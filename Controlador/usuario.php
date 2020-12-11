@@ -29,7 +29,9 @@
             $data = $this->modelo->modelo_busca_usuario_id(6);
             $this->vistas->obten_vista($this,"ver_usuario",$data);
         }
-        
-
+        public function elimina_usuario_id(){
+            $data = $this->modelo->modelo_elimina_usuario(4);
+            $this->vistas->obten_vista($this,"ver_usuario",$data);
+        }
     }
 ?>

@@ -62,22 +62,10 @@
             $solicita_busqueda = $this->select_one($query);
             return $solicita_busqueda;
         }
-        public function modelo_elimina_usuario($id){
-
+        public function modelo_elimina_usuario($id_usuario){
+            $query = "DELETE FROM usuario WHERE id_usuario = $id_usuario";
+            $solicita_borrado = $this->delete($query);
+            return $solicita_borrado;
         }
-        /*public function get_carrito($parametros){
-            return "Datos recibidos del carrito Nro." . $parametros;
-        }
-        public function set_categoria($nombre_cat,$descripcion_cat,$estado_cat){
-            $query = "INSERT INTO categoria_producto(nombre_categoria,descripcion_categoria,estado_categoria) values (?,?,?)";
-            $valores = array($nombre_cat,$descripcion_cat,$estado_cat);
-            $solicita_insert = $this->insert($query,$valores);
-            return $solicita_insert;
-        }
-        public function get_categoria($id_categoria){
-            $query = "SELECT * FROM categoria_producto WHERE id_categoria = $id_categoria";
-            $solicita_select = $this->select_one($query);
-            return $solicita_select;
-        }*/
     }
 ?>
