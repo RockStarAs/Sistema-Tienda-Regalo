@@ -1,6 +1,6 @@
 <?php 
     class Vistas{
-        function obten_vista($controlador,$vista,$valores=""){
+        function obten_vista($controlador,$vista,$data=""){
             $controlador = get_class($controlador);
             if($controlador == "Home" ){
                 $vista = VIEWS.$vista.".php";

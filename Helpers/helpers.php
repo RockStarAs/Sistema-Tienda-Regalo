@@ -15,10 +15,27 @@
        $format.= print_r("</pre>");
        return $format;
     }
-
-
+    //Cuando pasamos data sirve para los titulos y esas cosas si es que se van a  usar.
+    function header_admin($data=""){
+        $view_header = "Vista/Template/header_admin.php";
+        require_once($view_header);
+    }
+    function footer_admin($data=""){
+        $view_footer = "Vista/Template/footer_admin.php";
+        require_once($view_footer);
+    }
+    function obtener_modal(string $nombre_modal,$data){
+        $vista_modal = "Vista/Template/Modals/{$nombre_modal}.php";
+        require_once $vista_modal;
+    }
+    function mostrar_acciones($id){
+            return '<div class="text-center">
+                <button class="btn btn-outline-warning btn-sm" rl="'.$id.'" title="Editar" type="button">✏️</button>
+                <button class="btn btn-outline-danger btn-sm" rl="'.$id.'" title="Eliminar" type="button">❌</button>
+            </div>';           
+    }
     function limpiar_str($strCadena){
-        $string=preg_replace(['/\s+/','/^\s|\s$/'],[' ',''],$strCadena);
+        $string = preg_replace('/<+\s*\/*\s*([A-Z][A-Z0-9]*)\b[^>]*\/*\s*>+/i', '', $strCadena);
         $string=trim($string);
         $string=stripslashes($string);
         $string=str_ireplace("<script>","",$string);

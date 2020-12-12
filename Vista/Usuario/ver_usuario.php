@@ -7,6 +7,6 @@
     <title>Document</title>
 </head>
 <body>
-    <h1><?php print_r($valores); ?></h1>
+    <h1><?php print_r($data); ?></h1>
 </body>
 </html>

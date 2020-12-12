@@ -14,21 +14,30 @@
             //Función para agregar un nuevo usuario
             //Estado de usuario no es necesario porque por defecto está en 1 en la base de datos
             //Sacando la fecha creación
-            $fecha_creacion = date("Y-m-d H:i:s");
-            $ultima_conexion = date("Y-m-d H:i:s");  
-            $query = "INSERT INTO usuario(
-                dni_trabajador,
-                nombre_trabajador,
-                apellidos_trabajador,
-                nombre_usuario,
-                password_usuario,
-                rol_usuario,
-                fecha_creacion,
-                ultima_conexion) 
-                values (?,?,?,?,?,?,?,?)";
-            $valores = array($dni_trabajador,$nombre_trabajador,$apellidos_trabajador,$nombre_usuario,$password_usuario,$rol_usuario,$fecha_creacion,$ultima_conexion);
-            $solicita_insert = $this->insert($query,$valores);
-            return $solicita_insert;
+            $return ="";
+            $query = "SELECT * FROM usuario WHERE dni_trabajador = '$dni_trabajador'";
+            $solicita_listado = $this->select_all($query);
+
+            if(empty($solicita_listado)){
+                $fecha_creacion = date("Y-m-d H:i:s");
+                $ultima_conexion = date("Y-m-d H:i:s");  
+                $query = "INSERT INTO usuario(
+                    dni_trabajador,
+                    nombre_trabajador,
+                    apellidos_trabajador,
+                    nombre_usuario,
+                    password_usuario,
+                    rol_usuario,
+                    fecha_creacion,
+                    ultima_conexion) 
+                    values (?,?,?,?,?,?,?,?)";
+                $valores = array($dni_trabajador,$nombre_trabajador,$apellidos_trabajador,$nombre_usuario,$password_usuario,$rol_usuario,$fecha_creacion,$ultima_conexion);
+                $solicita_insert = $this->insert($query,$valores);
+                $return = $solicita_insert;
+            }else{
+                $return = "exist";
+            }
+            return $return;
         }
         public function modelo_actualiza_usuario($dni_trabajador,$nombre_trabajador,$apellidos_trabajador,$nombre_usuario,$password_usuario,$rol_usuario,$estado_usuario,$id_usuario){
             //No actualizaremos la fecha de creación nunca, la última conexión se hará en una función aparte

@@ -1,4 +1,5 @@
 <?php 
+    $controlador = ucwords($controlador);
     $archivo_controlador = "Controlador/".$controlador.".php";
         if(file_exists($archivo_controlador)){
             require_once($archivo_controlador);
