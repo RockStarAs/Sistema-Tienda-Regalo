@@ -13,5 +13,5 @@
     const SPD=".";
     const SPM=",";
 
-    const SMONEY="S/.";
+    const SMONEY="S/. ";
 ?>

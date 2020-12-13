@@ -31,6 +31,13 @@
             $solicita_busqueda = $this->select_one($query);
             return $solicita_busqueda;
         }
+
+        public function modelo_nombre_Categorias($id_categoria){
+            $query="SELECT TOP 1 categoria_producto.nombre_categoria FROM producto INNER JOIN categoria_producto
+            on producto.id_categoria=categoria_producto.id_categoria WHERE producto.id_categoria=$id_categoria";
+            $solicita_busqueda = $this->select_one($query);
+            return $solicita_busqueda;
+        }
         public function modelo_elimina_producto($id_producto){
 
         }    

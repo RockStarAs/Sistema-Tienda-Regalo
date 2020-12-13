@@ -3,3 +3,12 @@
     background-color: gray;
     padding: 6px;
 }
+.modalHeaderRegistro{
+    background: #009688;
+    color: #fff;
+}
+
+.modalHeaderActualizar{
+    background: #0e77e7;
+    color: #fff;
+}
