@@ -10,7 +10,7 @@
             $nombre_usuario,
             $password_usuario,
             $rol_usuario
-        ){
+        ){ 
             //Función para agregar un nuevo usuario
             //Estado de usuario no es necesario porque por defecto está en 1 en la base de datos
             //Sacando la fecha creación
@@ -57,7 +57,7 @@
             return $solicita_update;
         }
         public function modelo_listar_usuarios(){
-            $query = "SELECT * FROM usuario";
+            $query = "SELECT * FROM usuario WHERE rol_usuario!='ADMIN'";
             $solicita_listado = $this->select_all($query);
             return $solicita_listado;
         }
@@ -72,7 +72,7 @@
             return $solicita_busqueda;
         }
         public function modelo_elimina_usuario($id_usuario){
-            $query = "DELETE FROM usuario WHERE id_usuario = $id_usuario";
+            $query = "UPDATE usuario SET estado_usuario = 0 WHERE id_usuario = $id_usuario";
             $solicita_borrado = $this->delete($query);
             return $solicita_borrado;
         }

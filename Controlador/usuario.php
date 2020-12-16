@@ -42,8 +42,20 @@
             die();
         }
         public function modificar_usuario(){
-            $data = $this->modelo->modelo_actualiza_usuario("75541205","Juan","Caicedo","caja2","caja2","CAJERO",0,9);
-            $this->vistas->obten_vista($this,"ver_usuario",$data);
+            $id_usuario = $_POST['id_usuario'];
+            $dni_usuario = limpiar_str($_POST['txt_dni_act']);
+            $nombre_trabajador = limpiar_str($_POST['txt_nombre_act']);
+            $apellidos_trabajador = limpiar_str($_POST['txt_apellido_act']);
+            $nombre_usuario = limpiar_str($_POST['txt_nombre_usuario_act']);
+            $password_usuario = $_POST['txt_contraseña_act'];
+            $rol_usuario = limpiar_str($_POST['select_tipo_act']);
+            $solicitud_modificar = $this->modelo->modelo_actualiza_usuario($dni_usuario,$nombre_trabajador,$apellidos_trabajador,$nombre_usuario,$password_usuario,$rol_usuario,1,$id_usuario);
+
+            $array_respuesta = array('status' => true, 'msg' => "Datos actualizados correctamente.");
+            
+            echo json_encode($array_respuesta,JSON_UNESCAPED_UNICODE);
+            die();
+            
         }
         public function listar_usuarios(){
             $data = $this->modelo->modelo_listar_usuarios();
@@ -61,17 +73,37 @@
             //depurar($data);
             //$this->vistas->obten_vista($this,"ver_usuario",$data);
         }
-        public function busca_usuario_dni(){
+        /*public function busca_usuario_dni(){
             $data = $this->modelo->modelo_busca_usuario_dni("75541203");
             $this->vistas->obten_vista($this,"ver_usuario",$data);
-        }
-        public function busca_usuario_id(){
-            $data = $this->modelo->modelo_busca_usuario_id(6);
-            $this->vistas->obten_vista($this,"ver_usuario",$data);
+        }*/
+
+        public function busca_usuario_id(int $id_user){
+            $id_usuario = intval(limpiar_str($id_user));
+            if($id_usuario > 0){
+                $data = $this->modelo->modelo_busca_usuario_id($id_usuario); 
+                if(empty($data)){
+                    $respuesta = array('status' => false,
+                        'msg' => 'Datos no encontrados.'
+                    );
+                }else{
+                    $respuesta = array('status'=>true,
+                        'data' => $data
+                    );
+                }
+                echo json_encode($respuesta,JSON_UNESCAPED_UNICODE);
+            }
+            die();
         }
         public function elimina_usuario_id(){
-            $data = $this->modelo->modelo_elimina_usuario(4);
-            $this->vistas->obten_vista($this,"ver_usuario",$data);
+            if($_POST){
+                $id_usuario = intval($_POST['id_usuario']);
+                $solicita_eliminar = $this->modelo->modelo_elimina_usuario($id_usuario);
+                //Validar respuesta del controlador ok
+                $array_respuesta = array('status' =>true, 'msg'=>'Se ha eliminado el usuario');
+                echo json_encode($array_respuesta,JSON_UNESCAPED_UNICODE);
+            }
+            die();
         }
     }
 ?>

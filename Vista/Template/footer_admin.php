@@ -14,7 +14,6 @@
     <script type="text/javascript" src="<?= media();?>js/plugins/dataTables.bootstrap.min.js"></script>
     
     <!-- Page specific javascripts-->
-    <script src="<?= media();?>js/funciones_admin.js"></script>
     
   </body>
 </html>
