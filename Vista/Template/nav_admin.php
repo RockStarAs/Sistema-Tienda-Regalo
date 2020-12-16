@@ -9,7 +9,7 @@
       </div>
       <ul class="app-menu">
         <li><a class="app-menu__item" href="<?= base_url();?>dashboard"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
-        <li class="treeview">
+        <li class="treeview"> 
           <a class="app-menu__item" href="#" data-toggle="treeview">
             <i class="app-menu__icon fa fa-users"></i>
               <span class="app-menu__label">Usuarios</span>
@@ -53,7 +53,7 @@
         <li><a class="app-menu__item" href="docs.html"><i class="app-menu__icon fa fa-user-circle-o"></i>
           <span class="app-menu__label">Clientes</span></a>
         </li>
-        <li><a class="app-menu__item" href="docs.html"><i class="app-menu__icon fa fa-truck"></i>
+        <li><a class="app-menu__item" href="<?= base_url();?>proveedor/gestionar_proveedores"><i class="app-menu__icon fa fa-truck"></i>
           <span class="app-menu__label">Proveedores</span></a>
         </li>
         <li><a class="app-menu__item" href="docs.html"><i class="app-menu__icon fa fa-shopping-cart"></i>

@@ -28,10 +28,10 @@
         $vista_modal = "Vista/Template/Modals/{$nombre_modal}.php";
         require_once $vista_modal;
     }
-    function mostrar_acciones($id,$claseEditar=""){
+    function mostrar_acciones($id,$claseEditar="",$claseEliminar=""){
             return '<div class="text-center">
                 <button class="btn btn-outline-warning btn-sm '.$claseEditar.'" rl="'.$id.'" title="Editar" type="button">✏️</button>
-                <button class="btn btn-outline-danger btn-sm" rl="'.$id.'" title="Eliminar" type="button">❌</button>
+                <button class="btn btn-outline-danger btn-sm '.$clase_elimina.'" rl="'.$id.'" title="Eliminar" type="button">❌</button>
             </div>';           
     }
     function limpiar_str($strCadena){

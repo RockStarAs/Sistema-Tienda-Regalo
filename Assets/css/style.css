@@ -3,6 +3,10 @@
     background-color: gray;
     padding: 6px;
 }
+.no_listado{
+    display: none;
+}
+
 .modalHeaderRegistro{
     background: #009688;
     color: #fff;
