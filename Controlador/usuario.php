@@ -12,6 +12,7 @@
         public function gestionar_usuarios(){
             $data["titulo_pagina"] = "Agregar Usuario";
             $data["nombre_pagina"] = "Usuarios :: Agregar Usuario";
+            $data["funciones_js"]="funciones_admin.js";
             //$data = $this->modelo->modelo_inserta_usuario("75541205","Juan","Ortelli","caja2","caja2","CAJERO");
             $this->vistas->obten_vista($this,"gestionar_usuarios",$data);
         }

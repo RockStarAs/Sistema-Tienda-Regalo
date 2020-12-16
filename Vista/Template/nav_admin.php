@@ -13,7 +13,8 @@
           <a class="app-menu__item" href="#" data-toggle="treeview">
             <i class="app-menu__icon fa fa-users"></i>
               <span class="app-menu__label">Usuarios</span>
-              <i class="treeview-indicator fa fa-angle-right"></i></a>
+              <i class="treeview-indicator fa fa-angle-right"></i>
+          </a>
           <ul class="treeview-menu">
             <li>
               <a class="treeview-item" href="<?= base_url();?>usuario/gestionar_usuarios" target="" rel="noopener">
@@ -21,8 +22,30 @@
             </li>
           </ul>
         </li>
-        <li><a class="app-menu__item" href="docs.html"><i class="app-menu__icon fa fa-gift"></i>
-          <span class="app-menu__label">Productos</span></a>
+
+        <li class="treeview">
+          <a class="app-menu__item" href="#" data-toggle="treeview">
+            <i class="app-menu__icon fa fa-gift"></i>
+              <span class="app-menu__label">Productos</span>
+              <i class="treeview-indicator fa fa-angle-right"></i>
+          </a>
+          <ul class="treeview-menu">
+            <li>
+              <a class="treeview-item" href="<?= base_url();?>categoria/gestionar_categorias" target="" rel="noopener">
+                <i class="icon fa fa-circle-o"></i> Gestionar Categorias
+              </a>
+            </li>
+            <li>
+              <a class="treeview-item" href="<?= base_url();?>producto/gestionar_productos" target="" rel="noopener">
+                <i class="icon fa fa-circle-o"></i> Gestionar Productos
+              </a>
+            </li>
+            <li>
+              <a class="treeview-item" href="<?= base_url();?>usuario/gestionar_usuarios" target="" rel="noopener">
+                <i class="icon fa fa-circle-o"></i> Gestionar Combos
+              </a>
+            </li>
+          </ul>
         </li>
         <li><a class="app-menu__item" href="docs.html"><i class="app-menu__icon fa fa-usd"></i>
           <span class="app-menu__label">Ventas</span></a>

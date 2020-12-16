@@ -6,3 +6,13 @@
 .no_listado{
     display: none;
 }
+
+.modalHeaderRegistro{
+    background: #009688;
+    color: #fff;
+}
+
+.modalHeaderActualizar{
+    background: #0e77e7;
+    color: #fff;
+}
