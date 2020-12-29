@@ -4,7 +4,7 @@
 <main class="app-content">
     <div class="app-title">
         <div>
-            <h1><i class="fa fa-dashboard"></i> <?= $data["titulo_pagina"];?></h1>
+            <h1><i class="fa fa-clipboard" aria-hidden="true"></i> <?= $data["titulo_pagina"];?></h1>
             <p>Registrar nueva categoria</p>
             <button class="btn btn-primary" type="button" onclick="abrir_modal();"> <i class="fa fa-plus-square"
                     aria-hidden="true"></i>Añadir</button>

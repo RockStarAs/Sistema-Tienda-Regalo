@@ -70,7 +70,7 @@
                 }else{
                     $data[$i]['estado_usuario'] = " <span class='badge badge-danger'>  Inactivo </span> ";
                 }
-                $data[$i]['opciones'] = mostrar_acciones($data[$i]["id_usuario"]);          
+                $data[$i]['opciones'] = mostrar_acciones($data[$i]["id_usuario"],"btnEditarUsuario","btnEliminarUsuario");          
             }
 
             echo json_encode($data,JSON_UNESCAPED_UNICODE);

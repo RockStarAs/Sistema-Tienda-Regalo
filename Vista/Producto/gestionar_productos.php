@@ -1,5 +1,6 @@
 <?php header_admin($data); 
       obtener_modal('modal_agregar_producto',$data);
+      obtener_modal('modal_actualiza_producto',$data);
 ?>
 <main class="app-content">
     <div class="app-title">
@@ -23,6 +24,7 @@
                         <table class="table table-hover table-bordered" id="tabla_productos">
                             <thead>
                                 <tr>
+                                    <th>ID</th>
                                     <th>Nombre Producto</th>
                                     <th>Categoria</th>
                                     <th>Stock</th>
