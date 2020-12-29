@@ -1,7 +1,15 @@
 <?php 
+    require_once ("dashboard.php");
     class Home extends Controladores{ 
         public function __construct(){
+            
             parent::__construct();
+            session_start();
+            if(empty($_SESSION['login'])){
+                header('location: '.base_url().'login');
+            }else{
+                header('location: '.base_url().'dashboard');
+            }
         }
         public function home($parametros){
            $this->vistas->obten_vista($this,"home");
