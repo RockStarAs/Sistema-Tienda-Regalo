@@ -9,19 +9,29 @@
             $apellidos_cliente,
             $telefono_contacto
         ){
-            $query = "INSERT INTO cliente(
-                dni_cliente,
-                nombre_cliente,
-                apellidos_cliente,
-                telefono_contacto
-                ) 
-                values (?,?,?,?)";
-            $valores = array($dni_cliente,$nombre_cliente,$apellidos_cliente,$telefono_contacto);
-            $solicita_insert = $this->insert($query,$valores);
-            return $solicita_insert;
+
+            $return ="";
+            $query = "SELECT * FROM cliente WHERE dni_cliente = '$dni_cliente'";
+            $solicita_listado = $this->select_all($query);
+            if(empty($solicita_listado)){
+                $query = "INSERT INTO cliente(
+                    dni_cliente,
+                    nombre_cliente,
+                    apellidos_cliente,
+                    telefono_contacto
+                    ) 
+                    values (?,?,?,?)";
+                $valores = array($dni_cliente,$nombre_cliente,$apellidos_cliente,$telefono_contacto);
+                $solicita_insert = $this->insert($query,$valores);
+                $return = 1;
+            }else{
+                $return = "exist";
+            }
+            return $return;
         }
         public function modelo_actualiza_cliente(
-            $dni_cliente,
+            $dni_cliente_viejo,
+            $dni_cliente_nuevo,
             $nombre_cliente,
             $apellidos_cliente,
             $telefono_contacto
@@ -29,12 +39,14 @@
             $query = "UPDATE cliente SET
                     nombre_cliente = ?,
                     apellidos_cliente = ?,
-                    telefono_contacto = ?
+                    telefono_contacto = ?,
+                    dni_cliente = ?
                     WHERE dni_cliente = ?
                     ";
-            $valores = array($nombre_cliente,$apellidos_cliente,$telefono_contacto,$dni_cliente);
+            $valores = array($nombre_cliente,$apellidos_cliente,$telefono_contacto,$dni_cliente_nuevo,$dni_cliente_viejo);
             $solicita_update = $this->update($query,$valores);
             return $solicita_update;
+            
         }
         public function modelo_listar_cliente(){
             $query = "SELECT * FROM cliente";

@@ -13,7 +13,7 @@
        $format= print_r("<pre>");
        $format.= print_r($array_valores);
        $format.= print_r("</pre>");
-       return $format;
+       return $format; 
     }
     //Cuando pasamos data sirve para los titulos y esas cosas si es que se van a  usar.
     function header_admin($data=""){
@@ -28,11 +28,21 @@
         $vista_modal = "Vista/Template/Modals/{$nombre_modal}.php";
         require_once $vista_modal;
     }
-    function mostrar_acciones($id,$claseEditar="",$claseEliminar=""){
-            return '<div class="text-center">
+    function mostrar_acciones($id,$claseEditar="",$claseEliminar="",$num = 0){
+        switch ($num){
+            case 0:{
+                return '<div class="text-center">
+                    <button class="btn btn-outline-warning btn-sm '.$claseEditar.'" rl="'.$id.'" title="Editar" type="button">✏️</button>
+                    <button class="btn btn-outline-danger btn-sm '.$claseEliminar.'" rl="'.$id.'" title="Eliminar" type="button">❌</button>
+                </div>';
+            }
+            case 1:{
+                return '<div class="text-center">
                 <button class="btn btn-outline-warning btn-sm '.$claseEditar.'" rl="'.$id.'" title="Editar" type="button">✏️</button>
-                <button class="btn btn-outline-danger btn-sm '.$claseEliminar.'" rl="'.$id.'" title="Eliminar" type="button">❌</button>
-            </div>';           
+                </div>';
+            
+            }       
+        }    
     }
     function limpiar_str($strCadena){
         $string = preg_replace('/<+\s*\/*\s*([A-Z][A-Z0-9]*)\b[^>]*\/*\s*>+/i', '', $strCadena);

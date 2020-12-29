@@ -2,6 +2,10 @@
     require_once("combo.php");
     class detalle_combo extends Controladores{
         function __construct(){
+            session_start();
+            if(empty($_SESSION['login'])){
+                header('location: '.base_url().'login');
+            }
             parent::__construct();
         }
 

@@ -1,11 +1,16 @@
 <?php 
     class Proveedor extends Controladores{
         function __construct(){
+            session_start();
+            if(empty($_SESSION['login'])){
+                header('location: '.base_url().'login');
+            }
             parent::__construct();
         }
         public function gestionar_proveedores(){
             $data["titulo_pagina"] = "Gestion de Proveedores";
             $data["nombre_pagina"] = "Sistema Tienda :: Proveedores";
+            $data["funciones_js"] = "funciones_proveedor.js";
             //$data = $this->modelo->modelo_inserta_usuario("75541205","Juan","Ortelli","caja2","caja2","CAJERO");
             $this->vistas->obten_vista($this,"gestionar_proveedores",$data);
         }
@@ -55,7 +60,7 @@
             for ($i=0; $i < count($data); $i++) { 
                 $data[$i]['opciones'] = mostrar_acciones($data[$i]["ruc_dni"],"actualizaProveedor","eliminaProveedor");          
             }
-            echo json_encode($data,JSON_UNESCAPED_UNICODE);
+            echo json_encode($data,JSON_UNESCAPED_UNICODE); 
             die();
         }
         public function busca_proveedor($ruc_dni){

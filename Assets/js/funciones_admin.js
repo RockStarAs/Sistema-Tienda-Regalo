@@ -24,7 +24,11 @@ document.addEventListener('DOMContentLoaded',function(){
         "responsive":true,
         "bDestroy":true,
         "iDisplayLength":10,
-        "order":[[0,"desc"]]
+        "order":[[0,"desc"]],
+        drawCallback:function(){
+            fnc_editar_usuario();
+            fnc_eliminar_usuario();
+        }
     });
     //Insertar un usuarios
     var form_usuarios = document.querySelector("#frm_agregar_usuario");
