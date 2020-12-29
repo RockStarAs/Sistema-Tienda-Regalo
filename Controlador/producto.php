@@ -25,7 +25,7 @@
         $stock_producto = intval(limpiar_str($_POST['txt_stock']));
         $id_categoria = intval(limpiar_str($_POST['categoria_id']));
         $id_producto = limpiar_str($_POST['id_producto']);
-        if (!empty($_FILES["imagen"]["tmp_name"])) {
+        if (empty($_FILES["imagen"]["tmp_name"])) {
             $revisar = getimagesize($_FILES["foto"]["tmp_name"]);
             if ($revisar) {
                 $image = $_FILES['foto']['tmp_name'];
