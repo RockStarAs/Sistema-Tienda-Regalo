@@ -19,12 +19,17 @@ document.addEventListener('DOMContentLoaded',function(){
         "responsive":true,
         "bDestroy":true,
         "iDisplayLength":10,
-        "order":[[0,"desc"]]
+        "order":[[0,"desc"]],
+        drawCallback: function () {
+            ftnEditar_Categoria()
+            ftnEliminarCategoria()
+        },
     });
-    //Insertar un categoria
+    //Insertar un categoria o Modifica una categoria
     var form_categoria = document.querySelector("#frm_agregar_categoria");
     form_categoria.onsubmit = function(e){
         e.preventDefault();
+        var int_Id_cat=document.querySelector('#id_categoria').value;
         var nombre_categoria = document.querySelector('#txt_nombre').value;
         
 
@@ -34,6 +39,7 @@ document.addEventListener('DOMContentLoaded',function(){
         }
         var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
         var ajax_url = base_url+'categoria/inserta_categoria';
+        
         var form_data = new FormData(form_categoria);
         request.open("POST",ajax_url,true);
         request.send(form_data);
@@ -45,7 +51,9 @@ document.addEventListener('DOMContentLoaded',function(){
                     form_categoria.reset();
                     swal("Añadido",json.msg,"success");
                     tabla_categorias.ajax.reload(function(){
-
+                        setTimeout(() => { 
+                            ftnEditar_Categoria();
+                        }, 500);
                     });
                 }else{
                     swal("¡Error!",json.msg,"error");    
@@ -71,6 +79,7 @@ function abrir_modal(){
 window.addEventListener("load", function() {
     setTimeout(() => { 
         ftnEditar_Categoria();
+        ftnEliminarCategoria();
     }, 500);
 }, false);
 
@@ -102,8 +111,52 @@ function ftnEditar_Categoria(){
                     }
                 }
             }
+        });
+    });
+}
 
-            $('#modal_form_agrega_categoria').modal('show');
+function ftnEliminarCategoria(){
+    var btnEliminar_Categoria=document.querySelectorAll(".btnEliminar_Categoria");
+    btnEliminar_Categoria.forEach(function(btnEliminar_Categoria){
+        btnEliminar_Categoria.addEventListener('click',function(){
+            var id_categoria=this.getAttribute("rl");
+            swal({
+               title: "Eliminar Categoria",
+               text: "¿Realmente quiere elimar la categoria?", 
+               type: "warning",
+               showCancelButton: true,
+               confirmButtonText: "Sí,eliminar!",
+               cancelButtonText: "No, cancelar!",
+               closeOnConfirm: false,
+               closeOnCancel: true
+            }, function(isConfirm){
+                if (isConfirm) {
+                    var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+                    var ajax_url = base_url+'categoria/eliminar_categoria/';
+                    var strData="id_categoria="+id_categoria;
+                    request.open("POST",ajax_url,true);
+                    request.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+                    request.send(strData);
+                    request.onreadystatechange=function(){
+                        if (request.readyState == 4 && request.status == 200) {
+                            var obj_json=JSON.parse(request.responseText);
+                            console.log(obj_json);
+                            if (obj_json.status) {
+                                swal("Eliminar!",obj_json.msg,"success");
+                                tabla_categorias.ajax.reload(function(){
+                                    setTimeout(() => { 
+                                        ftnEditar_Categoria();
+                                        ftnEliminarCategoria();
+                                    }, 500);
+                                });
+                            }else{
+                                swal("Atencion",obj_json.msg,"error");
+                            }
+                        }
+                    }
+                }
+                
+            });
         });
     });
 }

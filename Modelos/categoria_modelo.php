@@ -22,6 +22,21 @@
             return $return;
         }
 
+        public function modelo_actualiza_categoria($id_categoria,$nombre_categoria,$descripcion_categoria){
+            $return ="";
+            $query = "SELECT * FROM categoria_producto WHERE nombre_categoria='$nombre_categoria' AND id_categoria != '$id_categoria'";
+            $solicita_listado = $this->select_all($query);
+
+            if(empty($solicita_listado)){
+                $query = "UPDATE categoria_producto SET nombre_categoria=?, descripcion_categoria=? WHERE id_categoria=?";
+                $valores = array($nombre_categoria,$descripcion_categoria,$id_categoria);
+                $solicita_insert = $this->update($query,$valores);
+                $return = $solicita_insert;
+            }else{
+                $return = "exist";
+            }
+            return $return;
+        }
         public function modelo_listar_categorias(){
             $query = "SELECT * FROM categoria_producto";
             $solicita_listado = $this->select_all($query);
@@ -38,6 +53,26 @@
             $query = "SELECT * FROM categoria_producto WHERE id_categoria=$id_categoria";
             $solicita_listado = $this->select_one($query);
             return $solicita_listado;
+        }
+
+        public function modelo_eliminar_categoria($id_categoria){
+            $return ="";
+            $query = "SELECT * FROM producto WHERE id_categoria = '$id_categoria'";
+            $solicita_listado = $this->select_all($query);
+
+            if(empty($solicita_listado)){
+                $query = "UPDATE categoria_producto SET estado_categoria=? WHERE id_categoria=?";
+                $valores = array(0,$id_categoria);
+                $return = $this->update($query,$valores);
+                if ($return) {
+                    $return='ok';
+                }else{
+                    $return='error';
+                }      
+            }else{
+                $return = 'exist';
+            }
+            return $return;
         }
     }
 ?>
