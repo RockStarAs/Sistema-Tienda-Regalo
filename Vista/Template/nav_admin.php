@@ -50,7 +50,7 @@
         <li><a class="app-menu__item" href="docs.html"><i class="app-menu__icon fa fa-usd"></i>
           <span class="app-menu__label">Ventas</span></a>
         </li>
-        <li><a class="app-menu__item" href="docs.html"><i class="app-menu__icon fa fa-user-circle-o"></i>
+        <li><a class="app-menu__item" href="<?= base_url();?>cliente/gestionar_clientes"><i class="app-menu__icon fa fa-user-circle-o"></i>
           <span class="app-menu__label">Clientes</span></a>
         </li>
         <li><a class="app-menu__item" href="<?= base_url();?>proveedor/gestionar_proveedores"><i class="app-menu__icon fa fa-truck"></i>

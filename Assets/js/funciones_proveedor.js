@@ -109,7 +109,7 @@ window.addEventListener('load',function(){
     setTimeout(() => { 
         fnc_editar_proveedor();
         fnc_eliminar_proveedor();
-    }, 500);
+    },500);
 },false);
 
 function fnc_editar_proveedor(){
