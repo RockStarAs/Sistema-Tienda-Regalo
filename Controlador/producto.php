@@ -19,41 +19,47 @@
     public function insertar_producto()
     {
         $nombre_producto = limpiar_str($_POST['txt_nombre']);
+        $codigo_barras = limpiar_str($_POST['txtCodigo']);
         $descripcion_producto = limpiar_str($_POST['txt_descripcion']);
         $precio_unitario_venta = floatval(limpiar_str($_POST['txt_precio_venta']));
         $precio_compra = floatval(limpiar_str($_POST['txt_precio_compra']));
         $stock_producto = intval(limpiar_str($_POST['txt_stock']));
         $id_categoria = intval(limpiar_str($_POST['categoria_id']));
         $id_producto = limpiar_str($_POST['id_producto']);
-        if (empty($_FILES["imagen"]["tmp_name"])) {
-            $revisar = getimagesize($_FILES["foto"]["tmp_name"]);
-            if ($revisar) {
-                $image = $_FILES['foto']['tmp_name'];
-                $imgContenido = base64_encode(file_get_contents($image));
-            }
-        } else {
-            $imgContenido = "";
-        }
-        if ($id_producto == 0) {
-            //Insertar
-            $solicitud_insertar = $this->modelo->modelo_insertar_producto($id_categoria, $nombre_producto, $precio_unitario_venta, $stock_producto, $precio_compra, $descripcion_producto, $imgContenido);
-            $opcion = 1;
-        } else {
-            //Actualizar
-            $solicitud_insertar = $this->modelo->modelo_actualizar_producto($id_producto, $id_categoria, $nombre_producto, $precio_unitario_venta, $stock_producto, $precio_compra, $descripcion_producto);
-            $opcion = 2;
-        }
-        if ($solicitud_insertar > 0) {
-            if ($opcion == 1) {
-                $array_respuesta = array('status' => true, 'msg' => "Producto guardado correctamente.");
-            } else {
-                $array_respuesta = array('status' => true, 'msg' => "Producto actualizado correctamente.");
-            }
-        } else {
-            $array_respuesta = array('status' => false, 'msg' => "No es posible almacenar datos.");
-        }
-        echo json_encode($array_respuesta, JSON_UNESCAPED_UNICODE);
-        die();
+        
+        $foto=$_FILES["foto"];
+        $nombre_foto=$foto["name"];
+        $type=$foto["type"];
+        $url_temp=$foto["tmp_name"];
+        depurar($foto);
+        $imgProducto="img_producto.png";
+
+        if ($nombre_foto!='') {
+            $destino="./Assets/images/uploads/";
+            $img_nombre="img_".md5(date('d-m-Y H:m:s'));
+            $imgProducto=$img_nombre.".jpg";
+            $src=$destino.$imgProducto;
+        } 
+
+        // if ($id_producto == 0) {
+        //     //Insertar
+        //     $solicitud_insertar = $this->modelo->modelo_insertar_producto($id_categoria, $nombre_producto, $precio_unitario_venta, $stock_producto, $precio_compra, $descripcion_producto, $imgProducto,$codigo_barras);
+        //     $opcion = 1;
+        // }
+        // if ($solicitud_insertar > 0) {
+        //     if ($opcion == 1) {
+        //         if($nombre_foto!=""){
+        //             move_uploaded_file($url_temp,$src);
+        //         }
+        //         $array_respuesta = array('status' => true, 'msg' => "Producto guardado correctamente.");
+        //     } else {
+        //         $array_respuesta = array('status' => true, 'msg' => "Producto actualizado correctamente.");
+        //     }
+        // } else {
+        //     $array_respuesta = array('status' => false, 'msg' => "No es posible almacenar datos.");
+        // }
+        // echo json_encode($array_respuesta, JSON_UNESCAPED_UNICODE);
+        // die();
     }
 
     public function modificar_producto()
@@ -65,30 +71,29 @@
         $stock_producto = intval(limpiar_str($_POST['txt_stock_act']));
         $id_categoria = intval(limpiar_str($_POST['categoria_id_act']));
         $id_producto = limpiar_str($_POST['id_producto_act']);
-        // if (!empty($_FILES["imagen"]["tmp_name"])) {
-        //     $revisar=getimagesize($_FILES["foto"]["tmp_name"]);
-        //     if ($revisar) {
-        //         $image = $_FILES['foto']['tmp_name'];
-        //         $imgContenido = base64_encode(file_get_contents($image));
-        //     }
-        // }else{
-        //     $imgContenido="";
-        // }
-        //Actualizar
-        $solicitud_insertar = $this->modelo->modelo_actualizar_producto($id_producto, $id_categoria, $nombre_producto, $precio_unitario_venta, $stock_producto, $precio_compra, $descripcion_producto);
-        $opcion = 2;
+        $foto_actual = limpiar_str($_POST['foto_actual']);
+        $foto_remove = limpiar_str($_POST['foto_remove']);
 
-        if ($solicitud_insertar > 0) {
-            if ($opcion == 1) {
-                $array_respuesta = array('status' => true, 'msg' => "Producto guardado correctamente.");
-            } else {
-                $array_respuesta = array('status' => true, 'msg' => "Producto actualizado correctamente.");
-            }
-        } else {
-            $array_respuesta = array('status' => false, 'msg' => "No es posible almacenar datos.");
-        }
-        echo json_encode($array_respuesta, JSON_UNESCAPED_UNICODE);
-        die();
+        $foto=$_FILES["foto_act"];
+        $nombre_foto=$foto["name"];
+        $type=$foto["type"];
+        $url_temp=$foto["tmp_name"];
+        depurar($foto);
+        //Actualizar
+        // $solicitud_insertar = $this->modelo->modelo_actualizar_producto($id_producto, $id_categoria, $nombre_producto, $precio_unitario_venta, $stock_producto, $precio_compra, $descripcion_producto);
+        // $opcion = 2;
+
+        // if ($solicitud_insertar > 0) {
+        //     if ($opcion == 1) {
+        //         $array_respuesta = array('status' => true, 'msg' => "Producto guardado correctamente.");
+        //     } else {
+        //         $array_respuesta = array('status' => true, 'msg' => "Producto actualizado correctamente.");
+        //     }
+        // } else {
+        //     $array_respuesta = array('status' => false, 'msg' => "No es posible almacenar datos.");
+        // }
+        // echo json_encode($array_respuesta, JSON_UNESCAPED_UNICODE);
+        // die();
     }
 
     public function seleccionar_producto($id_producto)

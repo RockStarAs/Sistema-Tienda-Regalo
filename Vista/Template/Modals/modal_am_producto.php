@@ -12,8 +12,8 @@
                 <form id="frm_agregar_producto" name="frm_agregar_producto" class="form-horizontal"
                     enctype="multipart/form-data">
                     <input type="hidden" id="id_producto" name="id_producto" value="">
-                    <!--<input type="hidden" id="foto_actual" name="foto_actual" value="">-->
-                    <!--<input type="hidden" id="foto_remove" name="foto_remove" value="0">-->
+                    <input type="hidden" id="foto_actual" name="foto_actual" value="">
+                    <input type="hidden" id="foto_remove" name="foto_remove" value="">
                     <div class="row">
                         <div class="col-md-8">
                             <div class="form-group">
@@ -46,7 +46,7 @@
                             <div class="form-group">
                                 <label class="control-label">Código</label>
                                 <input class="form-control" id="txtCodigo" name="txtCodigo" type="text"
-                                    placeholder="Código de barra" disabled>
+                                    placeholder="Código de barra">
                                 <br>
                             </div>
 

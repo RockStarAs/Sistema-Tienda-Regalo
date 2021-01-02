@@ -11,8 +11,8 @@
             <div class="modal-body">
                 <form id="frm_actualiza_producto" name="frm_actualiza_producto" class="form-horizontal" enctype="multipart/form-data">
                     <input type="hidden" id="id_producto_act" name="id_producto_act" value="">
-                    <!--<input type="hidden" id="foto_actual" name="foto_actual" value="">-->
-                    <!--<input type="hidden" id="foto_remove" name="foto_remove" value="0">-->
+                    <input type="hidden" id="foto_actual" name="foto_actual" value="">
+                    <input type="hidden" id="foto_remove" name="foto_remove" value="">
                     <div class="row">
                         <div class="col-md-8">
                             <div class="form-group">
@@ -28,15 +28,16 @@
                             </div>
                             <div class="form-group">
                                 <label for="foto">Actualizar Foto </label>
-                                <div class="photo">    
-                                    <div class="prevPhoto">
-                                        <span class="delPhoto notBlock">X</span>
-                                        <label for="foto" id="text">&nbsp;&nbsp;<i class="fa fa-cloud-download" aria-hidden="true"></i>&nbsp;Buscar Foto...</label>
+                                <div class="photo" id="actual">    
+                                    <div class="prevPhoto prevPhoto1">
+                                        <span class="delPhoto delPhoto1 notBlock">X</span>
+                                        <label for="foto" id="text1" class="carga">&nbsp;&nbsp;<i class="fa fa-cloud-download" aria-hidden="true"></i>&nbsp;Buscar Foto...</label>
+                                        
                                     </div>
                                     <div class="upimg">
                                         <input type="file" name="foto_act" id="foto_act">
                                     </div>
-                                    <div id="form_alert"></div>
+                                    <div id="form_alert_act"></div>
                                 </div>
                             </div>
                         </div>
@@ -44,7 +45,7 @@
                             <div class="form-group">
                                 <label class="control-label">Código</label>
                                 <input class="form-control" id="txtCodigo_act" name="txtCodigo_act" type="text"
-                                    placeholder="Código de barra" disabled>
+                                    placeholder="Código de barra">
                                 <br>
                             </div>
 

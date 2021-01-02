@@ -1,5 +1,5 @@
 <?php header_admin($data); 
-    obtener_modal('modal_agregar_categoria',$data);
+    obtener_modal('modal_am_categoria',$data);
 ?>
 <main class="app-content">
     <div class="app-title">
@@ -14,7 +14,7 @@
             <li class="breadcrumb-item"><a
                     href="<?= base_url();?>categoria/gestionar_categorias"><?= $data["titulo_pagina"];?></a></li>
         </ul>
-
+        
     </div>
     <div class="row">
         <div class="col-md-12">

@@ -11,8 +11,8 @@
             <div class="modal-body">
                 <div class="tile">
                     <div class="tile-body">
-                        <form id="frm_agregar_categoria" name="frm_agregar_categoria">
-                            <input type="hidden" id="id_categoria" name="id_categoria">
+                        <form id="frm_agregar_categoria" class="frm" name="frm_agregar_categoria">
+                            
                             <div class="form-group">
                                 <label class="control-label">Nombre Categoria:</label>
                                 <input class="form-control" id="txt_nombre" name="txt_nombre" type="text"
