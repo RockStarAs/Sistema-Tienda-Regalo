@@ -18,7 +18,12 @@
             $data["nombre_pagina"] = "Usuarios :: Agregar Usuario";
             $data["funciones_js"]="funciones_admin.js";
             //$data = $this->modelo->modelo_inserta_usuario("75541205","Juan","Ortelli","caja2","caja2","CAJERO");
-            $this->vistas->obten_vista($this,"gestionar_usuarios",$data);
+            if($_SESSION['rol_usuario'] == 'ADMINISTRADOR'){
+                $this->vistas->obten_vista($this,"gestionar_usuarios",$data);    
+            }else{
+                $this->vistas->obten_vista($this,"errores/sin_autorizacion",$data);    
+            }
+                
         }
         public function insertar_usuario(){
             /*$data["titulo_pagina"] = "Agregar Usuario";
@@ -29,7 +34,12 @@
             $nombre_trabajador = limpiar_str($_POST['txt_nombre']);
             $apellidos_trabajador = limpiar_str($_POST['txt_apellido']);
             $nombre_usuario = limpiar_str($_POST['txt_nombre_usuario']);
+            //Obteniendo la contraseña que a colocar
             $password_usuario = limpiar_str($_POST['txt_contraseña']);
+
+            //Pasando contraseña texto a SHA-256
+            $password_usuario = hash('sha256',$password_usuario);
+
             $rol_usuario = limpiar_str($_POST['select_tipo']);
             
             $solicitud_insertar = $this->modelo->modelo_inserta_usuario($dni_usuario,$nombre_trabajador,$apellidos_trabajador,$nombre_usuario,$password_usuario,$rol_usuario);
@@ -108,6 +118,51 @@
                 $array_respuesta = array('status' =>true, 'msg'=>'Se ha eliminado el usuario');
                 echo json_encode($array_respuesta,JSON_UNESCAPED_UNICODE);
             }
+            die();
+        }
+        public function perfil(){
+            $id_usuario = intval(limpiar_str($_SESSION['id_usuario']));
+            if($id_usuario > 0){
+                $data = $this->modelo->modelo_busca_usuario_id($id_usuario); 
+                if(empty($data)){
+                    $respuesta = array('status' => false,
+                        'msg' => 'Datos no encontrados.'
+                    );
+                }else{
+                    $respuesta = array('status'=>true,
+                        'data' => $data
+                    );
+                }
+                $respuesta["titulo_pagina"] = "Perfil del Usuario";
+                $respuesta["nombre_pagina"] = "Usuarios :: Perfil del Usuario";
+                
+                $this->vistas->obten_vista($this,"perfil",$respuesta);
+            }
+            die(); 
+        }
+        public function cambiar_password(){
+            if($_POST){
+                $password_usuario_antiguo = hash('sha256',$_POST['txt_password_antigua']);
+                $password_usuario_nuevo = $_POST['txt_password_nueva'];
+                $password_usuario_nuevo_rep = $_POST['txt_password_nueva_rep'];
+
+                if($password_usuario_antiguo != $_SESSION['password_usuario']){
+                    $array_respuesta = array('status' =>false, 'msg'=>'La contraseña indicada no coincide con su contraseña antigua');
+                }else{
+                    if($password_usuario_nuevo !== $password_usuario_nuevo_rep){
+                        $array_respuesta = array('status' =>false, 'msg'=>'Las nuevas contraseñas no coinciden');        
+                    }else{
+                        $password_usuario_nuevo = hash('sha256',$password_usuario_nuevo);
+                        
+                        $_SESSION['password_usuario'] = $password_usuario_nuevo;
+
+                        $solicita_modificar_password = $this->modelo->modelo_cambiar_password($_SESSION['id_usuario'],$password_usuario_nuevo);
+                        $array_respuesta = array('status' =>true, 'msg'=>'Se ha modificado su contraseña');
+                        
+                    }
+                }
+            }
+            echo json_encode($array_respuesta,JSON_UNESCAPED_UNICODE);
             die();
         }
     }

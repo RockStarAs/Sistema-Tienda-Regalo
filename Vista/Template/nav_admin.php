@@ -1,10 +1,10 @@
     <!-- Sidebar menu-->
     <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
     <aside class="app-sidebar">
-      <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="<?= media();?>images/admin.png" alt="User Image">
+      <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src=<?=$_SESSION['url_avatar'] ?> alt="User Image">
         <div>
-          <p class="app-sidebar__user-name">ADMIN 123</p>
-          <p class="app-sidebar__user-designation">Administrador</p>
+          <p class="app-sidebar__user-name"><?= $_SESSION['nombre_trabajador']; ?></p>
+          <p class="app-sidebar__user-designation"><?= $_SESSION['rol_usuario'];?> </p>
         </div>
       </div>
       <ul class="app-menu">

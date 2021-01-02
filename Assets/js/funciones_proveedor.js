@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded',function(){
         "aProcessing":true,
         "aServerSide":true,
         "language":{
-            "url" : "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
+            url : "idioma.json"
         },
         "ajax":{
             "url" : " "+base_url+"proveedor/listar_proveedores",
@@ -22,7 +22,11 @@ document.addEventListener('DOMContentLoaded',function(){
         "responsive":true,
         "bDestroy":true,
         "iDisplayLength":10,
-        "order":[[0,"desc"]]
+        "order":[[0,"desc"]],
+        drawCallback:function(){
+            fnc_editar_proveedor();
+            fnc_eliminar_proveedor();
+        }
     });
     var form_proveedores = document.querySelector("#frm_agregar_proveedor");
     form_proveedores.onsubmit = function(e){

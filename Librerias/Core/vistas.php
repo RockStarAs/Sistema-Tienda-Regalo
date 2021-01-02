@@ -2,7 +2,7 @@
     class Vistas{
         function obten_vista($controlador,$vista,$data=""){
             $controlador = get_class($controlador);
-            if($controlador == "Home" ){
+            if($vista == "errores/sin_autorizacion" ){
                 $vista = VIEWS.$vista.".php";
             }else{
                 $vista = VIEWS.$controlador."/".$vista.".php";

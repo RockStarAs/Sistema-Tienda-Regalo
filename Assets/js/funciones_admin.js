@@ -3,9 +3,6 @@ document.addEventListener('DOMContentLoaded',function(){
     tabla_usuarios = $('#tabla_usuarios').DataTable({
         "aProcessing":true,
         "aServerSide":true,
-        "language":{
-            "url" : "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
-        },
         "ajax":{
             "url" : " "+base_url+"usuario/listar_usuarios",
             "dataSrc":""  
@@ -23,11 +20,35 @@ document.addEventListener('DOMContentLoaded',function(){
         ],
         "responsive":true,
         "bDestroy":true,
-        "iDisplayLength":10,
+        "iDisplayLength":50,
         "order":[[0,"desc"]],
         drawCallback:function(){
             fnc_editar_usuario();
             fnc_eliminar_usuario();
+        },
+        "language":{
+            "sProcessing":     "Procesando...",
+            "sLengthMenu":     "Mostrar _MENU_ registros",
+            "sZeroRecords":    "No se encontraron resultados",
+            "sEmptyTable":     "Ningún dato disponible en esta tabla",
+            "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+            "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+            "sInfoPostFix":    "",
+            "sSearch":         "Buscar:",
+            "sUrl":            "",
+            "sInfoThousands":  ",",
+            "sLoadingRecords": "Cargando...",
+            "oPaginate": {
+                "sFirst":    "Primero",
+                "sLast":     "Último",
+                "sNext":     "Siguiente",
+                "sPrevious": "Anterior"
+            },
+            "oAria": {
+                "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+            }
         }
     });
     //Insertar un usuarios
@@ -62,7 +83,7 @@ document.addEventListener('DOMContentLoaded',function(){
                         setTimeout(()=>{
                             fnc_editar_usuario();
                             fnc_eliminar_usuario();
-                        },500);
+                        },1000);
                     });
                 }else{
                     swal("¡Error!",json.msg,"error");    
@@ -103,7 +124,7 @@ document.addEventListener('DOMContentLoaded',function(){
                         setTimeout(()=>{
                             fnc_editar_usuario();
                             fnc_eliminar_usuario();
-                        },500);
+                        },1000);
                     });
                 }else{
                     swal("¡Error!",json.msg,"error");    
@@ -123,7 +144,7 @@ window.addEventListener('load',function(){
     setTimeout(() => { 
         fnc_editar_usuario();
         fnc_eliminar_usuario();
-    }, 500);
+    }, 1000);
 },false);
 
 function fnc_editar_usuario(){
