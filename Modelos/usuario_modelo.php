@@ -76,5 +76,10 @@
             $solicita_borrado = $this->delete($query);
             return $solicita_borrado;
         }
+        public function modelo_cambiar_password($id_usuario,$nuevo_password){
+            $query = "UPDATE usuario SET password_usuario = ? WHERE id_usuario = ? ";
+            $valores = array($nuevo_password,$id_usuario);
+            $solicita_update = $this->update($query,$valores);
+        }
     }
 ?>

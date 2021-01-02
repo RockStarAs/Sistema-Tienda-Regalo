@@ -28,7 +28,7 @@
         $vista_modal = "Vista/Template/Modals/{$nombre_modal}.php";
         require_once $vista_modal;
     }
-    function mostrar_acciones($id,$claseEditar="",$claseEliminar="",$num = 0){
+    function mostrar_acciones($id,$claseEditar="",$claseEliminar="",$clase_compra="",$num = 0){
         switch ($num){
             case 0:{
                 return '<div class="text-center">
@@ -40,8 +40,15 @@
                 return '<div class="text-center">
                 <button class="btn btn-outline-warning btn-sm '.$claseEditar.'" rl="'.$id.'" title="Editar" type="button">✏️</button>
                 </div>';
-            
-            }       
+            }
+            case 3:{
+                return '<div class="text-center">
+                <button class="btn btn-outline-warning btn-sm '.$claseEditar.'" rl="'.$id.'" title="Editar" type="button">✏️</button>
+                <button class="btn btn-outline-danger btn-sm '.$claseEliminar.'" rl="'.$id.'" title="Eliminar" type="button">❌</button>
+                <button class="btn btn-outline-success btn-sm '.$clase_compra.'" rl="'.$id.'" title="Agregar una compa" type="button">
+                🛒</button>
+                </div>';
+            }
         }    
     }
     function limpiar_str($strCadena){

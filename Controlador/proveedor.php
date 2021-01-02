@@ -58,7 +58,7 @@
         public function listar_proveedores(){
             $data = $this->modelo->modelo_listar_proveedor();
             for ($i=0; $i < count($data); $i++) { 
-                $data[$i]['opciones'] = mostrar_acciones($data[$i]["ruc_dni"],"actualizaProveedor","eliminaProveedor");          
+                $data[$i]['opciones'] = mostrar_acciones($data[$i]["ruc_dni"],"actualizaProveedor","eliminaProveedor","compraAProveedor",3);          
             }
             echo json_encode($data,JSON_UNESCAPED_UNICODE); 
             die();

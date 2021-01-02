@@ -22,7 +22,11 @@ document.addEventListener('DOMContentLoaded',function(){
         "responsive":true,
         "bDestroy":true,
         "iDisplayLength":10,
-        "order":[[0,"desc"]]
+        "order":[[0,"desc"]],
+        drawCallback:function(){
+            fnc_editar_proveedor();
+            fnc_eliminar_proveedor();
+        }
     });
     var form_proveedores = document.querySelector("#frm_agregar_proveedor");
     form_proveedores.onsubmit = function(e){

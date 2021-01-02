@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded',function(){
         ],
         "responsive":true,
         "bDestroy":true,
-        "iDisplayLength":10,
+        "iDisplayLength":50,
         "order":[[0,"desc"]],
         drawCallback:function(){
             fnc_editar_usuario();
