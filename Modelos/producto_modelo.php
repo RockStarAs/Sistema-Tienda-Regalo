@@ -3,11 +3,11 @@
         public function __construct(){
             parent::__construct();
         }
-        public function modelo_insertar_producto($id_categoria,$nombre_producto,$precio_unitario_venta,$stock_producto,$precio_compra,$descripcion_producto,$imgContenido){
+        public function modelo_insertar_producto($id_categoria,$nombre_producto,$precio_unitario_venta,$stock_producto,$precio_compra,$descripcion_producto,$imgContenido,$codigo_barras){
             $descripcion_producto = ($descripcion_producto=="") ? "Ninguna" : $descripcion_producto ;
-            $query="INSERT INTO producto(id_categoria,nombre_producto,precio_unitario_venta,stock_producto,precio_compra_actualizado,descripcion_producto,imagen_producto) 
-            VALUES (?,?,?,?,?,?,?)";
-            $valores=array($id_categoria,$nombre_producto,$precio_unitario_venta,$stock_producto,$precio_compra,$descripcion_producto,$imgContenido);
+            $query="INSERT INTO producto(id_categoria,nombre_producto,precio_unitario_venta,stock_producto,precio_compra_actualizado,descripcion_producto,imagen_producto,codigo_barras) 
+            VALUES (?,?,?,?,?,?,?,?)";
+            $valores=array($id_categoria,$nombre_producto,$precio_unitario_venta,$stock_producto,$precio_compra,$descripcion_producto,$imgContenido,$codigo_barras);
             $solicita_insert = $this->insert($query,$valores);
             return $solicita_insert;
         }

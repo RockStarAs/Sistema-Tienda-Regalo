@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded',function(){
         "responsive":true,
         "bDestroy":true,
         "iDisplayLength":10,
-        "order":[[0,"desc"]],
+        "order":[[0,"asc"]],
         drawCallback: function () {
             ftnEditar_Categoria()
             ftnEliminarCategoria()
@@ -29,10 +29,14 @@ document.addEventListener('DOMContentLoaded',function(){
     var form_categoria = document.querySelector("#frm_agregar_categoria");
     form_categoria.onsubmit = function(e){
         e.preventDefault();
-        var int_Id_cat=document.querySelector('#id_categoria').value;
+        if (document.querySelector('#id_categoria')) {
+            var int_Id_cat=document.querySelector('#id_categoria').value;
+            if(int_Id_cat == ''){
+                swal("Atención","Todos los campos deben ser obligatorios","error");
+                return false;
+            }
+        }
         var nombre_categoria = document.querySelector('#txt_nombre').value;
-        
-
         if(nombre_categoria == ''){
             swal("Atención","El campo nombre es obligatorio.","error");
             return false;
@@ -51,9 +55,7 @@ document.addEventListener('DOMContentLoaded',function(){
                     form_categoria.reset();
                     swal("Añadido",json.msg,"success");
                     tabla_categorias.ajax.reload(function(){
-                        setTimeout(() => { 
-                            ftnEditar_Categoria();
-                        }, 500);
+                        
                     });
                 }else{
                     swal("¡Error!",json.msg,"error");    
@@ -67,7 +69,9 @@ document.addEventListener('DOMContentLoaded',function(){
 $('#tabla_categorias').DataTable();
 
 function abrir_modal(){
-    document.querySelector("#id_categoria").value="";
+    if (document.querySelector("#id_categoria")) {
+        $("#id_categoria").remove();
+    }
     document.querySelector("#titulo_Modal").innerHTML="Nueva Categoria ";
     document.querySelector(".modal-header").classList.replace("modalHeaderActualizar","modalHeaderRegistro");
     document.querySelector("#btnAccion_Form").classList.replace("btn-info","btn-primary");
@@ -76,22 +80,18 @@ function abrir_modal(){
     $('#modal_form_agrega_categoria').modal('show');
 }
 
-window.addEventListener("load", function() {
-    setTimeout(() => { 
-        ftnEditar_Categoria();
-        ftnEliminarCategoria();
-    }, 500);
-}, false);
-
 function ftnEditar_Categoria(){
     var btnEditar_Categoria=document.querySelectorAll(".btnEditar_Categoria");
     btnEditar_Categoria.forEach(function(btnEditar_Categoria){
         btnEditar_Categoria.addEventListener('click',function(){
+            if (document.querySelector("#id_categoria")) {
+                $("#id_categoria").remove();
+            }
             document.querySelector("#titulo_Modal").innerHTML="Actualizar Categoria ";
             document.querySelector(".modal-header").classList.replace("modalHeaderRegistro","modalHeaderActualizar");
             document.querySelector("#btnAccion_Form").classList.replace("btn-primary","btn-info");
             document.querySelector("#btn_Text").innerHTML="Actualizar";
-
+            $(".frm").append("<input type='hidden' id='id_categoria' name='id_categoria'>");
             var id_categoria=this.getAttribute("rl");
             var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
             var ajax_url = base_url+'categoria/seleccionar_categoria/'+id_categoria;
@@ -145,7 +145,7 @@ function ftnEliminarCategoria(){
                                 swal("Eliminar!",obj_json.msg,"success");
                                 tabla_categorias.ajax.reload(function(){
                                     setTimeout(() => { 
-                                        ftnEditar_Categoria();
+                                       
                                         ftnEliminarCategoria();
                                     }, 500);
                                 });

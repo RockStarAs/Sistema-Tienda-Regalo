@@ -1,6 +1,5 @@
 <?php header_admin($data); 
-      obtener_modal('modal_agregar_producto',$data);
-      obtener_modal('modal_actualiza_producto',$data);
+      obtener_modal('modal_am_producto',$data);
 ?>
 <main class="app-content">
     <div class="app-title">

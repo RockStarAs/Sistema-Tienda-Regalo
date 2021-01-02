@@ -22,7 +22,11 @@
         {
             $nombre_categoria = limpiar_str($_POST['txt_nombre']);
             $descripcion_categoria= limpiar_str($_POST['txt_descripcion']);
-            $id_Categoria=limpiar_str($_POST['id_categoria']);
+            if (isset($_POST['id_categoria'])) {
+                $id_Categoria=limpiar_str($_POST['id_categoria']);
+            }else{
+                $id_Categoria=0;
+            }
             if ($id_Categoria==0) {
                 //Insertar
                 $solicitud_insertar = $this->modelo->modelo_inserta_categoria($nombre_categoria,$descripcion_categoria);               
