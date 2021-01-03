@@ -1,6 +1,7 @@
 <?php
     class categoria extends Controladores
     {
+        
         public function __construct()
         {
             session_start();
@@ -54,7 +55,7 @@
         }
 
         public function seleccionar_categoria($id_Categoria){
-            $int_id_cat=intval(limpiar_str($id_Categoria));//convertir a entero
+            $int_id_cat=desencriptar($id_Categoria);
             if ($int_id_cat>0) {
                 $arrayDatos=$this->modelo->modelo_seleccionar_categoria($int_id_cat);
                 if (empty($arrayDatos)) {
@@ -74,12 +75,14 @@
                 }else{
                     $data[$i]['estado_categoria'] = " <span class='badge badge-danger'>  Inactiva </span> ";
                 }
-                
-                $data[$i]['opciones'] = mostrar_acciones($data[$i]["id_categoria"],"btnEditar_Categoria","btnEliminar_Categoria");          
+                $id_crypt=encriptar ($data[$i]["id_categoria"]);
+                $data[$i]['opciones'] = mostrar_acciones($id_crypt,"btnEditar_Categoria","btnEliminar_Categoria");          
             }
             echo json_encode($data,JSON_UNESCAPED_UNICODE);
             die();
         }
+
+        
 
         public function devolver_categorias(){
             $htmlOpciones="";
@@ -95,7 +98,8 @@
 
         public function eliminar_categoria(){
             if ($_POST) {
-                $int_id_cat=intval($_POST['id_categoria']);
+                $int_id_cat=desencriptar($_POST['id_categoria']);
+                $int_id_cat=intval($int_id_cat);
                 $solicitud_eliminar=$this->modelo->modelo_eliminar_categoria($int_id_cat);
                 if ($solicitud_eliminar=='ok') {
                     $array_respuesta=array('status' => true, 'msg' => "Se ha eliminado la categoria");

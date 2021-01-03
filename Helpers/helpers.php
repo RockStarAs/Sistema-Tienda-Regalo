@@ -109,4 +109,16 @@
         return $cantidad;
     }
 
+    function encriptar($valor){
+        $iv=base64_decode("C9fBxl1EWtYTL1/M8jfstw==");
+        return openssl_encrypt ($valor, METHOD,CLAVE, false, $iv);
+    }
+
+    function desencriptar($valor){
+        $valor=str_replace(" ","+",$valor);
+        $valor=str_replace(",","/",$valor);
+        $iv=base64_decode("C9fBxl1EWtYTL1/M8jfstw==");
+        $encrypted_data = base64_decode($valor);
+        return openssl_decrypt($valor, METHOD, CLAVE, false, $iv);
+    }
 ?>
