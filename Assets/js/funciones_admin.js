@@ -51,6 +51,7 @@ document.addEventListener('DOMContentLoaded',function(){
             }
         }
     });
+    //Por haber encontrado un error con esta datable se quedará como que enviamos el JSON completo aquí sin tener que acceder a la URL donde se encuentra almacenada
     //Insertar un usuarios
     var form_usuarios = document.querySelector("#frm_agregar_usuario");
     form_usuarios.onsubmit = function(e){

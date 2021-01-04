@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded',function(){
         "aProcessing":true,
         "aServerSide":true,
         "language":{
-            "url" : "idioma.json"
+            url : " " + base_url + "assets/js/idioma.json"
         },
         "ajax":{
             "url" : " "+base_url+"cliente/listar_clientes",
