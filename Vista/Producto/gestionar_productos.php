@@ -24,7 +24,7 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Nombre Producto</th>
+                                    <th>Producto</th>
                                     <th>Categoria</th>
                                     <th>Stock</th>
                                     <th>Precio Venta</th>

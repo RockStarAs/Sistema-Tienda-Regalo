@@ -122,7 +122,7 @@ function ftnEliminarCategoria(){
             var id_categoria=this.getAttribute("rl");
             swal({
                title: "Eliminar Categoria",
-               text: "¿Realmente quiere elimar la categoria?", 
+               text: "¿Realmente quiere eliminar la categoria?", 
                type: "warning",
                showCancelButton: true,
                confirmButtonText: "Sí,eliminar!",
