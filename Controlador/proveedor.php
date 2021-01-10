@@ -89,5 +89,16 @@
             }
             die();
         }
+        public function devolver_proveedores(){
+            $html_opciones="";
+            $array_datos=$this->modelo->modelo_listar_proveedor();
+            if(count($array_datos)){
+                for ($i=0; $i < count($array_datos); $i++) { 
+                    $html_opciones.='<option value="'.$array_datos[$i]['ruc_dni'].'">'.$array_datos[$i]['nombre_proveedor'].'</option>';  
+                }    
+            }
+            echo $html_opciones;
+            die();
+        }
     }
 ?>

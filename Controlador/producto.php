@@ -129,6 +129,32 @@ class Producto extends Controladores
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
         die();
     }
+    public function listar_productos_v2()
+    {
+        $data = $this->modelo->modelo_listar_productos();
+        for ($i = 0; $i < count($data); $i++) {
+            $nombre = $this->modelo->modelo_nombre_Categorias($data[$i]['id_categoria']);
+            $data[$i]['id_categoria'] = $nombre['nombre_categoria'];
+            if ($data[$i]['estado_producto'] == 1) {
+                $data[$i]['estado_producto'] = " <span class='badge badge-success'> Activo </span> ";
+            } else {
+                $data[$i]['estado_producto'] = " <span class='badge badge-danger'>  Inactivo </span> ";
+            }
+            $data[$i]['precio_unitario_venta'] = SMONEY . formatea_moneda($data[$i]['precio_unitario_venta']);
+            $data[$i]['precio_compra_actualizado'] = SMONEY . formatea_moneda($data[$i]['precio_compra_actualizado']);
+
+            //Opcion de agregar a la lista
+            $data[$i]['opciones'] = '<button class="btn btn-info" onclick="agregar_detalle('.$data[$i]['id_producto'].',\''.$data[$i]['nombre_producto'].'\')">➕</button>';
+            
+            
+            $data[$i]['imagen_producto'] = "<img id='img' width='50' height='50' src=./../Assets/images/uploads/".$data[$i]['imagen_producto'].
+            ">";
+            
+        }
+
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        die();
+    }
 
     public function listar_productos_modal()
     {
@@ -155,8 +181,19 @@ class Producto extends Controladores
         $this->vistas->obten_vista($this, "ver_producto", $data);
     }
 
-    public function eliminar_producto()
-    {
+    public function busca_producto(){
+        if($_POST){
+            $respuesta = $this->modelo->modelo_busca_producto_nombre_id($_POST['id_producto'],$_POST['nombre_producto']);
+            //Falta validar si la respuesta es vacia, si no llega nada xd
+            $data= array('data' => $respuesta , 'status' => true);
+        }else{
+            $data = array('status' => false , 'msg' => "Error con los parametros."); 
+        }
+        echo json_encode($data,JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
+    public function eliminar_producto(){
         if ($_POST) {
             $int_id_prod = desencriptar($_POST['id_producto']);
             if ($int_id_prod!=false) {
@@ -175,4 +212,5 @@ class Producto extends Controladores
         }
         die();
     }
+    
 }

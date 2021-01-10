@@ -39,6 +39,11 @@
             $solicita_busqueda = $this->select_one($query);
             return $solicita_busqueda;
         }
+        public function modelo_busca_producto_nombre_id($id_producto,$nombre_producto){
+            $query = "SELECT * FROM producto INNER JOIN categoria_producto on producto.id_categoria = categoria_producto.id_categoria WHERE producto.id_producto = $id_producto AND producto.nombre_producto = '$nombre_producto'";
+            $solicita_busqueda = $this->select_one($query);
+            return $solicita_busqueda;
+        }
         public function modelo_eliminar_producto($id_producto){
             $return ="";
             $query = "UPDATE producto SET estado_producto=? WHERE id_producto=?";
