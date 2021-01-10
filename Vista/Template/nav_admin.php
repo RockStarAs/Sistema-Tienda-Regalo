@@ -41,7 +41,7 @@
               </a>
             </li>
             <li>
-              <a class="treeview-item" href="<?= base_url();?>usuario/gestionar_usuarios" target="" rel="noopener">
+              <a class="treeview-item" href="<?= base_url();?>combo/gestionar_combo" target="" rel="noopener">
                 <i class="icon fa fa-circle-o"></i> Gestionar Combos
               </a>
             </li>

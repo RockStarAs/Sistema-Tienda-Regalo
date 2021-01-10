@@ -7,7 +7,7 @@
 
         public function modelo_inserta_categoria($nombre_categoria,$descripcion_categoria){
             $return ="";
-            $query = "SELECT * FROM categoria_producto WHERE nombre_categoria = '$nombre_categoria'";
+            $query = "SELECT * FROM categoria_producto WHERE nombre_categoria = '$nombre_categoria' AND estado_categoria!=0";
             $solicita_listado = $this->select_all($query);
             $descripcion_categoria = ($descripcion_categoria=="") ? "Ninguna" : $descripcion_categoria ;
             if(empty($solicita_listado)){
@@ -24,7 +24,7 @@
 
         public function modelo_actualiza_categoria($id_categoria,$nombre_categoria,$descripcion_categoria){
             $return ="";
-            $query = "SELECT * FROM categoria_producto WHERE nombre_categoria='$nombre_categoria' AND id_categoria != '$id_categoria'";
+            $query = "SELECT * FROM categoria_producto WHERE nombre_categoria='$nombre_categoria' AND id_categoria != '$id_categoria' AND estado_categoria!=0";
             $solicita_listado = $this->select_all($query);
 
             if(empty($solicita_listado)){

@@ -26,6 +26,12 @@
             $solicita_listado = $this->select_all($query);
             return $solicita_listado;
         }
+
+        public function modelo_listar_combosActivos(){
+            $query = "SELECT * FROM combo WHERE estado_combo!=0";
+            $solicita_listado = $this->select_all($query);
+            return $solicita_listado;
+        }
  
         public function modelo_busca_combo_id($id_combo){
             $query = "SELECT * FROM combo where id_combo = $id_combo";

@@ -631,7 +631,12 @@ pre code {
   padding-right: 15px;
   padding-left: 15px;
 }
-
+.col-sd-12{
+  position: relative;
+  width: 100%;
+  padding-right: 40px;
+  padding-left: 40px;
+}
 .col {
   -ms-flex-preferred-size: 0;
       flex-basis: 0;
@@ -15544,6 +15549,7 @@ be a descendant of the grid when it is being dragged.
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
+
 
 @media print {
   .tile {

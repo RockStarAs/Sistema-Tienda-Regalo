@@ -29,11 +29,19 @@ document.addEventListener("DOMContentLoaded", function () {
       ftnEliminarProducto();
     },
   });
-  //Insertar y un producto
+  //Insertar y modificar un producto
   var form_productos = document.querySelector("#frm_agregar_producto");
   form_productos.onsubmit = function (e) {
     e.preventDefault();
-    var int_Id_prod = document.querySelector("#id_producto").value;
+    if (document.querySelector("#id_producto")) {
+      var int_Id_prod = document.querySelector("#id_producto").value;
+      var foto_actual=document.querySelector("#id_producto").value;
+      var foto_remove=document.querySelector("#id_producto").value;
+      if(int_Id_prod == '' || foto_actual=='' || foto_remove==''){
+        swal("Atención","Todos los campos deben ser obligatorios","error");
+        return false;
+      }
+    }
     var nombre_producto = document.querySelector("#txt_nombre").value;
     var precio_unitario_venta = document.querySelector("#txt_precio_venta")
       .value;
@@ -67,10 +75,7 @@ document.addEventListener("DOMContentLoaded", function () {
           form_productos.reset();
           swal("Añadido", json.msg, "success");
           tabla_productos.ajax.reload(function () {
-            setTimeout(() => {
-              ftnEditar_Producto(); 
-              ftnEliminarProducto();
-            }, 500);
+            //fntListarCategorias();
           });
         } else {
           swal("¡Error!", json.msg, "error");
@@ -87,9 +92,7 @@ window.addEventListener(
   function () {
     setTimeout(() => {
       fntListarCategorias();
-      //ftnEditar_Producto();
       foto_carga();
-      //ftnEliminarProducto();
     }, 500);
   },
   false
@@ -98,11 +101,18 @@ function ftnEditar_Producto() {
   var btnEditar_Producto = document.querySelectorAll(".btnEditar_Producto");
   btnEditar_Producto.forEach(function (btnEditar_Producto) {
     btnEditar_Producto.addEventListener("click", function () {
-      
+      if (document.querySelector("#id_producto")) {
+        $("#id_producto").remove();
+        $("#foto_actual").remove();
+        $("#foto_remove").remove();
+      }
       document.querySelector("#titulo_Modal").innerHTML = "Actualizar Producto ";
       document.querySelector(".modal-header").classList.replace("modalHeaderRegistro","modalHeaderActualizar");
       document.querySelector("#btnAccion_Form").classList.replace("btn-primary", "btn-info");
       document.querySelector("#btn_Text").innerHTML = "Actualizar";
+      $(".frm").append("<input type='hidden' id='id_producto' name='id_producto'>");
+      $(".frm").append("<input type='hidden' id='foto_actual' name='foto_actual'>");
+      $(".frm").append("<input type='hidden' id='foto_remove' name='foto_remove'>");
 
       var id_producto = this.getAttribute("rl");
       var request = window.XMLHttpRequest
@@ -130,7 +140,7 @@ function ftnEditar_Producto() {
               Math.round(obj_json.data.precio_compra_actualizado * 100) / 100;
             document.querySelector("#txtCodigo").value = obj_json.data.codigo_barras;
             document.querySelector("#categoria_id").value = obj_json.data.id_categoria;
-             
+            $("#categoria_id").selectpicker("render"); 
             if (obj_json.data.imagen_producto != "img_producto.png") {
               $(".prevPhoto").append(
                 "<img id='img' src=./../Assets/images/uploads/" +
@@ -144,7 +154,7 @@ function ftnEditar_Producto() {
               obj_json.data.imagen_producto;
             document.querySelector("#foto_remove").value =
               obj_json.data.imagen_producto;
-            $("#categoria_id").selectpicker("render");
+            
             $("#modal_form_agrega_producto").modal("show");
           } else {
             swal("Error", obj_json.msg, "error");
@@ -228,7 +238,11 @@ function remove_foto() {
   }
 }
 function abrir_modal() {
-  document.querySelector("#id_producto").value = "";
+  if (document.querySelector("#id_producto")) {
+    $("#id_producto").remove();
+    $("#foto_actual").remove();
+    $("#foto_remove").remove();
+  }
   document.querySelector("#titulo_Modal").innerHTML = "Nuevo Producto ";
   document.querySelector(".modal-header").classList.replace("modalHeaderActualizar", "modalHeaderRegistro");
   document.querySelector("#btnAccion_Form").classList.replace("btn-info", "btn-primary");
@@ -246,7 +260,7 @@ function ftnEliminarProducto() {
       swal(
         {
           title: "Eliminar Producto",
-          text: "¿Realmente quiere elimar el Producto?",
+          text: "¿Realmente quiere eliminar el Producto?",
           type: "warning",
           showCancelButton: true,
           confirmButtonText: "Sí,eliminar!",

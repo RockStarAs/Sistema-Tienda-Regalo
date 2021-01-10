@@ -2,7 +2,8 @@
     const URL = 'http://localhost:8/sistema-tienda-regalo/';
     const LIBS = 'Librerias/';
     const VIEWS = 'Vista/';
-
+    const CLAVE='SNDAIDNSAINDSHASRDGCGFCHHHGVGCF';
+    const METHOD = 'aes-256-cbc';
     date_default_timezone_set('America/Lima');
 
     const DB_USER = "abel";

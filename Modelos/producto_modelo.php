@@ -13,10 +13,10 @@
         }
         
         
-        public function modelo_actualizar_producto($id_producto,$id_categoria,$nombre_producto,$precio_unitario_venta,$stock_producto,$precio_compra,$descripcion_producto){
-            $query="UPDATE producto SET id_categoria=?,nombre_producto=?,precio_unitario_venta=?,stock_producto=?,precio_compra_actualizado=?,descripcion_producto=? 
+        public function modelo_actualizar_producto($id_producto,$id_categoria,$nombre_producto,$precio_unitario_venta,$stock_producto,$precio_compra,$descripcion_producto,$imgContenido,$codigo_barras){
+            $query="UPDATE producto SET id_categoria=?,nombre_producto=?,precio_unitario_venta=?,stock_producto=?,precio_compra_actualizado=?,descripcion_producto=?,imagen_producto=?,codigo_barras=? 
             WHERE id_producto=?";
-            $valores=array($id_categoria,$nombre_producto,$precio_unitario_venta,$stock_producto,$precio_compra,$descripcion_producto,$id_producto);
+            $valores=array($id_categoria,$nombre_producto,$precio_unitario_venta,$stock_producto,$precio_compra,$descripcion_producto,$imgContenido,$codigo_barras,$id_producto);
             $solicita_update = $this->update($query,$valores);
             return $solicita_update;
         }

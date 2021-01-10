@@ -9,11 +9,8 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="frm_agregar_producto" name="frm_agregar_producto" class="form-horizontal"
+                <form id="frm_agregar_producto" class="frm" name="frm_agregar_producto" class="form-horizontal"
                     enctype="multipart/form-data">
-                    <input type="hidden" id="id_producto" name="id_producto" value="">
-                    <input type="hidden" id="foto_actual" name="foto_actual" value="">
-                    <input type="hidden" id="foto_remove" name="foto_remove" value="">
                     <div class="row">
                         <div class="col-md-8">
                             <div class="form-group">
