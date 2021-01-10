@@ -87,7 +87,7 @@
             if(count($arrayDatos)>0){
                 for ($i=0; $i <count($arrayDatos) ; $i++) { 
                     $htmlOpciones.='<option value="'.$arrayDatos[$i]['id_categoria'].'">'.$arrayDatos[$i]['nombre_categoria'].'</option>';
-                }
+                } 
             }
             echo $htmlOpciones;
             die();

@@ -56,9 +56,28 @@
         <li><a class="app-menu__item" href="<?= base_url();?>proveedor/gestionar_proveedores"><i class="app-menu__icon fa fa-truck"></i>
           <span class="app-menu__label">Proveedores</span></a>
         </li>
-        <li><a class="app-menu__item" href="docs.html"><i class="app-menu__icon fa fa-shopping-cart"></i>
-          <span class="app-menu__label">Compras</span></a>
+
+        
+        <li class="treeview">
+          <a class="app-menu__item" href="#" data-toggle="treeview">
+            <i class="app-menu__icon fa fa-shopping-cart"></i>
+              <span class="app-menu__label">Compras</span>
+              <i class="treeview-indicator fa fa-angle-right"></i>
+          </a>
+          <ul class="treeview-menu">
+            <li>
+              <a class="treeview-item" href="<?= base_url();?>compra/agregar_compra" target="" rel="noopener">
+                <i class="icon fa fa-circle-o"></i> Añadir una compra
+              </a>
+            </li>
+            <li>
+              <a class="treeview-item" href="<?= base_url();?>compra/ver_compras" target="" rel="noopener">
+                <i class="icon fa fa-circle-o"></i> Ver compras realizadas
+              </a>
+            </li>
+          </ul>
         </li>
+
         <li><a class="app-menu__item" href="docs.html"><i class="app-menu__icon fa fa-sign-out"></i>
           <span class="app-menu__label">Cerrar Sesión</span></a>
         </li>

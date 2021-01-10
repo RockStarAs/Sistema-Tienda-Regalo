@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
           swal("Añadido", json.msg, "success");
           tabla_productos.ajax.reload(function () {
             setTimeout(() => {
-              ftnEditar_Producto();
+              ftnEditar_Producto(); 
               ftnEliminarProducto();
             }, 500);
           });
@@ -138,7 +138,7 @@ function ftnEditar_Producto() {
                   ">"
               );
               $("#text").hide();
-              $(".delPhoto").removeClass("notBlock");
+              $(".delPhoto").removeClass("notBlock"); 
             }
             document.querySelector("#foto_actual").value =
               obj_json.data.imagen_producto;
@@ -162,7 +162,7 @@ function fntListarCategorias() {
     : new ActiveXObject("Microsoft.XMLHTTP");
   request.open("GET", ajax_url, true);
   request.send();
-
+ 
   request.onreadystatechange = function () {
     if (request.readyState == 4 && request.status == 200) {
       document.querySelector("#categoria_id").innerHTML = request.responseText;
