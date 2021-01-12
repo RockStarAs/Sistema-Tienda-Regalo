@@ -54,8 +54,8 @@ function listarProductos()
                 "order": [[0,"desc"]] //Ordenar (Columna, orden)
             
             })
-        .DataTable();
 }
+$('#tabla_producto').DataTable();
 
 function abrir_form(){
     $(".boton").hide();
