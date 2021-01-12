@@ -51,12 +51,13 @@ function listarProductos()
                 "responsive":true,
                 "bDestroy": true,
                 "iDisplayLength": 5, //Paginacion
-                "order": [[0,"desc"]] //Ordenar (Columna, orden)
-            
-            })
-        .DataTable();
+                "order": [[0,"desc"]], //Ordenar (Columna, orden)
+                drawCallback: function () {
+                    ftnAgregar_Producto()
+                }
+            });
 }
-
+$('#tabla_producto').DataTable();
 function abrir_form(){
     $(".boton").hide();
     $('.frm_combo').show();
@@ -75,4 +76,13 @@ function abrir_modal() {
     document.querySelector("#titulo_Modal").innerHTML = "Lista Productos ";
     document.querySelector(".modal-header").classList.replace("modalHeaderActualizar", "modalHeaderRegistro");
     $("#modal_lista_producto").modal("show");
+}
+
+function ftnAgregar_Producto(){
+    var btnAgregar=document.querySelectorAll(".btnAgregar");
+    btnAgregar.forEach(function(btnAgregar){
+        btnAgregar.addEventListener('click',function(){
+           
+        });
+    });
 }
