@@ -56,7 +56,7 @@ function carga_modal_datos() {
   });
 }
 var cont = 0;
-var detalles= 0;
+var detalles = 0;
 function agregar_detalle(id_producto, nombre_producto) {
   var request = window.XMLHttpRequest
     ? new XMLHttpRequest()
@@ -74,81 +74,81 @@ function agregar_detalle(id_producto, nombre_producto) {
       console.log(obj_json);
       if (obj_json.status) {
         //Agregando el objeto a la tabla
-        var cantidad = 1;
-        var precio_compra = 1;
-        var fila = '<tr class="filas" sl="'+obj_json.data.id_producto+'" id="fila'+cont+'"> ' +
-                      '<td>'+
-                           '<button type="button" class="btn btn-outline-danger btn-sm" onclick="eliminarDetalle('+cont+')">X</button>'+
-                       '</td>'+
-                      '<td>' +
-                          '<input type="hidden" name="idarticulo[]" value="'+obj_json.data.id_producto+'">'+
-                           obj_json.data.nombre_producto +
-                       '</td>'+
-                      '<td>' +
-                          '<input type="number" name="cantidad[]" id="cantidad[]" value="'+cantidad+'">'+
-                       '</td>'+
-                      '<td>' +
-                        '<span>S/.  </span>'+
-                          '<input type="number" onchange="actualiza_detalle('+cont+')" name="precio_compra[]" id="precio_compra[]" sl="'+cont+'" value="'+precio_compra+'">'+
-                       '</td>'+
-                      '<td>' +
-                          '<span>S/.</span>'+
-                          '<span name="subtotal"  id="subtotal'+cont+'" value="'+precio_compra+'" >'+precio_compra+'</span>'+
-                       '</td>'+
-                      '<td>' +
-                          '<button type="button" class="btn btn-info" onclick="modificarSubtotales()">'+
-                            '<i class="fa fa-refresh"></i>'+
-                          '</button>'+
-                       '</td>'+
-                   '</tr>';
+        if (evita_repetir(obj_json.data.id_producto)) {
+          //Si se repite
+          var repetido = $('input[sl="'+obj_json.data.id_producto+'"]');
+          var cantidad = repetido.attr('value');
+          //console.log(cantidad);
+          cantidad++;
+          repetido.attr('value',cantidad);
+        } else {
+          var cantidad = 1;
+          var precio_compra = 1;
+          var fila =
+            '<tr class="filas" sl="' +obj_json.data.id_producto +'" id="fila' +cont +'"> ' +
+            "<td>" +'<button type="button" class="btn btn-outline-danger btn-sm" onclick="eliminarDetalle(' +cont +')">X</button>' +"</td>" +
+            "<td>" +'<input type="hidden" name="idarticulo[]" value="' +obj_json.data.id_producto +'">' +obj_json.data.nombre_producto +"</td>" +
+            "<td>" +'<input type="number" name="cantidad[]" sl="'+obj_json.data.id_producto+'" id="cantidad[]" value="' +cantidad +'">' +"</td>" +
+            "<td>" +"<span>S/.  </span>" +'<input type="number" onchange="actualiza_detalle(' +cont +')" name="precio_compra[]"id="precio_compra[]" sl="' +cont +'" value="' +precio_compra +'">' +"</td>" +
+            "<td>" +"<span>S/.</span>" +'<span name="subtotal"  id="subtotal' +cont +'" value="' +precio_compra +'" >' +precio_compra +
+            "</span>" +
+            "</td>" +
+            "</tr>";
 
-        cont++;
-        detalles++;
-        $("#detalles_compra").append(fila);
-        
-        calcula_totales();
+          cont++;
+          detalles++;
+          $("#detalles_compra").append(fila);
 
+          calcula_totales();
+        }
       } else {
         swal("Atencion", obj_json.msg, "error");
       }
     }
   };
 }
-function calcula_totales(){
+function calcula_totales() {
   var sub_totales = document.getElementsByName("subtotal");
   //console.log(sub_totales);
   var total = 0.0;
   var tamaño_sub_totales = sub_totales.length;
   for (var index = 0; index < tamaño_sub_totales; index++) {
-    
-    var sub =  parseFloat(document.getElementsByName("subtotal")[index].textContent);
+    var sub = parseFloat(
+      document.getElementsByName("subtotal")[index].textContent
+    );
     //console.log(sub);
     //console.log(document.getElementsByName("subtotal")[index]);
     total += sub;
-  } 
-  $("#total").html("S/."+ total);
+  }
+  $("#total").html("S/." + total);
   $("#total_compra").val(total);
 }
-
-function actualiza_detalle(numero){
-
-    var cant = document.getElementsByName("cantidad[]");
-    var prec = document.getElementsByName("precio_compra[]");
-    var sub = document.getElementsByName("subtotal");
-    var tamañoCant = cant.length;
-    for (var i = 0; i < tamañoCant; i++) 
-    {
-        var inpC = cant[i];
-        var inpP = prec[i];
-        var inpS = sub[i];
-
-        inpS.value = inpP.value;
-        document.getElementsByName("subtotal")[i].textContent = inpS.value;
+function evita_repetir(id_producto) {
+  var tr = document.getElementsByTagName("tr");
+  for (var i = 0; i < tr.length; i++) {
+    var sl = tr[i].getAttribute("sl");
+    if (sl == id_producto) {
+      return true;
     }
+  }
+  return false;
+}
+function actualiza_detalle(numero) {
+  var cant = document.getElementsByName("cantidad[]");
+  var prec = document.getElementsByName("precio_compra[]");
+  var sub = document.getElementsByName("subtotal");
+  var tamañoCant = cant.length;
+  for (var i = 0; i < tamañoCant; i++) {
+    var inpC = cant[i];
+    var inpP = prec[i];
+    var inpS = sub[i];
 
-    calcula_totales();
- 
- 
+    inpS.value = inpP.value;
+    document.getElementsByName("subtotal")[i].textContent = inpS.value;
+  }
+
+  calcula_totales();
+
   // var elemento = $('input[sl="'+numero+'"]');
   //  elemento.value = $('input[sl="'+numero+'"]').attr('sl');
   //console.log($('input[sl="'+numero+'"]').text());
@@ -156,3 +156,14 @@ function actualiza_detalle(numero){
   //console.log(elemento);
   //calcula_totales();
 }
+function eliminarDetalle(indice)
+{
+    $("#fila" + indice).remove();
+
+    detalles -= 1;
+
+    calcula_totales();
+
+    
+}
+
