@@ -20,7 +20,7 @@
             <div class="tile p-md-4">
                 <form id="" class="frm" name="">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label class="control-label">Proveedor</label>
                                 <select class="form-control" data-live-search="true" id="proveedor_id"
@@ -28,13 +28,19 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label class="control-label">Fecha de compra</label>
                                 <input class="form-control" type="date" placeholder="Ingrese fecha">
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Fecha de entrega(Opcional)</label>
+                                <input class="form-control" type="date" placeholder="Ingrese fecha">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
                             <label class="control-label">Estado de compra</label>
                             <select class="form-control" data-live-search="true" id="proveedor_id" name="categoria_id"
                                 required>

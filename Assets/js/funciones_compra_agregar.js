@@ -76,7 +76,7 @@ function agregar_detalle(id_producto, nombre_producto) {
         //Agregando el objeto a la tabla
         if (evita_repetir(obj_json.data.id_producto)) {
           //Si se repite
-          var repetido = $('input[sl="'+obj_json.data.id_producto+'"]');
+          var repetido = $('input[sc="'+obj_json.data.id_producto+'"]');
           var cantidad = repetido.attr('value');
           //console.log(cantidad);
           cantidad++;
@@ -88,8 +88,8 @@ function agregar_detalle(id_producto, nombre_producto) {
             '<tr class="filas" sl="' +obj_json.data.id_producto +'" id="fila' +cont +'"> ' +
             "<td>" +'<button type="button" class="btn btn-outline-danger btn-sm" onclick="eliminarDetalle(' +cont +')">X</button>' +"</td>" +
             "<td>" +'<input type="hidden" name="idarticulo[]" value="' +obj_json.data.id_producto +'">' +obj_json.data.nombre_producto +"</td>" +
-            "<td>" +'<input type="number" name="cantidad[]" sl="'+obj_json.data.id_producto+'" id="cantidad[]" value="' +cantidad +'">' +"</td>" +
-            "<td>" +"<span>S/.  </span>" +'<input type="number" onchange="actualiza_detalle(' +cont +')" name="precio_compra[]"id="precio_compra[]" sl="' +cont +'" value="' +precio_compra +'">' +"</td>" +
+            "<td>" +'<input type="number" onchange="actualiza_cantidad('+obj_json.data.id_producto+')" name="cantidad[]" sc="'+obj_json.data.id_producto+'" id="cantidad[]" value="' +cantidad +'">' +"</td>" +
+            "<td>" +"<span>S/.  </span>" +'<input type="number" onchange="actualiza_detalle(' +cont +')" name="precio_compra[]"id="precio_compra[]" sp="' +cont +'" value="' +precio_compra +'">' +"</td>" +
             "<td>" +"<span>S/.</span>" +'<span name="subtotal"  id="subtotal' +cont +'" value="' +precio_compra +'" >' +precio_compra +
             "</span>" +
             "</td>" +
@@ -123,12 +123,19 @@ function calcula_totales() {
   $("#total").html("S/." + total);
   $("#total_compra").val(total);
 }
+function actualiza_cantidad(id_producto){
+  var cantidad_por_actualizar = $('input[sc="'+id_producto+'"]');
+  console.log(cantidad_por_actualizar);
+  var cantidad = cantidad_por_actualizar.val();
+  console.log(cantidad);
+  cantidad_por_actualizar.attr('value',cantidad);
+}
 function evita_repetir(id_producto) {
   var tr = document.getElementsByTagName("tr");
   for (var i = 0; i < tr.length; i++) {
     var sl = tr[i].getAttribute("sl");
     if (sl == id_producto) {
-      return true;
+      return true; 
     }
   }
   return false;
