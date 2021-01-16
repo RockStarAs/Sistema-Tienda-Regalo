@@ -144,7 +144,7 @@ class Producto extends Controladores
             $data[$i]['precio_compra_actualizado'] = SMONEY . formatea_moneda($data[$i]['precio_compra_actualizado']);
 
             //Opcion de agregar a la lista
-            $data[$i]['opciones'] = '<button class="btn btn-info" onclick="agregar_detalle('.$data[$i]['id_producto'].',\''.$data[$i]['nombre_producto'].'\')">➕</button>';
+            $data[$i]['opciones'] = '<button class="btn btn-outline-info btn-sm" onclick="agregar_detalle('.$data[$i]['id_producto'].',\''.$data[$i]['nombre_producto'].'\')">➕</button>';
             
             
             $data[$i]['imagen_producto'] = "<img id='img' width='50' height='50' src=./../Assets/images/uploads/".$data[$i]['imagen_producto'].
