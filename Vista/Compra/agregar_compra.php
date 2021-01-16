@@ -18,7 +18,7 @@
     <div class="row">
         <div class="col-md-12 col-sd-12">
             <div class="tile p-md-4">
-                <form id="" class="frm" name="">
+                <form id="formulario_agregar_compra_detalles" class="frm" name="">
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
@@ -31,18 +31,18 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label class="control-label">Fecha de compra</label>
-                                <input class="form-control" type="date" placeholder="Ingrese fecha">
+                                <input class="form-control" id="fecha_compra" name="fecha_compra" type="date" placeholder="Ingrese fecha" required>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label class="control-label">Fecha de entrega(Opcional)</label>
-                                <input class="form-control" type="date" placeholder="Ingrese fecha">
+                                <input class="form-control" id="fecha_entrega" name="fecha_entrega" type="date" placeholder="Ingrese fecha">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <label class="control-label">Estado de compra</label>
-                            <select class="form-control" data-live-search="true" id="proveedor_id" name="categoria_id"
+                            <select class="form-control" data-live-search="true" id="estado_compra" name="estado_compra" name="estado_compra"
                                 required>
                                 <option value="1" selected>Recibida</option>
                                 <option value="0">Por recibir</option>
@@ -53,13 +53,13 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label">Serie de boleta o factura (Opcional)</label>
-                                <input class="form-control" type="text" placeholder="Enter your name">
+                                <input class="form-control" type="text" id="serie_boleta_factura" name="serie_boleta_factura" placeholder="Enter your name">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label">Correlativo(Opcional)</label>
-                                <input class="form-control" type="text" placeholder="Enter your name">
+                                <input class="form-control" type="text" id="correlativo_boleta_factura" name="correlativo_boleta_factura"  placeholder="Enter your name">
                             </div>
                         </div>
                     </div>

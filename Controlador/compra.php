@@ -17,8 +17,44 @@
             $this->vistas->obten_vista($this,"agregar_compra",$data); 
         }
         public function insertar_compra(){
-            $data = $this->modelo->modelo_inserta_compra("12345678",null,null,null);
-            $this->vistas->obten_vista($this,"ver_compra",$data);
+            if($_POST){
+                //Agregando la compra en la base de datos
+                $ruc_dni = limpiar_str($_POST["proveedor_id"]); 
+                $estado_compra = limpiar_str($_POST["estado_compra"]);
+                $serie_boleta_factura = limpiar_str($_POST["serie_boleta_factura"]) == "" ? null: limpiar_str($_POST["serie_boleta_factura"]);
+                $correlativo_boleta_factura = limpiar_str($_POST["correlativo_boleta_factura"]) == "" ? null : limpiar_str($_POST["correlativo_boleta_factura"]);
+                $fecha_registro_compra = limpiar_str($_POST["fecha_compra"]);
+                $fecha_entrega_compra = limpiar_str($_POST["fecha_entrega"]) == "" ? null : limpiar_str($_POST["fecha_entrega"]);
+                //Datos de compra asignados
+                //Array de detalles pero están separados
+                $id_productos =  $_POST["idarticulo"];
+                $cantidad_productos =  $_POST["cantidad"];
+                $precio_compra_productos = $_POST["precio_compra"];
+
+                //bandera
+                $flag = false;
+
+                $solicitud_agregar_compra=$this->modelo->modelo_inserta_compra($ruc_dni,$serie_boleta_factura,$correlativo_boleta_factura,$fecha_registro_compra,$fecha_entrega_compra,$estado_compra);
+                if($solicitud_agregar_compra > 0){
+                    //El id se ha registrado
+                    if(count($id_productos) <= 0){
+                        $data = array("status" => false,"id" => null,"msg" =>"Error en la inserción de los detalles de la compra.");
+                           
+                    }else{
+                        //Procediendo a agregar 
+                        for ($i=0; $i < count($id_productos) ; $i++) { 
+                            $solicitud_agrega_detalle_compra = $this->modelo->modelo_inserta_detalles_compra($id_productos[$i],$solicitud_agregar_compra,$cantidad_productos[$i],$precio_compra_productos[$i]);        
+                        }
+                        $data = array("status" => true,"msg" =>"Se ha registrado la compra, con un total de ".count($id_productos)." productos.");
+                    }     
+                }else{
+                    $data = array("status" => false,"id" => null,"msg" =>"Fallo inserción de la compra compra como tal.");         
+                }
+            }else{
+                $data = array("status" => false, "msg" => "Error en la inserción de la compra.");
+            }
+            echo json_encode($data,JSON_UNESCAPED_UNICODE);
+            die();
         }
         public function listar_compra(){
             $data = $this->modelo->modelo_listar_compra_con_prov();

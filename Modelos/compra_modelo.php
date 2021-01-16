@@ -7,19 +7,33 @@
             $ruc_dni,
             $serie_factura_boleta,
             $correlativo_factura_boleta,
-            $fecha_compra_realizada
+            $fecha_registro_compra,
+            $fecha_compra_realizada,
+            $estado_compra
         ){
-            //FALTA VALIDAR CUANDO ME ENVIEN UNA COMPRA CON FECHA DE COMPRA REALIZADA
-            $fecha_registro_compra = date("Y-m-d");
             $query = "INSERT INTO compra(
                 ruc_dni,
                 serie_factura_boleta,
                 correlativo_factura_boleta,
                 fecha_registro_compra,
-                fecha_compra_realizada
+                fecha_compra_realizada,
+                estado_compra
                 ) 
-                values (?,?,?,?,?)";
-            $valores = array($ruc_dni,$serie_factura_boleta,$correlativo_factura_boleta,$fecha_registro_compra,$fecha_compra_realizada);
+                values (?,?,?,?,?,?)";
+            $valores = array($ruc_dni,$serie_factura_boleta,$correlativo_factura_boleta,$fecha_registro_compra,$fecha_compra_realizada,$estado_compra);
+            $solicita_insert = $this->insert($query,$valores);
+            return $solicita_insert;
+        }
+        public function modelo_inserta_detalles_compra($id_producto,$id_compra,$cantidad_producto,$precio_compra){
+            $query = "INSERT INTO detalle_compra_producto(
+                id_producto,
+                id_compra,
+                cantidad_producto,
+                precio_compra
+            )
+            values (?,?,?,?)
+            ";
+            $valores = array($id_producto,$id_compra,$cantidad_producto,$precio_compra);
             $solicita_insert = $this->insert($query,$valores);
             return $solicita_insert;
         }

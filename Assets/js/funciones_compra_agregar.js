@@ -89,7 +89,7 @@ function agregar_detalle(id_producto, nombre_producto) {
             "<td>" +'<button type="button" class="btn btn-outline-danger btn-sm" onclick="eliminarDetalle(' +cont +')">X</button>' +"</td>" +
             "<td>" +'<input type="hidden" name="idarticulo[]" value="' +obj_json.data.id_producto +'">' +obj_json.data.nombre_producto +"</td>" +
             "<td>" +'<input type="number" onchange="actualiza_cantidad('+obj_json.data.id_producto+')" name="cantidad[]" sc="'+obj_json.data.id_producto+'" id="cantidad[]" value="' +cantidad +'">' +"</td>" +
-            "<td>" +"<span>S/.  </span>" +'<input type="number" onchange="actualiza_detalle(' +cont +')" name="precio_compra[]"id="precio_compra[]" sp="' +cont +'" value="' +precio_compra +'">' +"</td>" +
+            "<td>" +"<span>S/.  </span>" +'<input type="number" onchange="actualiza_detalle(' +cont +')" name="precio_compra[]"id="precio_compra[]" sp="' +cont +'" value="' +precio_compra +'" step="0.1">' +"</td>" +
             "<td>" +"<span>S/.</span>" +'<span name="subtotal"  id="subtotal' +cont +'" value="' +precio_compra +'" >' +precio_compra +
             "</span>" +
             "</td>" +
@@ -169,8 +169,61 @@ function eliminarDetalle(indice)
 
     detalles -= 1;
 
-    calcula_totales();
+    calcula_totales(); 
+}
+var form_compra = document.querySelector("#formulario_agregar_compra_detalles");
 
-    
+form_compra.onsubmit = function(e){
+  e.preventDefault();
+  //Validar que esté lleno xdd
+  var proveedor_id = document.querySelector("#proveedor_id");
+  var fecha_compra = document.querySelector("#fecha_compra");
+  var fecha_entrega = document.querySelector("#fecha_entrega");
+  var estado_compra = document.querySelector("#estado_compra");
+  var serie_boleta_factura = document.querySelector("#serie_boleta_factura");
+  var serie_boleta_factura = document.querySelector("#correlativo_boleta_factura");
+  if(proveedor_id.value == "" || fecha_compra.value == "" || estado_compra.value == ""){
+    //Aqui es porque le falta agregar datos en el formulario principal
+    swal("Atención","Falta llenar un campo obligatorio.","error");
+    return false;
+  }else{
+    //Aqui está todo correcto por ahora xd
+    var sub_totales = document.getElementsByName("subtotal");
+    if(sub_totales.length == 0  || sub_totales.length < 0 ){
+      swal("Atención","Las compras deben contener al menos un producto para ser registradas.","error")
+      return false;
+    }else{
+      //Aqui empiezo a agregar
+      //Registro primero la compra
+      var request = window.XMLHttpRequest
+      ? new XMLHttpRequest()
+      : new ActiveXObject("Microsoft.XMLHTTP");
+      var ajax_url = base_url + "compra/insertar_compra";
+      var form_data = new FormData(form_compra);
+      request.open("POST", ajax_url, true);
+      request.send(form_data);
+      request.onreadystatechange = function () {
+        if (request.readyState == 4 && request.status == 200) {
+          //Solicitud exitosa
+        var json = JSON.parse(request.responseText);
+        if (json.status) {   
+          swal({
+            title:"Agregado correctamente 😀",
+            text:json.msg,
+            type:"success",
+            showCancelButton:false,
+            confirmButtonText:"Aceptar",
+          },function(isConfirm){
+            if(isConfirm){
+              location.reload();
+            }
+          });    
+        }else{
+          swal("Posible error", json.msg, "error");
+        }
+      }
+      }
+    }
+  }
 }
 
