@@ -40,11 +40,11 @@
                 <i class="icon fa fa-circle-o"></i> Gestionar Productos
               </a>
             </li>
-            <li>
-              <a class="treeview-item" href="<?= base_url();?>combo/gestionar_combo" target="" rel="noopener">
+            <!-- <li>
+              <a class="treeview-item" href=" base_url();combo/gestionar_combo" target="" rel="noopener">
                 <i class="icon fa fa-circle-o"></i> Gestionar Combos
               </a>
-            </li>
+            </li> -->
           </ul>
         </li>
         <li><a class="app-menu__item" href="docs.html"><i class="app-menu__icon fa fa-usd"></i>

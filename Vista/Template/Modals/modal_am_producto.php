@@ -44,7 +44,7 @@
                                 <label class="control-label">Código</label>
                                 <input class="form-control" id="txtCodigo" name="txtCodigo" type="text"
                                     placeholder="Código de barra">
-                                <br>
+                               
                             </div>
 
                             <label class="control-label">Precio de Venta</label>
@@ -55,7 +55,14 @@
                                 <input class="form-control" id="txt_precio_venta" name="txt_precio_venta" value="0.00"
                                     data-decimals="2" min="0" step="0.01" type="number" required="" />
                             </div>
-
+                            <label class="control-label">Precio de Venta Por Mayor</label>
+                            <div class="input-group mb-2 mr-sm-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">S/.</div>
+                                </div>
+                                <input class="form-control" id="txt_precio_venta_mayor" name="txt_precio_venta_mayor" value="0.00"
+                                    data-decimals="2" min="0" step="0.01" type="number" />
+                            </div>
                             <label class="control-label">Precio de Compra</label>
                             <div class="input-group mb-2 mr-sm-2">
                                 <div class="input-group-prepend">

@@ -10,6 +10,13 @@ document.addEventListener("DOMContentLoaded", function () {
       url: " " + base_url + "producto/listar_productos",
       dataSrc: "",
     },
+    bAutoWidth: false,
+    columnDefs: [
+      {
+        width: "30px",
+        targets: 3
+      }
+    ],
     columns: [
       { data: "id_producto" },
       { data: "nombre_producto" },
@@ -29,6 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
       ftnEliminarProducto();
     },
   });
+ 
   //Insertar y modificar un producto
   var form_productos = document.querySelector("#frm_agregar_producto");
   form_productos.onsubmit = function (e) {
