@@ -94,7 +94,7 @@ function ftnEditar_Categoria(){
             $(".frm").append("<input type='hidden' id='id_categoria' name='id_categoria'>");
             var id_categoria=this.getAttribute("rl");
             var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-            var ajax_url = base_url+'categoria/seleccionar_categoria/'+id_categoria;
+            var ajax_url = base_url+'categoria/seleccionar_categoria/'+id_categoria; 
             request.open("GET",ajax_url,true);
             request.send();
 

@@ -59,18 +59,62 @@
         public function listar_compra(){
             $data = $this->modelo->modelo_listar_compra_con_prov();
             for($i=0; $i<count($data); $i++){
+                
+                if($data[$i]['estado_compra']== 0 ){
+                    $data[$i]['opciones_compra'] =
+                    '<div class="text-center">
+                        <button class="btn btn-outline-success btn-sm recibirCompra" rl="'.encriptar($data[$i]['id_compra']).'" title="Marcar compra como recibida" type="button">📦</button>
+                        <button class="btn btn-outline-warning btn-sm verCompra" rl="'.encriptar($data[$i]['id_compra']).'" title="Ver detalles de la compra" type="button">¡👁️!</button>
+                        <button class="btn btn-outline-danger btn-sm eliminarCompra" rl="'.encriptar($data[$i]['id_compra']).'" title="Eliminar" type="button">❌</button>
+                    </div>';   
+                }else{
+                    $data[$i]['opciones_compra'] =
+                    '<div class="text-center">
+                        <button class="btn btn-outline-warning btn-sm verCompra" rl="'.encriptar($data[$i]['id_compra']).'" title="Ver detalles de la compra" type="button">¡👁️!</button>
+                        <button class="btn btn-outline-danger btn-sm eliminarCompra" rl="'.encriptar($data[$i]['id_compra']).'" title="Eliminar" type="button">❌</button>
+                    </div>';
+                }
                 $data[$i]['estado_compra'] = $data[$i]['estado_compra'] == 1 ? " <span class='badge badge-success'> Recibido </span> " : " <span class='badge badge-danger'>  No recibido </span> ";
-                $data[$i]['opciones_compra'] =
-                '<div class="text-center">
-                    <button class="btn btn-outline-warning btn-sm verCompra" rl="'.$data[$i]['id_compra'].'" title="Ver detalles de la compra" type="button">¡👁️!</button>
-                    <button class="btn btn-outline-danger btn-sm eliminarCompra" rl="'.$data[$i]['id_compra'].'" title="Eliminar" type="button">❌</button>
-                </div>';
             }
             //Listar las opciones para compras 
             //Ver compra y eliminar una compra, solo ver compra por ahora disponible
 
             echo json_encode($data,JSON_UNESCAPED_UNICODE);
             die();
+        }
+        
+        public function actualiza_compra($id_compra){
+            $id_compra_dsc = desencriptar($id_compra);
+            if($id_compra_dsc > 0){
+                $this->modelo->modelo_actualiza_compra($id_compra_dsc);
+                $array_respuesta = array('status' => true, "msg" => "Se actualizó la compra y los productos");
+            }else{
+                $array_respuesta = array('status' => false, "msg" => "No se pudo actualizar, ocurrió un problema con el servidor");
+            }
+            echo json_encode($array_respuesta,JSON_UNESCAPED_UNICODE);
+            die(); 
+        }
+        public function ver_compra_con_detalles($id_compra){
+            
+            $id_compra_dsc =  desencriptar($id_compra);
+            if($id_compra_dsc > 0 ){
+                $data["titulo_pagina"] = "Vista compra";
+                $data["nombre_pagina"] = "Sistema Tienda :: Ver Compra";
+                $data["funciones_js"] = "funcion_vista_compra.js";
+                $data["datos_compra"] = $this->modelo->modelo_busca_compra($id_compra_dsc);
+                $data["detalles_compra"] = $this->modelo->modelo_busca_detalles($id_compra_dsc);
+                
+                
+                $this->vistas->obten_vista($this,"ver_compra",$data);
+                //echo json_encode($data,JSON_UNESCAPED_UNICODE);
+                
+
+            }else{
+                //Podría agregarse una vista de algo salió mal xd 
+                header("location:".base_url() . "dashboard");
+            }
+            die();
+            
         }
         public function busca_compra(){
             $data = $this->modelo->modelo_busca_compra(1);
