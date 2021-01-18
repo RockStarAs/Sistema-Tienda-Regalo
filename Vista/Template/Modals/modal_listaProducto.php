@@ -20,9 +20,9 @@
                                                 <th>Opciones</th>
                                                 <th>Id</th>
                                                 <th>Producto</th>
-                                                <th>Categoria</th>
                                                 <th>Stock</th>
-                                                <th>Precio Venta</th>
+                                                <th>Precio Venta Por Unidad</th>
+                                                <th>Precio Venta Por Mayor</th>
                                                 <th>Imagen</th>
                                             </tr>
                                         </thead>

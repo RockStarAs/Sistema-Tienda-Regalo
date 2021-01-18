@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
         url: " " + base_url + "compra/listar_compra",
         dataSrc: "",
       },
+      bAutoWidth: false,
       columns: [
             { data: "ruc_dni" },
             { data: "nombre_proveedor" },

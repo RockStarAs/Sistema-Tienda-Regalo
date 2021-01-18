@@ -24,6 +24,7 @@ class Producto extends Controladores
         $codigo_barras = limpiar_str($_POST['txtCodigo']);
         $descripcion_producto = limpiar_str($_POST['txt_descripcion']);
         $precio_unitario_venta = floatval(limpiar_str($_POST['txt_precio_venta']));
+        $precio_por_mayor=floatval(limpiar_str($_POST['txt_precio_venta_mayor']));
         $precio_compra = floatval(limpiar_str($_POST['txt_precio_compra']));
         $stock_producto = intval(limpiar_str($_POST['txt_stock']));
         $id_categoria = intval(limpiar_str($_POST['categoria_id']));
@@ -59,11 +60,11 @@ class Producto extends Controladores
 
             if ($id_producto == 0) {
                 //Insertar
-                $solicitud_insertar = $this->modelo->modelo_insertar_producto($id_categoria, $nombre_producto, $precio_unitario_venta, $stock_producto, $precio_compra, $descripcion_producto, $imgProducto, $codigo_barras);
+                $solicitud_insertar = $this->modelo->modelo_insertar_producto($id_categoria, $nombre_producto, $precio_unitario_venta, $precio_por_mayor,$stock_producto, $precio_compra, $descripcion_producto, $imgProducto, $codigo_barras);
                 $opcion = 1;
             } else {
                 //Modificar
-                $solicitud_insertar = $this->modelo->modelo_actualizar_producto($id_producto, $id_categoria, $nombre_producto, $precio_unitario_venta, $stock_producto, $precio_compra, $descripcion_producto, $imgProducto, $codigo_barras);
+                $solicitud_insertar = $this->modelo->modelo_actualizar_producto($id_producto, $id_categoria, $nombre_producto,$precio_unitario_venta,$precio_por_mayor, $stock_producto, $precio_compra, $descripcion_producto, $imgProducto, $codigo_barras);
                 $opcion = 2;
             }
             
@@ -115,13 +116,9 @@ class Producto extends Controladores
         for ($i = 0; $i < count($data); $i++) {
             $nombre = $this->modelo->modelo_nombre_Categorias($data[$i]['id_categoria']);
             $data[$i]['id_categoria'] = $nombre['nombre_categoria'];
-            if ($data[$i]['estado_producto'] == 1) {
-                $data[$i]['estado_producto'] = " <span class='badge badge-success'> Activo </span> ";
-            } else {
-                $data[$i]['estado_producto'] = " <span class='badge badge-danger'>  Inactivo </span> ";
-            }
             $id_crypt = encriptar($data[$i]["id_producto"]);
             $data[$i]['precio_unitario_venta'] = SMONEY . formatea_moneda($data[$i]['precio_unitario_venta']);
+            $data[$i]['precio_venta_por_mayor']= SMONEY . formatea_moneda($data[$i]['precio_venta_por_mayor']);
             $data[$i]['precio_compra_actualizado'] = SMONEY . formatea_moneda($data[$i]['precio_compra_actualizado']);
             $data[$i]['opciones'] = mostrar_acciones($id_crypt, "btnEditar_Producto", "btnEliminar_Producto");
         }
@@ -158,15 +155,16 @@ class Producto extends Controladores
 
     public function listar_productos_modal()
     {
-        $data = $this->modelo->modelo_listar_productos();
+        $data = $this->modelo->modelo_listar_productos_mayor();
         for ($i = 0; $i < count($data); $i++) {
             $nombre = $this->modelo->modelo_nombre_Categorias($data[$i]['id_categoria']);
             $data[$i]['id_categoria'] = $nombre['nombre_categoria'];
             $id_crypt = encriptar($data[$i]["id_producto"]);
             $data[$i]['precio_unitario_venta'] = SMONEY . formatea_moneda($data[$i]['precio_unitario_venta']);
+            $data[$i]['precio_venta_por_mayor'] = SMONEY . formatea_moneda($data[$i]['precio_venta_por_mayor']);
             $data[$i]['imagen_producto']="<img id='img' src=./../Assets/images/uploads/".$data[$i]['imagen_producto']." width='50px' height='50px'>";
             $data[$i]['opciones'] = '<div class="text-center">
-            <button class="btn btn-outline-info btn-sm btnAgregar" rl="'.$id_crypt.'" title="Agregar" type="button">➕</button>
+            <button class="btn btn-outline-info btn-sm" rl="'.$id_crypt.'" title="Agregar" type="button" onclick="agregar_detalle('.$data[$i]['id_producto'].',\''.$data[$i]['nombre_producto'].'\')">➕</button>
             </div>';
         }
 

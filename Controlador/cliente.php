@@ -63,6 +63,19 @@
             echo json_encode($data,JSON_UNESCAPED_UNICODE);
             die();
         }
+
+        public function devolver_clientes(){
+            $htmlOpciones="";
+            $arrayDatos=$this->modelo->modelo_listar_cliente();
+            if(count($arrayDatos)>0){
+                for ($i=0; $i <count($arrayDatos) ; $i++) { 
+                    $htmlOpciones.='<option value="'.$arrayDatos[$i]['dni_cliente'].'">'.$arrayDatos[$i]['dni_cliente'].'</option>';
+                } 
+            }
+            echo $htmlOpciones;
+            die();
+        }
+
         public function busca_cliente($dni_cliente){
             $data = $this->modelo->modelo_busca_cliente($dni_cliente);    
             if(empty($data)){

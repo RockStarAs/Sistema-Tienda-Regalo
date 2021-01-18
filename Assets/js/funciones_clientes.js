@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded',function(){
             "url" : " "+base_url+"cliente/listar_clientes",
             "dataSrc":""  
         },
+        "bAutoWidth": false,
         "columns": [ 
             { "data": "dni_cliente" }, 
             { "data": "nombre_cliente" },

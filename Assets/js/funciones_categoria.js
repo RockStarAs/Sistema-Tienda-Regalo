@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded',function(){
             "url" : " "+base_url+"categoria/listar_categorias",
             "dataSrc":""  
         },
+        "bAutoWidth": false,
         "columns": [
             { "data": "nombre_categoria" },
             { "data": "descripcion_categoria" },
