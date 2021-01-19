@@ -10,14 +10,37 @@ document.addEventListener("DOMContentLoaded", function () {
       url: " " + base_url + "producto/listar_productos",
       dataSrc: "",
     },
+    bAutoWidth: false,
+    columnDefs: [
+      {
+        width: "100px",
+        targets: 1
+      }
+      ,{
+        width: "30px",
+        targets: 3
+      },
+      {
+        width: "80px",
+        targets: 4
+      },
+      {
+        width: "110px",
+        targets: 5
+      },
+      {
+        width: "100px",
+        targets: 6
+      }
+    ],
     columns: [
       { data: "id_producto" },
       { data: "nombre_producto" },
       { data: "id_categoria" },
       { data: "stock_producto" },
       { data: "precio_unitario_venta" },
+      { data: "precio_venta_por_mayor" },
       { data: "precio_compra_actualizado" },
-      { data: "estado_producto" },
       { data: "opciones" },
     ],
     responsive: true,
@@ -29,6 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
       ftnEliminarProducto();
     },
   });
+ 
   //Insertar y modificar un producto
   var form_productos = document.querySelector("#frm_agregar_producto");
   form_productos.onsubmit = function (e) {
@@ -136,6 +160,8 @@ function ftnEditar_Producto() {
             document.querySelector("#txt_stock").value = obj_json.data.stock_producto;
             document.querySelector("#txt_precio_venta").value =
               Math.round(obj_json.data.precio_unitario_venta * 100) / 100;
+            document.querySelector("#txt_precio_venta_mayor").value =
+              Math.round(obj_json.data.precio_venta_por_mayor * 100) / 100;
             document.querySelector("#txt_precio_compra").value =
               Math.round(obj_json.data.precio_compra_actualizado * 100) / 100;
             document.querySelector("#txtCodigo").value = obj_json.data.codigo_barras;

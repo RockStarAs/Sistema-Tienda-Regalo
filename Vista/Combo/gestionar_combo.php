@@ -96,6 +96,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
+                            <div class="table-responsive">
                             <table id="detalles" class="table table-striped table-bordered table-condensed table-hover">
                                 <thead style="background-color:#00635a">
                                     <tr style="color: white;">
@@ -103,7 +104,6 @@
                                         <th>Producto</th>
                                         <th>Cantidad</th>
                                         <th>Precio Venta</th>
-                               
                                     </tr>
                                 </thead>
                                 <!-- <tfoot>
@@ -121,6 +121,7 @@
                                 <tbody>
                                 </tbody>
                             </table>
+                            </div>
                         </div>
                     </div>
                     <div class="tile-footer text-center">

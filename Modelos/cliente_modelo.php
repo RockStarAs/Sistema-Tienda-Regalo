@@ -49,6 +49,11 @@
             
         }
         public function modelo_listar_cliente(){
+            $query = "SELECT * FROM cliente WHERE dni_cliente!='99999999'";
+            $solicita_listado = $this->select_all($query);
+            return $solicita_listado;
+        }
+        public function modelo_listar_clientes(){
             $query = "SELECT * FROM cliente";
             $solicita_listado = $this->select_all($query);
             return $solicita_listado;
