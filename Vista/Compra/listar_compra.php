@@ -24,6 +24,7 @@
                                     <th>Proveedor</th>
                                     <th>Fecha de la compra </th>
                                     <th>Estado de la compra</th>
+                                    <th>Serie y Correlativo</th>
                                     <th>Opciones</th>
                                 </tr>
                             </thead>

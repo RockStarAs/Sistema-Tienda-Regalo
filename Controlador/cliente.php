@@ -48,7 +48,7 @@
             $nombre_cliente,
             $apellidos_cliente,
             $telefono_contacto */
-            $solicitud_modificar = $this->modelo->modelo_actualiza_cliente($dni_cliente_viejo,$dni_cliente_nuevo,$nombre_cliente,$apellidos_cliente,$telefono_contacto);
+            $solicitud_modificar = $this->modelo->modelo_actualiza_cliente($dni_cliente_viejo,$dni_cliente_nuevo,$nombre_cliente,$apellidos_cliente,$telefono_contacto); 
 
             $array_respuesta = array('status' => true, 'msg' => "Datos actualizados correctamente.");
             
