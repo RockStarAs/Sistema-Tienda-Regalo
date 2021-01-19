@@ -10,6 +10,13 @@ document.addEventListener('DOMContentLoaded',function(){
             "url" : " "+base_url+"proveedor/listar_proveedores",
             "dataSrc":""  
         },
+        "bAutoWidth": false,
+        "columnDefs": [
+            {
+              width: "150px",
+              targets: 6
+            }
+        ],
         "columns": [
             { "data": "ruc_dni" }, 
             { "data": "nombre_proveedor" },

@@ -110,6 +110,17 @@
             }
             die();
         }
+        public function devolver_usuarios(){
+            $htmlOpciones="";
+            $arrayDatos=$this->modelo->modelo_listar_usuarios();
+            if(count($arrayDatos)>0){
+                for ($i=0; $i <count($arrayDatos) ; $i++) { 
+                    $htmlOpciones.='<option value="'.$arrayDatos[$i]['id_usuario'].'">'.$arrayDatos[$i]['nombre_trabajador'].' '.$arrayDatos[$i]['apellidos_trabajador'].'</option>';
+                } 
+            }
+            echo $htmlOpciones;
+            die();
+        }
         public function elimina_usuario_id(){
             if($_POST){
                 $id_usuario = intval($_POST['id_usuario']);

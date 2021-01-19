@@ -24,8 +24,8 @@ obtener_modal('modal_actualiza_proveedor',$data);
                   <thead>
                     <tr>
                       <th>RUC-DNI</th>
-                      <th>Nombre del Proveedor</th>
-                      <th>Telefono de contacto</th>
+                      <th>Proveedor</th>
+                      <th>Telefono</th>
                       <th>Email</th>
                       <th>Ciudad</th>
                       <th>Dirección</th> 

@@ -28,8 +28,8 @@
                                     <th>Categoria</th>
                                     <th>Stock</th>
                                     <th>Precio Venta</th>
+                                    <th>Precio Por Mayor</th>
                                     <th>Precio Compra</th>
-                                    <th>Estado</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>

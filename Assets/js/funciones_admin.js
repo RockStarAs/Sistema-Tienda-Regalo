@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded',function(){
             "url" : " "+base_url+"usuario/listar_usuarios",
             "dataSrc":""  
         },
+        "bAutoWidth": false,
         "columns": [
             { "data": "dni_trabajador" },
             { "data": "nombre_trabajador" },
