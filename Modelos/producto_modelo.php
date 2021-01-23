@@ -32,7 +32,6 @@
             $solicita_listado = $this->select_all($query);
             return $solicita_listado;
         }
-
         public function modelo_seleccionar_producto($id_producto){
             $query = "SELECT * FROM producto where id_producto = $id_producto";
             $solicita_busqueda = $this->select_one($query);

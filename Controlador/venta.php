@@ -16,6 +16,26 @@
             $this->vistas->obten_vista($this,"venta_mayor",$data); 
         }
 
+        public function venta_normal(){
+            //Pagina de la vista para las ventas normales
+            $data["titulo_pagina"] = "Sistema Tienda :: Ventas";
+            $data["nombre_pagina"] = "Venta de productos";
+            $data["funciones_js"] = "funciones_venta_normal.js";
+            
+            $this->vistas->obten_vista($this,"venta_normal",$data); 
+        } 
+        public function insertar_venta_normal(){
+            if($_POST){
+                $dni_cliente = isset($_POST["cliente_dni"]) ? limpiar_str($_POST["cliente_dni"]) : '99999999' ; 
+                $id_usuario_caja=$_SESSION['id_usuario'];
+                $id_usuario_atiende=isset($_POST["id_vendedor"]) ? limpiar_str($_POST["id_vendedor"]) : $_SESSION['id_usuario'];
+                $fecha_venta=limpiar_str($_POST["fecha_venta"]);
+                
+                $respuesta = array("DNI" => $dni_cliente,"ID_USUARIO" => $id_usuario_caja,"ID_ATENCION" => $id_usuario_atiende,"FECHA" => $fecha_venta);
+                echo json_encode($respuesta,JSON_UNESCAPED_UNICODE);
+                die();
+            }
+        }
         public function insertar_venta(){
             if($_POST){
                 //Agregando la compra en la base de datos

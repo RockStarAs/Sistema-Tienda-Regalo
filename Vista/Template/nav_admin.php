@@ -61,7 +61,7 @@
                 </a>
                 <ul class="treeview-menu">
                     <li>
-                        <a class="treeview-item" href="" target=""
+                        <a class="treeview-item" href="<?= base_url();?>venta/venta_normal" target=""
                             rel="noopener">
                             <i class="icon fa fa-circle-o"></i> Venta Producto
                         </a>
