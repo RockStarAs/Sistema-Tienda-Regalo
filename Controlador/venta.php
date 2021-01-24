@@ -50,7 +50,7 @@
                         for ($i=0; $i < count($id_productos) ; $i++) { 
                             $solicitud_agrega_detalle_venta = $this->modelo-> modelo_inserta_detalles_venta($solicitud_agregar_venta,$id_productos[$i],$precio_venta_productos[$i],$cantidad_productos[$i],$descuento[$i]);        
                         }
-                        $data = array("status" => true,"msg" =>"Se ha registrado la venta, con un total de ".count($id_productos)." productos.");
+                        $data = array("status" => true,"msg" =>"Se ha registrado la venta, con un total de ".count($id_productos)." productos.","id_venta"=>$solicitud_agregar_venta);
                     }
                 }else{
                     $respuesta = array('status' => false, 'msg' => "Id agregado es $solicitud_agregar_venta");    
@@ -98,12 +98,15 @@
             die();
         }
         public function listar_ventas(){
-            $data = $this->modelo->modelo_listar_venta();
-            $this->vistas->obten_vista($this,"ver_venta",$data);
+            $data = $this->modelo->modelo_listar_venta_mayor();
+            echo json_encode($data,JSON_UNESCAPED_UNICODE);
+            die();
         }
-        public function busca_venta(){
-            $data = $this->modelo->modelo_busca_venta(2);
-            $this->vistas->obten_vista($this,"ver_venta",$data);
+        public function busca_venta_con_datos($id_venta){
+            $data = $this->modelo->modelo_datos_venta($id_venta);
+            $data["detalles_venta"] = $this->modelo->modelo_detalles_venta($id_venta);
+            return $data;
+            die();
         }
     }
 ?>

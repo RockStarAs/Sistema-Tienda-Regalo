@@ -320,13 +320,16 @@ form_venta.onsubmit = function (e) {
           swal(
             {
               title: "Agregado correctamente 😀",
-              text: json.msg,
+              text: json.msg + "\n¿Deseas imprimir el ticket de venta?",
               type: "success",
-              showCancelButton: false,
+              showCancelButton: true,
               confirmButtonText: "Aceptar",
             },
             function (isConfirm) {
               if (isConfirm) {
+                window.open(base_url + "pdf/genera_pdf/" +json.id_venta );
+                location.reload();
+              }else{
                 location.reload();
               }
             }
