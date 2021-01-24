@@ -15,7 +15,28 @@
             
             $this->vistas->obten_vista($this,"venta_mayor",$data); 
         }
+        public function listar_ventas_general(){
+            $data["titulo_pagina"] = "Sistema Tienda :: Ventas";
+            $data["nombre_pagina"] = "Ventas Realizadas";
+            $data["funciones_js"] = "funciones_ventas_listar.js";
+            
+            $this->vistas->obten_vista($this,"listar_ventas_main",$data); 
+        }
 
+        public function listar_ventas_normal($tipo){
+
+            if ($tipo==1) {
+                $data["nombre_pagina"] = "Ventas Realizadas al por mayor";
+                $data["tipo"]=$tipo;
+            }else{
+                $data["nombre_pagina"] = "Ventas Realizadas";
+                $data["tipo"]=$tipo;
+            }
+            $data["titulo_pagina"] = "Sistema Tienda :: Ventas"; 
+            $data["funciones_js"] = "funciones_ventas_listar.js";
+            
+            $this->vistas->obten_vista($this,"listar_ventas_normales",$data); 
+        }
         public function insertar_venta(){
             if($_POST){
                 //Agregando la compra en la base de datos
@@ -28,7 +49,7 @@
                 $id_productos =  $_POST["idarticulo"];
                 $cantidad_productos =  $_POST["cantidad"];
                 $precio_venta_productos = $_POST["precio_venta"];
-
+                $descuento=$_POST["descuento_producto"];
                 //bandera
                 $flag = false;
 
@@ -41,7 +62,7 @@
                     }else{
                         //Procediendo a agregar 
                         for ($i=0; $i < count($id_productos) ; $i++) { 
-                            $solicitud_agrega_detalle_venta = $this->modelo-> modelo_inserta_detalles_venta($solicitud_agregar_venta,$id_productos[$i],$precio_venta_productos[$i],$cantidad_productos[$i]);        
+                            $solicitud_agrega_detalle_venta = $this->modelo-> modelo_inserta_detalles_venta($solicitud_agregar_venta,$id_productos[$i],$precio_venta_productos[$i],$cantidad_productos[$i],$descuento[$i]);        
                         }
                         $data = array("status" => true,"msg" =>"Se ha registrado la venta, con un total de ".count($id_productos)." productos.");
                     }     
@@ -54,9 +75,23 @@
             echo json_encode($data,JSON_UNESCAPED_UNICODE);
             die();
         }
-        public function listar_ventas(){
-            $data = $this->modelo->modelo_listar_venta();
-            $this->vistas->obten_vista($this,"ver_venta",$data);
+        public function listar_ventas($tipo){
+            if ($tipo==1) {
+                //AL POR MAYOR
+                $data=$this->modelo->modelo_listar_venta_mayor();
+            }else{
+                $data=$this->modelo->modelo_listar_venta_producto();
+            }
+            for ($i=0; $i < count($data); $i++) { 
+                $id_crypt=encriptar ($data[$i]["ID_VENTA"]);
+                $data[$i]["TOTAL_PAGADO"]= SMONEY . formatea_moneda($data[$i]["TOTAL_PAGADO"]);
+                $data[$i]['opciones'] = '<div class="text-center">
+                <button class="btn btn-outline-warning btn-sm verVenta" rl="'.$id_crypt.'" title="Ver detalles de la venta" type="button">¡👁️!</button>
+                <button class="btn btn-outline-danger btn-sm eliminarVenta" rl="'.$id_crypt.'" title="Eliminar" type="button">❌</button>
+                </div>';          
+            }
+            echo json_encode($data,JSON_UNESCAPED_UNICODE);
+            die();
         }
         public function busca_venta(){
             $data = $this->modelo->modelo_busca_venta(2);
