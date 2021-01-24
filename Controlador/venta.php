@@ -108,5 +108,27 @@
             return $data;
             die();
         }
+        public function ventas_realizadas(){
+            $data["titulo_pagina"] = "Sistema Tienda :: Historial ventas";
+            $data["nombre_pagina"] = "Historial de ventas";
+            $data["funciones_js"] = "funciones_historial_ventas.js";
+            $this->vistas->obten_vista($this,"ventas_realizadas",$data); 
+            die();
+        }
+        public function lista_ventas(){
+            $data = $this->modelo->lista_ventas_realizadas();
+            for ($i=0; $i < count($data); $i++) {
+                $fecha = $data[$i]["FECHA_VENTA"];
+                $fecha_venta = date_create("$fecha");
+                $data[$i]["FECHA_VENTA"] = date_format($fecha_venta,"d/m/Y H:i A");
+                $data[$i]["TIPO_VENTA"] = $data[$i]["TIPO_VENTA"] == 0 ? "Al por mayor":"Venta normal";
+                $data[$i]["TOTAL_PAGADO"] = round($data[$i]["TOTAL_PAGADO"],2);
+                $total = $data[$i]["TOTAL_PAGADO"];
+                $data[$i]["TOTAL_PAGADO"] = "S/. $total";
+                $data[$i]["OPCIONES"] = mostrar_acciones($data[$i]["ID_VENTA"],"verVenta","eliminarVenta","verTicket",4);
+            }
+            echo json_encode($data,JSON_UNESCAPED_UNICODE);
+            die();
+        }
     }
 ?>

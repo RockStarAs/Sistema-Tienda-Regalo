@@ -26,7 +26,7 @@ function Header_2($fecha_venta,$nombre_cliente,$id_venta,$nombre_cajero,$tipo_ve
     $this->Cell(60,4,"Tipo venta: $cadena_tipo_venta",0,1,'C');
     //$this->Cell(60,4,'alfredo@lacodigoteca.com',0,1,'C');
 }
-function CargarDatos($array_detalles_venta){
+function CargarDatos($array_detalles_venta,$total_pagado){
     // COLUMNAS
     $this->SetFont('Helvetica', 'B', 7);
     $this->Cell(5, 10, 'Cod.', 0);
@@ -48,19 +48,19 @@ function CargarDatos($array_detalles_venta){
         $descuento_aplicado = $array_detalles_venta[$i]['DESCUENTO_APLICADO'];
         $total = ($cantidad * $precio) - $descuento_aplicado;
         
-        $total_a_pagar = $total_a_pagar + $total;
+        $total_a_pagar = $total_pagado;
 
         $this->Cell(5, 10,$codigo_producto, 0);
         $this->Cell(12, 10, utf8_decode(strtoupper(substr($nombre_producto, 0,7))),0,0,'C');
-        $this->Cell(12, 10, "S/.".$precio,0,0,'R');
+        $this->Cell(12, 10, "S/.".round($precio,2),0,0,'R');
         $this->Cell(8, 10, $cantidad,0,0,'C');
-        $this->Cell(10, 10, "S/.".$descuento_aplicado,0,0,'R');
-        $this->Cell(12, 10, "S/.".$total ,0,0,'R');  
+        $this->Cell(10, 10, "S/.".round($descuento_aplicado,2),0,0,'R');
+        $this->Cell(12, 10, "S/.".round($total,2) ,0,0,'R');  
         $this->Ln(3);
     }
     $this->Ln(8);
     $this->Cell(60,0,'','T');
-    $this->Carga_total($total_a_pagar);
+    $this->Carga_total(round($total_a_pagar,2));
 }
 // Pie de página
 function Footer()
@@ -93,7 +93,7 @@ function genera_pdf($id_venta){
     $pdf->AddPage();
     $pdf->Header_2($json['FECHA_VENTA'],$json['NOMBRE_CLIENTE'],$json['ID_VENTA'],$json['NOMBRE_CAJERO'],$json['TIPO_VENTA']);
     //HEADER
-    $pdf->CargarDatos($json['detalles_venta']);
+    $pdf->CargarDatos($json['detalles_venta'],$json['TOTAL_PAGADO']);
     $pdf->Output();    
 
 

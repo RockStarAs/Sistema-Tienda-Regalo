@@ -70,12 +70,17 @@
         }
         public function modelo_datos_venta($id_venta)
         {
-            $query = "SELECT (C.nombre_cliente + ' ' + C.apellidos_cliente) as NOMBRE_CLIENTE,(U.nombre_usuario) as NOMBRE_CAJERO,(V.id_venta) as ID_VENTA,(V.fecha_venta) as FECHA_VENTA,(V.tipo_venta) as TIPO_VENTA  FROM venta as V INNER JOIN cliente as C ON C.dni_cliente = V.dni_cliente INNER JOIN usuario as U ON  U.id_usuario = V.id_usuario WHERE V.id_venta = $id_venta";
+            $query = "SELECT * FROM vista_datos_venta WHERE ID_VENTA = $id_venta";
             $solicita_busqueda = $this->select_one($query);
             return $solicita_busqueda;
         }
         public function modelo_detalles_venta($id_venta){
             $query= "SELECT (P.id_producto) as CODIGO_PRODUCTO, (P.nombre_producto) as NOMBRE_PRODUCTO, (DV.precio_venta) as PRECIO, (DV.cantidad) as CANTIDAD_VENDIDA,(DV.descuento) as DESCUENTO_APLICADO FROM venta as V INNER JOIN detalle_venta as DV ON  DV.id_venta = V.id_venta INNER JOIN producto as P ON P.id_producto = DV.id_producto WHERE DV.id_venta = $id_venta";
+            $solicita_busqueda = $this->select_all($query);
+            return $solicita_busqueda;
+        }
+        public function lista_ventas_realizadas(){
+            $query = "SELECT * FROM vista_datos_venta";
             $solicita_busqueda = $this->select_all($query);
             return $solicita_busqueda;
         }
