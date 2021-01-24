@@ -31,8 +31,31 @@
                 $id_usuario_atiende=isset($_POST["id_vendedor"]) ? limpiar_str($_POST["id_vendedor"]) : $_SESSION['id_usuario'];
                 $fecha_venta=limpiar_str($_POST["fecha_venta"]);
                 
-                $respuesta = array("DNI" => $dni_cliente,"ID_USUARIO" => $id_usuario_caja,"ID_ATENCION" => $id_usuario_atiende,"FECHA" => $fecha_venta);
-                echo json_encode($respuesta,JSON_UNESCAPED_UNICODE);
+                $id_productos =  $_POST["idarticulo"];
+                $cantidad_productos =  $_POST["cantidad"];
+                $precio_venta_productos = $_POST["precio_venta"];
+                $descuento = $_POST["descuento_venta"];
+                //public function modelo_inserta_venta_mayor($id_usuario,$id_usuario_atiende,$dni_cliente,$fecha_venta,$tipo_venta=0)
+                /*La function modelo_inserta_venta_mayor modificada para que el tipo de venta por defecto sea 0 la cuál hace referencia a una venta al por mayor, para la venta al por meno el tipo_venta = 1 --> en la base de datos este también se encuentra por defecto */
+
+                $solicitud_agregar_venta = $this->modelo->modelo_inserta_venta_mayor($id_usuario_caja,$id_usuario_atiende,$dni_cliente,$fecha_venta,1);
+
+                if($solicitud_agregar_venta > 0 ){
+                    //El id se ha registrado
+                    if(count($id_productos) <= 0){
+                        $data = array("status" => false,"id" => null,"msg" =>"Error en la inserción de los detalles de la compra.");
+                           
+                    }else{
+                        //Procediendo a agregar 
+                        for ($i=0; $i < count($id_productos) ; $i++) { 
+                            $solicitud_agrega_detalle_venta = $this->modelo-> modelo_inserta_detalles_venta($solicitud_agregar_venta,$id_productos[$i],$precio_venta_productos[$i],$cantidad_productos[$i],$descuento[$i]);        
+                        }
+                        $data = array("status" => true,"msg" =>"Se ha registrado la venta, con un total de ".count($id_productos)." productos.");
+                    }
+                }else{
+                    $respuesta = array('status' => false, 'msg' => "Id agregado es $solicitud_agregar_venta");    
+                }
+                echo json_encode($data,JSON_UNESCAPED_UNICODE);
                 die();
             }
         }

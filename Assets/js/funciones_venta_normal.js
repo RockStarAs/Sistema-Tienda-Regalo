@@ -175,7 +175,7 @@ function agregar_detalle(id_producto, nombre_producto) {
             '<tr class="filas" sl="' +obj_json.data.id_producto +'" id="fila' +cont +'"> ' +
             "<td>" +'<button type="button" class="btn btn-outline-danger btn-sm" onclick="eliminarDetalle(' +cont +')">X</button>' +"</td>" +
             "<td>" +'<input type="hidden" name="idarticulo[]" value="' +obj_json.data.id_producto +'">' +obj_json.data.nombre_producto +"</td>" +
-            "<td>" +'<input type="number" class="form-control" onchange="actualiza_cantidad('+obj_json.data.id_producto+')" name="cantidad[]" sc="'+obj_json.data.id_producto+'" id="cantidad[]" value="' +cantidad +'">' +"</td>" +
+            "<td>" +'<input type="number" class="form-control" onchange="actualiza_cantidad('+obj_json.data.id_producto+')" name="cantidad[]" sc="'+obj_json.data.id_producto+'" id="cantidad[]" max="'+obj_json.data.stock_producto+'" value="' +cantidad +'">' +"</td>" +
             "<td>" +'<input type="number" class="form-control" onchange="actualiza_detalle(' +cont +')" name="precio_venta[]" id="precio_venta[]" sp="' +cont +'" value="' +obj_json.data.precio_unitario_venta +'" step="0.01" readonly>' +"</td>" +
             "<td>" +'<input type="number" class="form-control" onchange="actualiza_descuento(' +cont +')" name="descuento_venta[]" id="descuento_venta[]" sp="' +cont +'" value="' + "0.0" +'" step="0.01">' +"</td>" +
             
@@ -291,43 +291,50 @@ function eliminarDetalle(indice)
     calcula_totales(); 
 }
 var form_venta = document.querySelector("#form_venta_normal");
-form_venta.onsubmit = function(e){
+form_venta.onsubmit = function (e) {
   e.preventDefault();
-  var valor_select = $("#id_vendedor").val();
-  var valor_select_cliente = $("#cliente_dni").val();
-  if(valor_select == null){
-    swal("Falta vendedor", "Selecciona al vendedor", "error");
-  }else{
-    //Agregar la venta
-    //Aqui empiezo a agregar
-      //Registro primero la venta
-      var request = window.XMLHttpRequest
+  //Agregar la venta
+  //Aqui empiezo a agregar
+  //Registro primero la venta
+  var cant = document.getElementsByName("cantidad[]");
+  if (cant.length <= 0) {
+    swal(
+      "⚠️Error en venta⚠️",
+      "Para registrar una venta debes agregar al menos 1 producto.",
+      "error"
+    );
+  } else {
+    var request = window.XMLHttpRequest
       ? new XMLHttpRequest()
       : new ActiveXObject("Microsoft.XMLHTTP");
-      var ajax_url = base_url + "venta/insertar_venta_normal";
-      var form_data = new FormData(form_venta);
-      request.open("POST", ajax_url, true);
-      request.send(form_data);
-      request.onreadystatechange = function () {
-        if (request.readyState == 4 && request.status == 200) {
-          //Solicitud exitosa
+    var ajax_url = base_url + "venta/insertar_venta_normal";
+    var form_data = new FormData(form_venta);
+    request.open("POST", ajax_url, true);
+    request.send(form_data);
+
+    request.onreadystatechange = function () {
+      if (request.readyState == 4 && request.status == 200) {
+        //Solicitud exitosa
         var json = JSON.parse(request.responseText);
-        if (json.status) {   
-          swal({
-            title:"Agregado correctamente 😀",
-            text:json.msg,
-            type:"success",
-            showCancelButton:false,
-            confirmButtonText:"Aceptar",
-          },function(isConfirm){
-            if(isConfirm){
-              location.reload();
+        if (json.status) {
+          swal(
+            {
+              title: "Agregado correctamente 😀",
+              text: json.msg,
+              type: "success",
+              showCancelButton: false,
+              confirmButtonText: "Aceptar",
+            },
+            function (isConfirm) {
+              if (isConfirm) {
+                location.reload();
+              }
             }
-          });    
-        }else{
+          );
+        } else {
           swal("Posible error", json.msg, "error");
         }
       }
-      }
-  }
-}
+    };
+  };
+};

@@ -64,7 +64,7 @@
                             <div class="form-group">
                                 <label class="control-label">Vendedor</label>
                                 <select class="form-control" data-live-search="true" id="id_vendedor"
-                                    name="id_vendedor" required>
+                                    name="id_vendedor">
                                 </select>
                             </div>
                         </div>
