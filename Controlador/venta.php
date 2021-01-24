@@ -15,28 +15,7 @@
             
             $this->vistas->obten_vista($this,"venta_mayor",$data); 
         }
-        public function listar_ventas_general(){
-            $data["titulo_pagina"] = "Sistema Tienda :: Ventas";
-            $data["nombre_pagina"] = "Ventas Realizadas";
-            $data["funciones_js"] = "funciones_ventas_listar.js";
-            
-            $this->vistas->obten_vista($this,"listar_ventas_main",$data); 
-        }
-
-        public function listar_ventas_normal($tipo){
-
-            if ($tipo==1) {
-                $data["nombre_pagina"] = "Ventas Realizadas al por mayor";
-                $data["tipo"]=$tipo;
-            }else{
-                $data["nombre_pagina"] = "Ventas Realizadas";
-                $data["tipo"]=$tipo;
-            }
-            $data["titulo_pagina"] = "Sistema Tienda :: Ventas"; 
-            $data["funciones_js"] = "funciones_ventas_listar.js";
-            
-            $this->vistas->obten_vista($this,"listar_ventas_normales",$data); 
-        }
+        
         public function venta_normal(){
             //Pagina de la vista para las ventas normales
             $data["titulo_pagina"] = "Sistema Tienda :: Ventas";
@@ -119,24 +98,7 @@
             echo json_encode($data,JSON_UNESCAPED_UNICODE);
             die();
         }
-        public function listar_ventas($tipo){
-            if ($tipo==1) {
-                //AL POR MAYOR
-                $data=$this->modelo->modelo_listar_venta_mayor();
-            }else{
-                $data=$this->modelo->modelo_listar_venta_producto();
-            }
-            for ($i=0; $i < count($data); $i++) { 
-                $id_crypt=encriptar ($data[$i]["ID_VENTA"]);
-                $data[$i]["TOTAL_PAGADO"]= SMONEY . formatea_moneda($data[$i]["TOTAL_PAGADO"]);
-                $data[$i]['opciones'] = '<div class="text-center">
-                <button class="btn btn-outline-warning btn-sm verVenta" rl="'.$id_crypt.'" title="Ver detalles de la venta" type="button">¡👁️!</button>
-                <button class="btn btn-outline-danger btn-sm eliminarVenta" rl="'.$id_crypt.'" title="Eliminar" type="button">❌</button>
-                </div>';          
-            }
-            echo json_encode($data,JSON_UNESCAPED_UNICODE);
-            die();
-        }
+        
         
         public function listar_ventas(){
             $data = $this->modelo->modelo_listar_venta_mayor();

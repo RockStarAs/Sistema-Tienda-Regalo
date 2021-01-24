@@ -90,6 +90,7 @@ function carga_modal_datos() {
       url: " " + base_url + "producto/listar_productos_modal",
       dataSrc: "",
     },
+    bAutoWidth: false,
     columns: [
       { data: "opciones" },
       { data: "id_producto" },
@@ -273,3 +274,10 @@ function cerrar_form(){
   form_venta.reset();
 }
 
+function fnc_cambia_gen(){
+  
+  //fnc_listar_clientes();
+  $("#cliente_dni").val(0);
+  $("#cliente_dni").selectpicker("refresh");
+  document.querySelector("#cliente_nombre").value = "Público General";
+}

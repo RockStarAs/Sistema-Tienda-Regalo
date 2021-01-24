@@ -21,12 +21,19 @@
             <div class="tile p-md-4">
                 <form id="form_venta_mayor" class="frm" name="">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label class="control-label">Dni Cliente</label>
                                 <select class="form-control" data-live-search="true" id="cliente_dni" name="cliente_dni"
                                     onchange="mostar_nombre_cliente()">
                                 </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Cambiar a (Sin DNI): </label>
+                                <button type="button" class="btn btn-warning"
+                                onclick="fnc_cambia_gen()"><i class="fa fa-fw fa-lg fa-address-card"></i>Público General.</button>
                             </div>
                         </div>
                         <div class="col-md-6">
