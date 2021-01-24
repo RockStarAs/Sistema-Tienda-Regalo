@@ -17,7 +17,7 @@
             $solicita_insert = $this->insert($query,$valores);
             return $solicita_insert;
         }
-        public function modelo_inserta_venta_mayor($id_usuario,$id_usuario_atiende,$dni_cliente,$fecha_venta)
+        public function modelo_inserta_venta_mayor($id_usuario,$id_usuario_atiende,$dni_cliente,$fecha_venta,$tipo_venta=0)
         {
             $fecha_venta = date("Y-m-d H:i:s");
             $query = "INSERT INTO venta(
@@ -28,7 +28,7 @@
                 tipo_venta
                 ) 
                 values (?,?,?,?,?)";
-            $valores = array($id_usuario,$id_usuario_atiende,$fecha_venta,$dni_cliente,0);
+            $valores = array($id_usuario,$id_usuario_atiende,$fecha_venta,$dni_cliente,$tipo_venta);
             $solicita_insert = $this->insert($query,$valores);
             return $solicita_insert;
         }
@@ -67,6 +67,22 @@
                 $return='error';
             }      
             return $return;
+        }
+        public function modelo_datos_venta($id_venta)
+        {
+            $query = "SELECT * FROM vista_datos_venta WHERE ID_VENTA = $id_venta";
+            $solicita_busqueda = $this->select_one($query);
+            return $solicita_busqueda;
+        }
+        public function modelo_detalles_venta($id_venta){
+            $query= "SELECT (P.id_producto) as CODIGO_PRODUCTO, (P.nombre_producto) as NOMBRE_PRODUCTO, (DV.precio_venta) as PRECIO, (DV.cantidad) as CANTIDAD_VENDIDA,(DV.descuento) as DESCUENTO_APLICADO FROM venta as V INNER JOIN detalle_venta as DV ON  DV.id_venta = V.id_venta INNER JOIN producto as P ON P.id_producto = DV.id_producto WHERE DV.id_venta = $id_venta";
+            $solicita_busqueda = $this->select_all($query);
+            return $solicita_busqueda;
+        }
+        public function lista_ventas_realizadas(){
+            $query = "SELECT * FROM vista_datos_venta";
+            $solicita_busqueda = $this->select_all($query);
+            return $solicita_busqueda;
         }
     }
 ?>

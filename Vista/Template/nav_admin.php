@@ -61,7 +61,7 @@
                 </a>
                 <ul class="treeview-menu">
                     <li>
-                        <a class="treeview-item" href="" target=""
+                        <a class="treeview-item" href="<?= base_url();?>venta/venta_normal" target=""
                             rel="noopener">
                             <i class="icon fa fa-circle-o"></i> Venta Producto
                         </a>
@@ -105,6 +105,25 @@
                     <li>
                         <a class="treeview-item" href="<?= base_url();?>compra/ver_compras" target="" rel="noopener">
                             <i class="icon fa fa-circle-o"></i> Ver compras realizadas
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a class="app-menu__item" href="#" data-toggle="treeview">
+                    <i class="app-menu__icon fa fa-history"></i>
+                    <span class="app-menu__label">Historial</span>
+                    <i class="treeview-indicator fa fa-angle-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li>
+                        <a class="treeview-item" href="<?= base_url();?>venta/ventas_realizadas" target="" rel="noopener">
+                            <i class="icon fa fa-circle-o"></i> Lista de ventas realizadas
+                        </a>
+                    </li>
+                    <li>
+                        <a class="treeview-item" href="<?= base_url();?>compra/ver_compras" target="" rel="noopener">
+                            <i class="icon fa fa-circle-o"></i> Lista de ventas eliminadas
                         </a>
                     </li>
                 </ul>

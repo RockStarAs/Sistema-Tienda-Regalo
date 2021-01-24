@@ -171,7 +171,23 @@ class Producto extends Controladores
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
         die();   
     }
+    public function listar_productos_venta(){
+        $data = $this->modelo->modelo_listar_productos();
+        for ($i = 0; $i < count($data); $i++) {
+            $nombre = $this->modelo->modelo_nombre_Categorias($data[$i]['id_categoria']);
+            $data[$i]['id_categoria'] = $nombre['nombre_categoria'];
+            $id_crypt = encriptar($data[$i]["id_producto"]);
+            $data[$i]['precio_unitario_venta'] = SMONEY . formatea_moneda($data[$i]['precio_unitario_venta']);
+            $data[$i]['precio_venta_por_mayor'] = SMONEY . formatea_moneda($data[$i]['precio_venta_por_mayor']);
+            $data[$i]['imagen_producto']="<img id='img' src=./../Assets/images/uploads/".$data[$i]['imagen_producto']." width='50px' height='50px'>";
+            $data[$i]['opciones'] = '<div class="text-center">
+            <button class="btn btn-outline-info btn-sm" rl="'.$id_crypt.'" title="Agregar" type="button" onclick="agregar_detalle('.$data[$i]['id_producto'].',\''.$data[$i]['nombre_producto'].'\')">➕</button>
+            </div>';
+        }
 
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        die();       
+    }
 
     public function busca_producto_id()
     {
@@ -183,6 +199,7 @@ class Producto extends Controladores
         if($_POST){
             $respuesta = $this->modelo->modelo_busca_producto_nombre_id($_POST['id_producto'],$_POST['nombre_producto']);
             //Falta validar si la respuesta es vacia, si no llega nada xd
+            $respuesta['precio_unitario_venta'] = round($respuesta['precio_unitario_venta'],2);
             $data= array('data' => $respuesta , 'status' => true);
         }else{
             $data = array('status' => false , 'msg' => "Error con los parametros."); 

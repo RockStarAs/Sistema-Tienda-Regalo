@@ -125,9 +125,9 @@ function calcula_totales() {
 }
 function actualiza_cantidad(id_producto){
   var cantidad_por_actualizar = $('input[sc="'+id_producto+'"]');
-  console.log(cantidad_por_actualizar);
+  //console.log(cantidad_por_actualizar);
   var cantidad = cantidad_por_actualizar.val();
-  console.log(cantidad);
+  //console.log(cantidad);
   cantidad_por_actualizar.attr('value',cantidad);
 }
 function evita_repetir(id_producto) {
