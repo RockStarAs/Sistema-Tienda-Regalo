@@ -40,12 +40,12 @@
             return $solicita_insert;
         }
         public function modelo_listar_venta_producto(){
-            $query = "SELECT * FROM venta WHERE tipo_venta=1";
+            $query = "SELECT * FROM vista_datos_venta WHERE tipo_venta=1";
             $solicita_listado = $this->select_all($query);
             return $solicita_listado;
         }
         public function modelo_listar_venta_mayor(){
-            $query = "SELECT * FROM venta WHERE tipo_venta=0";
+            $query = "SELECT * FROM vista_datos_venta WHERE tipo_venta=0";
             $solicita_listado = $this->select_all($query);
             return $solicita_listado;
         }

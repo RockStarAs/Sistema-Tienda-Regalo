@@ -1,5 +1,6 @@
-<?php header_admin($data);
-   obtener_modal("modal_listaProducto",$data);
+<?php
+    header_admin($data);
+    obtener_modal("modal_listaProducto", $data);
 ?>
 
 <main class="app-content">
@@ -10,8 +11,8 @@
         </div>
         <ul class="app-breadcrumb breadcrumb">
             <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-            <li class="breadcrumb-item"><a
-                    href="<?= base_url();?>venta/venta_mayor"><?= $data["nombre_pagina"];?></a></li>
+            <li class="breadcrumb-item"><a href="<?= base_url();?>venta/venta_mayor"><?= $data["nombre_pagina"];?></a>
+            </li>
         </ul>
     </div>
     <!--Aqui va el formulario -->
@@ -20,21 +21,29 @@
             <div class="tile p-md-4">
                 <form id="form_venta_mayor" class="frm" name="">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label class="control-label">Dni Cliente</label>
-                                <select class="form-control" data-live-search="true" id="cliente_dni"
-                                    name="cliente_dni" onchange="mostar_nombre_cliente()">
+                                <select class="form-control" data-live-search="true" id="cliente_dni" name="cliente_dni"
+                                    onchange="mostar_nombre_cliente()">
                                 </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Cambiar a (Sin DNI): </label>
+                                <button type="button" class="btn btn-warning"
+                                onclick="fnc_cambia_gen()"><i class="fa fa-fw fa-lg fa-address-card"></i>Público General.</button>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label">Nombre cliente</label>
-                                <input class="form-control" id="cliente_nombre" name="cliente_nombre" type="text" value="Público General" readonly>
+                                <input class="form-control" id="cliente_nombre" name="cliente_nombre" type="text"
+                                    value="Público General" readonly>
                             </div>
                         </div>
-                        
+
                     </div>
                     <div class="row" style="display: none;">
                         <div class="col-sm-6">
@@ -58,7 +67,8 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label">Fecha de venta</label>
-                                <input class="form-control" id="fecha_venta" name="fecha_venta" type="date" placeholder="Ingrese fecha" readonly>
+                                <input class="form-control" id="fecha_venta" name="fecha_venta" type="date"
+                                    placeholder="Ingrese fecha" readonly>
                             </div>
                         </div>
                     </div>
@@ -82,12 +92,14 @@
                                             <th>Opciones</th>
                                             <th>Productos</th>
                                             <th>Cantidad</th>
-                                            <th>Precio Venta</th>
+                                            <th>Precio Venta (S/.)</th>
+                                            <th>Descuento (%)</th>
                                             <th>Subtotal</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <th>TOTAL</th>
+                                        <th></th>
                                         <th></th>
                                         <th></th>
                                         <th></th>

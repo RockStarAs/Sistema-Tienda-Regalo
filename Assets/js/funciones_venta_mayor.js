@@ -90,6 +90,7 @@ function carga_modal_datos() {
       url: " " + base_url + "producto/listar_productos_modal",
       dataSrc: "",
     },
+    bAutoWidth: false,
     columns: [
       { data: "opciones" },
       { data: "id_producto" },
@@ -142,6 +143,7 @@ function agregar_detalle(id_producto, nombre_producto) {
             "<td>" +'<input type="hidden" name="idarticulo[]" value="' +obj_json.data.id_producto +'">' +obj_json.data.nombre_producto +"</td>" +
             "<td>" +'<input type="number" class="form-control" onchange="actualiza_cantidad('+obj_json.data.id_producto+')" name="cantidad[]" sc="'+obj_json.data.id_producto+'" id="cantidad[]" value="' +cantidad +'">' +"</td>" +
             "<td>" +'<input type="number" class="form-control" onchange="actualiza_detalle(' +cont +')" name="precio_venta[]" id="precio_venta[]" sp="' +cont +'" value="' +obj_json.data.precio_venta_por_mayor +'" step="0.01">' +"</td>" +
+            "<td>" +'<input type="number" class="form-control"  onchange="actualiza_descuento(' +obj_json.data.id_producto +')" name="descuento_producto[]" id="descuento_producto[]" sd="' +obj_json.data.id_producto +'" value="' +0 +'" step="1">' +"</td>" +
             "<td>" +"<span>S/.</span>" +'<span name="subtotal"  id="subtotal' +cont +'" value="' +precio_venta +'" rl="'+obj_json.data.id_producto+'" >'+precio_venta  +
             "</span>" +
             "</td>" +
@@ -179,6 +181,12 @@ function actualiza_cantidad(id_producto){
   cantidad_por_actualizar.attr('value',cantidad);
   actualiza_detalle(id_producto);
 }
+function actualiza_descuento(id_producto){
+  var descuento_por_actualizar = $('input[sd="'+id_producto+'"]');
+  var descuento = descuento_por_actualizar.val();
+  descuento_por_actualizar.attr('value',descuento);
+  actualiza_detalle(id_producto);
+}
 function evita_repetir(id_producto) {
   var tr = document.getElementsByTagName("tr");
   for (var i = 0; i < tr.length; i++) {
@@ -191,6 +199,7 @@ function evita_repetir(id_producto) {
 }
 function actualiza_detalle(numero) {
   var cant = document.getElementsByName("cantidad[]");
+  var desc = document.getElementsByName("descuento_producto[]");
   var prec = document.getElementsByName("precio_venta[]");
   var sub = document.getElementsByName("subtotal");
   var tamañoCant = cant.length;
@@ -198,8 +207,9 @@ function actualiza_detalle(numero) {
     var inpC = cant[i];
     var inpP = prec[i];
     var inpS = sub[i];
-
-    inpS.value = inpP.value*inpC.value;
+    var inD=desc[i];
+    var inDesc=(inD.value/100)*(inpP.value*inpC.value);
+    inpS.value = (inpP.value*inpC.value)-inDesc;
     inpS.value=Math.round(inpS.value * 100) / 100;
     document.getElementsByName("subtotal")[i].textContent = inpS.value;
   }
@@ -264,3 +274,10 @@ function cerrar_form(){
   form_venta.reset();
 }
 
+function fnc_cambia_gen(){
+  
+  //fnc_listar_clientes();
+  $("#cliente_dni").val(0);
+  $("#cliente_dni").selectpicker("refresh");
+  document.querySelector("#cliente_nombre").value = "Público General";
+}
