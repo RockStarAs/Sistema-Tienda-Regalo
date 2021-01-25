@@ -90,7 +90,7 @@
 	border-radius: 2px;
 	position: relative;
 	display: block;
-	margin-bottom: 20px;
+	margin-bottom: 15px;
 	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
   }
   .small-box > .inner {
@@ -159,4 +159,32 @@
 	.small-box p {
 	  font-size: 12px;
 	}
+	.col-xl-6{
+		width: 50% !important;
+	}
+	.small-box h3 {
+		font-size: 18px;
+	}
+  }
+  @media (max-width: 767px) {
+	.small-box {
+	  text-align: center;
+	}
+	.small-box .icon {
+	  display: none;
+	}
+	.small-box p {
+	  font-size: 12px;
+	}
+	.col-xl-6{
+		width: 50% !important;
+	}
+	.small-box h3 {
+		font-size: 18px;
+	}
+  }
+  @media(max-width: 1092px){
+	.small-box h3 {
+		font-size: 18px;
+	}  
   }

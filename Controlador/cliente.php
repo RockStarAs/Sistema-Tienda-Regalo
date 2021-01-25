@@ -24,7 +24,7 @@
             $solicitud_insertar = $this->modelo->modelo_inserta_cliente($dni_cliente,$nombre_cliente,$apellido_cliente,$telefono_contacto);
 
             if($solicitud_insertar > 0){
-                $array_respuesta = array('status' => true, 'msg' => "Datos guardados correctamente.");
+                $array_respuesta = array('status' => true, 'msg' => "Datos guardados correctamente.", 'id' => $dni_cliente);
             }else{
                 if($solicitud_insertar == 'exist'){
                     $array_respuesta = array('status' => false, 'msg' => "Atención el DNI o RUC ya está registrado");
