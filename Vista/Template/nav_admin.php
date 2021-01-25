@@ -72,6 +72,12 @@
                             <i class="icon fa fa-circle-o"></i> Venta Por Mayor
                         </a>
                     </li>
+                    <li>
+                        <a class="treeview-item" href="<?= base_url();?>venta/listar_ventas_general" target=""
+                            rel="noopener">
+                            <i class="icon fa fa-circle-o"></i> Ver ventas
+                        </a>
+                    </li>
                 </ul>
             </li>
             <li><a class="app-menu__item" href="<?= base_url();?>cliente/gestionar_clientes"><i
