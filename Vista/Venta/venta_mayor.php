@@ -1,6 +1,7 @@
 <?php
     header_admin($data);
     obtener_modal("modal_listaProducto", $data);
+    obtener_modal("modal_agregar_cliente",$data);
 ?>
 
 <main class="app-content">
@@ -24,9 +25,16 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label class="control-label">Dni Cliente</label>
-                                <select class="form-control" data-live-search="true" id="cliente_dni" name="cliente_dni"
+                                <select class="form-control selectCliente" data-live-search="true" id="cliente_dni" name="cliente_dni"
                                     onchange="mostar_nombre_cliente()">
                                 </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Nombre cliente</label>
+                                <input class="form-control" id="cliente_nombre" name="cliente_nombre" type="text"
+                                    value="Público General" readonly>
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -36,18 +44,9 @@
                                 onclick="fnc_cambia_gen()"><i class="fa fa-fw fa-lg fa-address-card"></i>Público General.</button>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-3">
                             <div class="form-group">
-                                <label class="control-label">Nombre cliente</label>
-                                <input class="form-control" id="cliente_nombre" name="cliente_nombre" type="text"
-                                    value="Público General" readonly>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="row" style="display: none;">
-                        <div class="col-sm-6">
-                            <div class="form-group">
+                            <label class="control-label">Agregar nuevo Cliente: </label>
                                 <a data-toggle="modal" href="#myModal">
                                     <button class="btn btn-info" type="button" onclick="abrir_modal_cliente();"><i
                                             class="fa fa-fw fa-lg fa-plus-square"></i>Añadir cliente</button>
