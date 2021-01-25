@@ -61,17 +61,12 @@
                 </a>
                 <ul class="treeview-menu">
                     <li>
-                        <a class="treeview-item" href="<?= base_url();?>venta/venta_normal" target=""
+                        <a class="treeview-item" href="<?= base_url();?>venta/realizar_venta" target=""
                             rel="noopener">
-                            <i class="icon fa fa-circle-o"></i> Venta Producto
+                            <i class="icon fa fa-circle-o"></i> Realizar una venta
                         </a>
                     </li>
-                    <li>
-                        <a class="treeview-item" href="<?= base_url();?>venta/venta_mayor" target=""
-                            rel="noopener">
-                            <i class="icon fa fa-circle-o"></i> Venta Por Mayor
-                        </a>
-                    </li>
+                
                     <li>
                         <a class="treeview-item" href="<?= base_url();?>venta/listar_ventas_general" target=""
                             rel="noopener">
