@@ -85,18 +85,26 @@ function Carga_total($total_a_pagar){
 }
 function genera_pdf($id_venta){
     require_once('venta.php');
-    $venta = new Venta();
-    $json = $venta->busca_venta_con_datos($id_venta);
+    $id_venta = desencriptar($id_venta);
+    if(ctype_digit($id_venta)){
+        $venta = new Venta();
+        $json = $venta->busca_venta_con_datos($id_venta);
+        if($json["status"]){
+            $pdf = new PDF('P','mm',array(80,150));
+            $pdf->SetTitle(utf8_decode("Ticket de venta : TIENDA DE REGALOS PEÑA -> Nro: $id_venta"));
+            $pdf->AliasNbPages();
+            $pdf->AddPage();
+            $pdf->Header_2($json['FECHA_VENTA'],$json['NOMBRE_CLIENTE'],$json['ID_VENTA'],$json['NOMBRE_CAJERO'],$json['TIPO_VENTA']);
+             //HEADER
+            $pdf->CargarDatos($json['detalles_venta'],$json['TOTAL_PAGADO']);
+            $pdf->Output();    
+        }else{
+            echo "Error con el servidor";
+        }
+    }else{
+        echo "Error con el servidor";
+    }
     
-    $pdf = new PDF('P','mm',array(80,150));
-    $pdf->AliasNbPages();
-    $pdf->AddPage();
-    $pdf->Header_2($json['FECHA_VENTA'],$json['NOMBRE_CLIENTE'],$json['ID_VENTA'],$json['NOMBRE_CAJERO'],$json['TIPO_VENTA']);
-    //HEADER
-    $pdf->CargarDatos($json['detalles_venta'],$json['TOTAL_PAGADO']);
-    $pdf->Output();    
-
-
     die();
 }
 }

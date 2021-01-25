@@ -51,10 +51,10 @@
             case 4:{
                 
                 return '<div class="text-center">
-                <button class="btn btn-outline-warning btn-sm '.$claseEditar.'" rl="'.$id.'" title="Ver venta completa" type="button">👁️</button>
+                <button class="btn btn-outline-warning btn-sm '.$claseEditar.'" rl="'.encriptar($id).'" title="Ver venta completa" type="button">👁️</button>
                 <a class="btn btn-outline-success btn-sm '.$clase_compra.'" rl="'.$id.'" title="Ver el ticket" type="button"
-                href="'.base_url().'pdf/genera_pdf/'.$id.'">🎟️</a>
-                <button class="btn btn-outline-danger btn-sm '.$claseEliminar.'" rl="'.$id.'" title="Eliminar venta" type="button">❌</button>
+                href="'.base_url().'pdf/genera_pdf/'.encriptar($id).'" target="blank">🎫</a>
+                <button class="btn btn-outline-danger btn-sm '.$claseEliminar.'" rl="'.encriptar($id).'" title="Eliminar venta" type="button">❌</button>
                 </div>';   
             }
         }    

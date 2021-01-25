@@ -26,9 +26,13 @@
             $solicita_listado = $this->select_all($query);
             return $solicita_listado;
         }
-
+        public function modelo_listar_productos_stock_mayor(){
+            $query = "SELECT * FROM producto WHERE estado_producto!=0 AND stock_producto > 0";
+            $solicita_listado = $this->select_all($query);
+            return $solicita_listado; 
+        }
         public function modelo_listar_productos_mayor(){
-            $query = "SELECT * FROM producto WHERE estado_producto!=0 AND precio_venta_por_mayor!=0";
+            $query = "SELECT * FROM producto WHERE estado_producto!=0 AND precio_venta_por_mayor!=0 AND stock_producto > 0";
             $solicita_listado = $this->select_all($query);
             return $solicita_listado;
         }

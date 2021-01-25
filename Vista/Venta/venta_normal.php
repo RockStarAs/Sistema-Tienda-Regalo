@@ -1,5 +1,6 @@
 <?php header_admin($data);
    obtener_modal("modal_listarProductos_venta_normal",$data);
+   obtener_modal("modal_agregar_cliente",$data);
 ?>
 
 <main class="app-content">
@@ -19,37 +20,20 @@
         <div class="col-md-12 col-sd-12">
             <div class="tile p-md-4">
                 <form id="form_venta_normal" class="frm" name="">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="control-label">Nombre cliente</label>
-                                <input class="form-control" id="cliente_nombre" name="cliente_nombre" type="text" value="Público General" readonly>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="control-label">Fecha de venta</label>
-                                <input class="form-control" id="fecha_venta" name="fecha_venta" type="date" placeholder="Ingrese fecha" readonly>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row" style="display: none;">
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <a data-toggle="modal" href="#myModal">
-                                    <button class="btn btn-info" type="button" onclick="abrir_modal_cliente();"><i
-                                            class="fa fa-fw fa-lg fa-plus-square"></i>Añadir cliente</button>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                    <div class="col-md-3">
+                <div class="row">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label class="control-label">Dni Cliente</label>
-                                <select class="form-control" data-live-search="true" id="cliente_dni"
-                                    name="cliente_dni" onchange="mostar_nombre_cliente()">
+                                <select class="form-control selectCliente" data-live-search="true" id="cliente_dni" name="cliente_dni"
+                                    onchange="mostar_nombre_cliente()">
                                 </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Nombre cliente</label>
+                                <input class="form-control" id="cliente_nombre" name="cliente_nombre" type="text"
+                                    value="Público General" readonly>
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -59,13 +43,30 @@
                                 onclick="fnc_cambia_gen()"><i class="fa fa-fw fa-lg fa-address-card"></i>Público General.</button>
                             </div>
                         </div>
-                    
+                        <div class="col-md-3">
+                            <div class="form-group">
+                            <label class="control-label">Agregar nuevo Cliente: </label>
+                                <a data-toggle="modal" href="#myModal">
+                                    <button class="btn btn-info" type="button" onclick="abrir_modal_cliente();"><i
+                                            class="fa fa-fw fa-lg fa-plus-square"></i>Añadir cliente</button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label">Vendedor</label>
                                 <select class="form-control" data-live-search="true" id="id_vendedor"
                                     name="id_vendedor">
                                 </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Fecha de venta</label>
+                                <input class="form-control" id="fecha_venta" name="fecha_venta" type="date"
+                                    placeholder="Ingrese fecha" readonly>
                             </div>
                         </div>
                     </div>

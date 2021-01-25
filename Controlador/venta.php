@@ -51,6 +51,9 @@ class Venta extends Controladores
             $data = $this->modelo->modelo_listar_venta_producto();
         }
         for ($i = 0; $i < count($data); $i++) {
+            $fecha = $data[$i]["FECHA_VENTA"];
+            $fecha_venta = date_create("$fecha");
+            $data[$i]["FECHA_VENTA"] = date_format($fecha_venta, "d/m/Y H:i A");
             $id_crypt = encriptar($data[$i]["ID_VENTA"]);
             $data[$i]["TOTAL_PAGADO"] = SMONEY . formatea_moneda($data[$i]["TOTAL_PAGADO"]);
             $data[$i]["OPCIONES"] = mostrar_acciones($data[$i]["ID_VENTA"], "verVenta", "eliminarVenta", "verTicket", 4);
@@ -132,7 +135,7 @@ class Venta extends Controladores
                     for ($i = 0; $i < count($id_productos); $i++) {
                         $solicitud_agrega_detalle_venta = $this->modelo->modelo_inserta_detalles_venta($solicitud_agregar_venta, $id_productos[$i], $precio_venta_productos[$i], $cantidad_productos[$i], $descuento[$i]);
                     }
-                    $data = array("status" => true, "msg" => "Se ha registrado la venta, con un total de " . count($id_productos) . " productos.");
+                    $data = array("status" => true, "msg" => "Se ha registrado la venta, con un total de " . count($id_productos) . " productos.","id" => $solicitud_agregar_venta);
                 }
             } else {
                 $data = array("status" => false, "id" => null, "msg" => "Fallo inserción de la venta como tal.");
@@ -152,8 +155,14 @@ class Venta extends Controladores
     }
     public function busca_venta_con_datos($id_venta)
     {
-        $data = $this->modelo->modelo_datos_venta($id_venta);
-        $data["detalles_venta"] = $this->modelo->modelo_detalles_venta($id_venta);
+        $solicitud_id = $this->modelo->buscar_id($id_venta);
+        if($solicitud_id == null){
+            $data = array("status" => false);
+        }else{
+            $data = $this->modelo->modelo_datos_venta($id_venta);
+            $data["detalles_venta"] = $this->modelo->modelo_detalles_venta($id_venta);
+            $data["status"] = true;
+        }
         return $data;
         die();
     }

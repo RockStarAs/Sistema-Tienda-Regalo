@@ -175,7 +175,7 @@ function agregar_detalle(id_producto, nombre_producto) {
             '<tr class="filas" sl="' +obj_json.data.id_producto +'" id="fila' +cont +'"> ' +
             "<td>" +'<button type="button" class="btn btn-outline-danger btn-sm" onclick="eliminarDetalle(' +cont +')">X</button>' +"</td>" +
             "<td>" +'<input type="hidden" name="idarticulo[]" value="' +obj_json.data.id_producto +'">' +obj_json.data.nombre_producto +"</td>" +
-            "<td>" +'<input type="number" class="form-control" onchange="actualiza_cantidad('+obj_json.data.id_producto+')" name="cantidad[]" sc="'+obj_json.data.id_producto+'" id="cantidad[]" max="'+obj_json.data.stock_producto+'" value="' +cantidad +'">' +"</td>" +
+            "<td>" +'<input type="number" class="form-control" onchange="actualiza_cantidad('+obj_json.data.id_producto+')" name="cantidad[]" sc="'+obj_json.data.id_producto+'" id="cantidad[]" min="1" max="'+obj_json.data.stock_producto+'" value="' +cantidad +'">' +"</td>" +
             "<td>" +'<input type="number" class="form-control" onchange="actualiza_detalle(' +cont +')" name="precio_venta[]" id="precio_venta[]" sp="' +cont +'" value="' +obj_json.data.precio_unitario_venta +'" step="0.01" readonly>' +"</td>" +
             "<td>" +'<input type="number" class="form-control" onchange="actualiza_descuento(' +cont +')" name="descuento_venta[]" id="descuento_venta[]" sp="' +cont +'" value="' + "0.0" +'" step="0.01">' +"</td>" +
             
@@ -339,5 +339,55 @@ form_venta.onsubmit = function (e) {
         }
       }
     };
+  };
+};
+function abrir_modal_cliente() {
+  $("#modal_agregar_cliente").modal("show");
+}
+var form_clientes = document.querySelector("#frm_agregar_cliente");
+form_clientes.onsubmit = function (e) {
+  e.preventDefault();
+  var dni_cliente = document.querySelector("#txt_dni_cliente").value;
+  var nombre_cliente = document.querySelector("#txt_nombre_cliente").value;
+  var apellido_cliente = document.querySelector("#txt_apellido_cliente").value;
+  var telefono_cliente = document.querySelector("#txt_telefono_contacto").value;
+
+  if (dni_cliente.length != 8) {
+    swal(
+      "Atención",
+      "El campo del DNI o RUC debe tener (8) o (11) dígitos respectivamente.",
+      "error"
+    );
+    return false;
+  }
+  if (
+    dni_cliente == "" ||
+    nombre_cliente == "" ||
+    apellido_cliente == "" ||
+    telefono_cliente == ""
+  ) {
+    swal("Atención", "Campo obligatorios.", "error");
+    return false;
+  }
+  var request = window.XMLHttpRequest
+    ? new XMLHttpRequest()
+    : new ActiveXObject("Microsoft.XMLHTTP");
+  var ajax_url = base_url + "cliente/insertar_cliente";
+  var form_data = new FormData(form_clientes);
+  request.open("POST", ajax_url, true);
+  request.send(form_data);
+  request.onreadystatechange = function () {
+    if (request.readyState == 4 && request.status == 200) {
+      var json = JSON.parse(request.responseText);
+      if (json.status) {
+        $("#modal_agregar_cliente").modal("hide");
+        form_clientes.reset();
+        $('.selectCliente').selectpicker('destroy');
+        fnc_listar_clientes(json.id);
+        swal("Añadido", json.msg, "success");
+      } else {
+        swal("¡Error!", json.msg, "error");
+      }
+    }
   };
 };

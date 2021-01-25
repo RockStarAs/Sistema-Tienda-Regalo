@@ -156,7 +156,7 @@ function agregar_detalle(id_producto, nombre_producto) {
             obj_json.data.nombre_producto +
             "</td>" +
             "<td>" +
-            '<input type="number" class="form-control" onchange="actualiza_cantidad(' +
+            '<input type="number" class="form-control" min="1" max="'+obj_json.data.stock_producto+'" onchange="actualiza_cantidad(' +
             obj_json.data.id_producto +
             ')" name="cantidad[]" sc="' +
             obj_json.data.id_producto +
@@ -180,7 +180,7 @@ function agregar_detalle(id_producto, nombre_producto) {
             obj_json.data.id_producto +
             '" value="' +
             0 +
-            '" step="1">' +
+            '" step="0.01">' +
             "</td>" +
             "<td>" +
             "<span>S/.</span>" +
@@ -255,8 +255,8 @@ function actualiza_detalle(numero) {
     var inpP = prec[i];
     var inpS = sub[i];
     var inD = desc[i];
-    var inDesc = (inD.value / 100) * (inpP.value * inpC.value);
-    inpS.value = inpP.value * inpC.value - inDesc;
+    //var inDesc = (inD.value / 100) * (inpP.value * inpC.value);
+    inpS.value = inpP.value * inpC.value - inD.value;
     inpS.value = Math.round(inpS.value * 100) / 100;
     document.getElementsByName("subtotal")[i].textContent = inpS.value;
   }
@@ -296,14 +296,17 @@ form_venta_mayor.onsubmit = function (e) {
         if (json.status) {
           swal(
             {
-              title: "Venta Realiza",
-              text: json.msg,
+              title: "Venta Realizada",
+              text: json.msg + "\n¿Deseas imprimir el ticket de venta?",
               type: "success",
-              showCancelButton: false,
+              showCancelButton: true,
               confirmButtonText: "Aceptar",
             },
             function (isConfirm) {
               if (isConfirm) {
+                window.open(base_url + "pdf/genera_pdf/" +json.id );
+                location.reload();
+              }else{
                 location.reload();
               }
             }

@@ -84,5 +84,10 @@
             $solicita_busqueda = $this->select_all($query);
             return $solicita_busqueda;
         }
+        public function buscar_id($id){
+            $query = "SELECT id_venta FROM venta WHERE id_venta = $id";
+            $solicita_busqueda = $this->select_one($query);
+            return $solicita_busqueda;
+        }
     }
 ?>

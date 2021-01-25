@@ -155,7 +155,7 @@ class Producto extends Controladores
 
     public function listar_productos_modal()
     {
-        $data = $this->modelo->modelo_listar_productos_mayor();
+        $data = $this->modelo->modelo_listar_productos_mayor(); 
         for ($i = 0; $i < count($data); $i++) {
             $nombre = $this->modelo->modelo_nombre_Categorias($data[$i]['id_categoria']);
             $data[$i]['id_categoria'] = $nombre['nombre_categoria'];
@@ -172,7 +172,7 @@ class Producto extends Controladores
         die();   
     }
     public function listar_productos_venta(){
-        $data = $this->modelo->modelo_listar_productos();
+        $data = $this->modelo->modelo_listar_productos_stock_mayor();
         for ($i = 0; $i < count($data); $i++) {
             $nombre = $this->modelo->modelo_nombre_Categorias($data[$i]['id_categoria']);
             $data[$i]['id_categoria'] = $nombre['nombre_categoria'];
