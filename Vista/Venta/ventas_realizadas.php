@@ -3,11 +3,11 @@
     <main class="app-content">
       <div class="app-title">
         <div>
-          <h1><i class="fa fa-dashboard"></i> <?= $data["titulo_pagina"];?></h1>
+          <h1><i class="fa fa-dashboard"></i> <?= $data["nombre_pagina"];?></h1>
         </div>
         <ul class="app-breadcrumb breadcrumb">
           <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-          <li class="breadcrumb-item"><a href="<?= base_url();?>usuario/gestionar_usuarios"><?= $data["titulo_pagina"];?></a></li>
+          <li class="breadcrumb-item"><a href="<?= base_url();?>usuario/gestionar_usuarios"><?= $data["nombre_pagina"];?></a></li>
         </ul>
         
       </div>

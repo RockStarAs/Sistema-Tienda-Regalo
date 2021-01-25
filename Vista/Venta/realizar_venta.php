@@ -19,9 +19,8 @@
         <div class="card text-center">
             <img class="card-img-top" src="<?= media();?>images/venta1.jpg" alt="Card image cap">
             <div class="card-body">
-                <h5 class="card-title"><i class="app-menu__icon fa fa-usd"></i>Ventas normales</h5>
-                <p class="card-text">Lista solo las ventas normales.</p>  
-                <a href="<?= base_url();?>venta/listar_ventas_normal/2" class="btn btn-primary">Ver listado</a>
+                <h5 class="card-title"><i class="app-menu__icon fa fa-shopping-basket"></i>Realizar una venta normal</h5>
+                <a href="<?= base_url();?>venta/venta_normal" class="btn btn-primary">Realizar</a>
             </div>
             <!-- <div class="card-footer">
                 <small class="text-muted">Last updated 3 mins ago</small>
@@ -31,21 +30,8 @@
             <img class="card-img-top" src="<?= media();?>images/venta0.jpg" alt="Card image cap">
             <div class="card-body">
                 <h5 class="card-title"><i class="fa fa-shopping-basket" aria-hidden="true"></i>
-                    Ventas al por mayor</h5>
-                <p class="card-text">Lista solo las ventas que sean al por mayor.</p>  
-                <a href="<?= base_url();?>venta/listar_ventas_normal/1" class="btn btn-primary">Ver listado</a>
-            </div>
-            <!-- <div class="card-footer">
-                <small class="text-muted">Last updated 3 mins ago</small>
-            </div> -->
-        </div>
-        <div class="card text-center">
-            <img class="card-img-top" src="<?= media();?>images/venta2.png" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title"><i class="fa fa-shopping-basket" aria-hidden="true"></i>
-                    Listar todas las ventas</h5>
-                <p class="card-text">Listado de todas las ventas sean normales o al por mayor.</p>    
-                <a href="<?= base_url();?>venta/ventas_realizadas" class="btn btn-primary">Ver listado</a>
+                    Realizar una venta al por mayor</h5>
+                <a href="<?= base_url();?>venta/venta_mayor" class="btn btn-primary">Realizar</a>
             </div>
             <!-- <div class="card-footer">
                 <small class="text-muted">Last updated 3 mins ago</small>

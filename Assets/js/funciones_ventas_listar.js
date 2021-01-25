@@ -31,7 +31,7 @@ function carga_ventas(tipo) {
         { data: "NOMBRE_CAJERO" },
         { data: "NOMBRE_CLIENTE" },
         { data: "TOTAL_PAGADO" },
-        { data: "opciones" },
+        { data: "OPCIONES" },
       ],
       responsive: true,
       bDestroy: true,

@@ -53,10 +53,7 @@ class Venta extends Controladores
         for ($i = 0; $i < count($data); $i++) {
             $id_crypt = encriptar($data[$i]["ID_VENTA"]);
             $data[$i]["TOTAL_PAGADO"] = SMONEY . formatea_moneda($data[$i]["TOTAL_PAGADO"]);
-            $data[$i]['opciones'] = '<div class="text-center">
-                <button class="btn btn-outline-warning btn-sm verVenta" rl="' . $id_crypt . '" title="Ver detalles de la venta" type="button">¡👁️!</button>
-                <button class="btn btn-outline-danger btn-sm eliminarVenta" rl="' . $id_crypt . '" title="Eliminar" type="button">❌</button>
-                </div>';
+            $data[$i]["OPCIONES"] = mostrar_acciones($data[$i]["ID_VENTA"], "verVenta", "eliminarVenta", "verTicket", 4);
         }
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
         die();
@@ -162,8 +159,8 @@ class Venta extends Controladores
     }
     public function ventas_realizadas()
     {
-        $data["titulo_pagina"] = "Sistema Tienda :: Historial ventas";
-        $data["nombre_pagina"] = "Historial de ventas";
+        $data["titulo_pagina"] = "Sistema Tienda :: Ver todas las ventas";
+        $data["nombre_pagina"] = "Todas las ventas";
         $data["funciones_js"] = "funciones_historial_ventas.js";
         $this->vistas->obten_vista($this, "ventas_realizadas", $data);
         die();
@@ -182,6 +179,13 @@ class Venta extends Controladores
             $data[$i]["OPCIONES"] = mostrar_acciones($data[$i]["ID_VENTA"], "verVenta", "eliminarVenta", "verTicket", 4);
         }
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+    public function realizar_venta(){
+        $data["titulo_pagina"] = "Sistema Tienda :: Realizar una venta";
+        $data["nombre_pagina"] = "Realice una venta";
+        $data["funciones_js"] = "realiza_venta.js";
+        $this->vistas->obten_vista($this, "realizar_venta", $data);
         die();
     }
 }
