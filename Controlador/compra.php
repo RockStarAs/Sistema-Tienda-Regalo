@@ -96,7 +96,7 @@
         }
         public function ver_compra_con_detalles($id_compra){
             
-            $id_compra_dsc =  desencriptar($id_compra);
+            $id_compra_dsc =  desencriptar($id_compra); 
             if($id_compra_dsc > 0 ){
                 $data["titulo_pagina"] = "Vista compra";
                 $data["nombre_pagina"] = "Sistema Tienda :: Ver Compra";

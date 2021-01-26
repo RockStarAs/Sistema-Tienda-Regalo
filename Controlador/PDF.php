@@ -26,7 +26,7 @@ function Header_2($fecha_venta,$nombre_cliente,$id_venta,$nombre_cajero,$tipo_ve
     $this->Cell(60,4,"Tipo venta: $cadena_tipo_venta",0,1,'C');
     //$this->Cell(60,4,'alfredo@lacodigoteca.com',0,1,'C');
 }
-function CargarDatos($array_detalles_venta,$total_pagado){
+function CargarDatos($array_detalles_venta,$total_pagado,$estado_venta){
     // COLUMNAS
     $this->SetFont('Helvetica', 'B', 7);
     $this->Cell(5, 10, 'Cod.', 0);
@@ -60,7 +60,7 @@ function CargarDatos($array_detalles_venta,$total_pagado){
     }
     $this->Ln(8);
     $this->Cell(60,0,'','T');
-    $this->Carga_total(round($total_a_pagar,2));
+    $this->Carga_total(round($total_a_pagar,2),$estado_venta);
 }
 // Pie de página
 function Footer()
@@ -72,7 +72,7 @@ function Footer()
     // Número de página
     $this->Cell(0,10,'Pag. '.$this->PageNo().'/{nb}',0,0,'C');
 }
-function Carga_total($total_a_pagar){
+function Carga_total($total_a_pagar,$estado_venta){
 
 
     $this->setX(10);
@@ -81,7 +81,11 @@ function Carga_total($total_a_pagar){
     $this->Cell(5,10,"S/.".$total_a_pagar,0,0,"R");
     
     $this->setX(10);
-    $this->Cell(5,15+6,'GRACIAS POR TU COMPRA ');
+    if($estado_venta == 0){
+        $this->Cell(5,15+6,'ESTA VENTA FUE ELIMINADA');
+    }else{
+        $this->Cell(5,15+6,'GRACIAS POR TU COMPRA ');
+    }
 }
 function genera_pdf($id_venta){
     require_once('venta.php');
@@ -96,7 +100,7 @@ function genera_pdf($id_venta){
             $pdf->AddPage();
             $pdf->Header_2($json['FECHA_VENTA'],$json['NOMBRE_CLIENTE'],$json['ID_VENTA'],$json['NOMBRE_CAJERO'],$json['TIPO_VENTA']);
              //HEADER
-            $pdf->CargarDatos($json['detalles_venta'],$json['TOTAL_PAGADO']);
+            $pdf->CargarDatos($json['detalles_venta'],$json['TOTAL_PAGADO'],$json['ESTADO_VENTA']);
             $pdf->Output();    
         }else{
             echo "Error con el servidor";

@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded',function(){
         "aProcessing":true,
         "aServerSide":true,
         "ajax":{
-            "url" : " "+base_url+"venta/lista_ventas",
+            "url" : " "+base_url+"venta/lista_ventas_eliminadas",
             "dataSrc":""  
         },
         "bAutoWidth": false,

@@ -40,12 +40,12 @@
             return $solicita_insert;
         }
         public function modelo_listar_venta_producto(){
-            $query = "SELECT * FROM vista_datos_venta WHERE tipo_venta=1";
+            $query = "SELECT * FROM vista_datos_venta WHERE tipo_venta=1 AND estado_venta = 1";
             $solicita_listado = $this->select_all($query);
             return $solicita_listado;
         }
         public function modelo_listar_venta_mayor(){
-            $query = "SELECT * FROM vista_datos_venta WHERE tipo_venta=0";
+            $query = "SELECT * FROM vista_datos_venta WHERE tipo_venta=0 AND estado_venta = 1";
             $solicita_listado = $this->select_all($query);
             return $solicita_listado;
         }
@@ -80,7 +80,12 @@
             return $solicita_busqueda;
         }
         public function lista_ventas_realizadas(){
-            $query = "SELECT * FROM vista_datos_venta";
+            $query = "SELECT * FROM vista_datos_venta WHERE estado_venta = 1";
+            $solicita_busqueda = $this->select_all($query);
+            return $solicita_busqueda;
+        }
+        public function lista_ventas_realizadas_eliminadas(){
+            $query = "SELECT * FROM vista_datos_venta WHERE estado_venta = 0";
             $solicita_busqueda = $this->select_all($query);
             return $solicita_busqueda;
         }
@@ -88,6 +93,22 @@
             $query = "SELECT id_venta FROM venta WHERE id_venta = $id";
             $solicita_busqueda = $this->select_one($query);
             return $solicita_busqueda;
+        }
+        public function saca_dni($id_venta){
+            $query = "SELECT dni_cliente FROM venta WHERE id_venta = $id_venta";
+            $solicitud = $this->select_one($query);
+            return $solicitud;
+        }
+        public function modelo_det_ventas($id_venta){
+            $query ="SELECT P.imagen_producto,P.id_producto,P.nombre_producto,P.descripcion_producto,DV.precio_venta,DV.descuento,DV.cantidad FROM detalle_venta as DV INNER JOIN producto as P ON DV.id_producto = P.id_producto WHERE DV.id_venta = $id_venta";
+            $solicita = $this->select_all($query);
+            return $solicita;
+        }
+        public function eliminar_venta($id_venta){
+            $query = "UPDATE venta SET estado_venta = 0,id_venta = ? WHERE id_venta = ?";
+            $valores = array($id_venta,$id_venta);
+            $solicita_update = $this->update($query,$valores);
+            return $solicita_update;
         }
     }
 ?>

@@ -166,12 +166,52 @@ class Venta extends Controladores
         return $data;
         die();
     }
+    public function busca_venta_con_datos_v2($id_venta)
+    {
+        $solicitud_id = $this->modelo->buscar_id($id_venta);
+        if($solicitud_id == null){
+            $data = array("status" => false);
+        }else{
+
+            $data = $this->modelo->modelo_datos_venta($id_venta);
+            $data['DNI'] = $this->modelo->saca_dni($id_venta);
+            $data["detalles_venta"] = $this->modelo->modelo_det_ventas($id_venta);
+            
+            $data["status"] = true;
+        }
+        return $data;
+        die();
+    }
+    
     public function ventas_realizadas()
     {
         $data["titulo_pagina"] = "Sistema Tienda :: Ver todas las ventas";
         $data["nombre_pagina"] = "Todas las ventas";
         $data["funciones_js"] = "funciones_historial_ventas.js";
         $this->vistas->obten_vista($this, "ventas_realizadas", $data);
+        die();
+    }
+    public function lista_ventas_eliminadas(){
+        $data = $this->modelo->lista_ventas_realizadas_eliminadas();
+        for ($i = 0; $i < count($data); $i++) {
+            $fecha = $data[$i]["FECHA_VENTA"];
+            $fecha_venta = date_create("$fecha");
+            $data[$i]["FECHA_VENTA"] = date_format($fecha_venta, "d/m/Y H:i A");
+            $data[$i]["TIPO_VENTA"] = $data[$i]["TIPO_VENTA"] == 0 ? "Al por mayor" : "Venta normal";
+            $data[$i]["TOTAL_PAGADO"] = round($data[$i]["TOTAL_PAGADO"], 2);
+            $total = $data[$i]["TOTAL_PAGADO"];
+            $data[$i]["TOTAL_PAGADO"] = "S/. $total";
+            $data[$i]["OPCIONES"] = mostrar_acciones($data[$i]["ID_VENTA"], "verVenta", "", "verTicket", 5);
+        }
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        die();   
+    }
+    public function ventas_eliminadas()
+    {
+        $data["titulo_pagina"] = "Sistema Tienda :: Ver todas las ventas eliminadas ";
+        $data["nombre_pagina"] = "Todas las ventas eliminadas";
+        $data["funciones_js"] = "funciones_historial_ventas_eliminadas.js";
+        $this->vistas->obten_vista($this, "ventas_eliminadas", $data);
         die();
     }
     public function lista_ventas()
@@ -196,5 +236,30 @@ class Venta extends Controladores
         $data["funciones_js"] = "realiza_venta.js";
         $this->vistas->obten_vista($this, "realizar_venta", $data);
         die();
+    }
+    public function ver_venta_detallada($id_venta){
+        $id_venta = desencriptar($id_venta);
+        if(ctype_digit($id_venta)){
+        $data = $this->busca_venta_con_datos_v2($id_venta);
+        $data["titulo_pagina"] = "Sistema Tienda :: Ver venta completa";
+        $data["nombre_pagina"] = "Vista de venta"; 
+        $data["funciones_js"] = "ver_venta.js";
+        //echo json_encode($data,JSON_UNESCAPED_UNICODE);
+        $this->vistas->obten_vista($this, "ver_venta_detallada", $data);
+        die();
+        }else{
+            echo "Error con el servidor";
+        }
+        //$this->vistas->obten_vista($this, "ver_venta_detallada", $data);
+        die();
+    }
+    public function eliminar_venta(){
+        if($_POST){
+            $id_venta = desencriptar($_POST['id_venta']);
+            $solicita = $this->modelo->eliminar_venta($id_venta);
+            $data = array("status" => true, "msg"=>"Venta elimada");
+            echo json_encode($data,JSON_UNESCAPED_UNICODE);
+            die();
+        }
     }
 }
