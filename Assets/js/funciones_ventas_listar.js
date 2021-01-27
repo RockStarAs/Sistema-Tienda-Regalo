@@ -82,10 +82,22 @@ function carga_ventas(tipo) {
                   if(solicitud.readyState == 4 && solicitud.status == 200){
                       var obj_data = JSON.parse(solicitud.responseText);
                       if(obj_data.status){
-                          swal("Eliminar!",obj_data.msg,"success");
-                          tabla_ventas.ajax.reload(function(){
-                              
-                          });
+                          /*swal("Eliminar!",obj_data.msg,"success");
+                          location.reload();*/
+                          swal({
+                            title:"Venta eliminada",
+                            text:"La venta ahora podrá ser visualizada en ventas eliminadas.",
+                            type:"success",
+                            showCancelButton:false,
+                            confirmButtonText:"Aceptar.",
+                            closeOnConfirm:false,
+                            closeOnCancel:false
+                        },function(isConfirm){
+                          if(isConfirm){
+                            location.reload();
+                          }
+                        });
+
                       }else{
                          swal("Atencion!",obj_data.msg,"error"); 
                       }
