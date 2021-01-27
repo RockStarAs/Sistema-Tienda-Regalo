@@ -84,6 +84,13 @@
             $solicita_busqueda = $this->select_all($query);
             return $solicita_busqueda;
         }
+        public function ventas_realizadas_por_vendedor($nombre_usuario){
+            $query = "SELECT FECHA_VENTA,ID_VENTA,TIPO_VENTA,TOTAL_PAGADO
+            FROM vista_datos_venta WHERE ESTADO_VENTA!=0 AND NOMBRE_CAJERO='$nombre_usuario' AND YEAR(FECHA_VENTA)=YEAR(GETDATE())
+						ORDER BY FECHA_VENTA DESC";
+            $solicita_busqueda = $this->select_all($query);
+            return $solicita_busqueda;
+        }
         public function lista_ventas_realizadas_eliminadas(){
             $query = "SELECT * FROM vista_datos_venta WHERE estado_venta = 0";
             $solicita_busqueda = $this->select_all($query);

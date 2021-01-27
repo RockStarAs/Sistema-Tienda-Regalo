@@ -265,4 +265,20 @@ class Venta extends Controladores
             die();
         }
     }
+
+    public function ventas_por_vendedor(){
+        $nombre_usuario=$_SESSION['nombre_usuario'];
+        $data = $this->modelo->ventas_realizadas_por_vendedor($nombre_usuario);
+        for ($i = 0; $i < count($data); $i++) {
+            $fecha = $data[$i]["FECHA_VENTA"];
+            $fecha_venta = date_create("$fecha");
+            $data[$i]["FECHA_VENTA"] = date_format($fecha_venta, "d/m/Y H:i A");
+            $data[$i]["TIPO_VENTA"] = $data[$i]["TIPO_VENTA"] == 0 ? "Al por mayor" : "Venta normal";
+            $data[$i]["TOTAL_PAGADO"] = round($data[$i]["TOTAL_PAGADO"], 2);
+            $total = $data[$i]["TOTAL_PAGADO"];
+            $data[$i]["TOTAL_PAGADO"] = "S/. $total";
+        }
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        die();
+    }
 }
