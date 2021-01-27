@@ -16,23 +16,23 @@
                 <input type="hidden" id="id_usuario" name="id_usuario">
                 <div class="form-group">
                   <label class="control-label">DNI:</label>
-                  <input class="form-control" id="txt_dni_act" name="txt_dni_act" type="text" placeholder="Enter full name" required="">
+                  <input class="form-control" id="txt_dni_act" name="txt_dni_act" type="text" placeholder="Ingrese DNI" required="">
                 </div>
                 <div class="form-group">
                   <label class="control-label">Nombres:</label>
-                  <input class="form-control" id="txt_nombre_act" name="txt_nombre_act" type="text" placeholder="Enter full name" required="">
+                  <input class="form-control" id="txt_nombre_act" name="txt_nombre_act" type="text" placeholder="Ingrese nombre" required="">
                 </div>
                 <div class="form-group">
                   <label class="control-label">Apellidos:</label>
-                  <input class="form-control" id="txt_apellido_act" name="txt_apellido_act" type="text" placeholder="Enter full name" required="">
+                  <input class="form-control" id="txt_apellido_act" name="txt_apellido_act" type="text" placeholder="Ingrese apellidos" required="">
                 </div>
                 <div class="form-group">
                   <label class="control-label">Nombre usuario:</label>
-                  <input class="form-control" id="txt_nombre_usuario_act" name="txt_nombre_usuario_act" type="text" placeholder="Enter full name" required="">
+                  <input class="form-control" id="txt_nombre_usuario_act" name="txt_nombre_usuario_act" type="text" placeholder="Ingrese nombre de usuario" required="">
                 </div>
                 <div class="form-group">
                   <label class="control-label">Contraseña:</label>
-                  <input class="form-control" id="txt_contraseña_act" name="txt_contraseña_act" type="password" placeholder="Enter full name" required="">
+                  <input class="form-control" id="txt_contraseña_act" name="txt_contraseña_act" type="password" placeholder="Ingrese contraseña" required="">
                 </div>
                 <div class="form-group">
                     <label for="select_tipo">Rol de Ususario</label>

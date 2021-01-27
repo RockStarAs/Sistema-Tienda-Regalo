@@ -25,7 +25,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Producto</th>
-                                    <th>Categoria</th>
+                                    <th>Categoría</th>
                                     <th>Stock</th>
                                     <th>Precio Venta</th>
                                     <th>Precio Por Mayor</th>

@@ -19,7 +19,7 @@
                                     placeholder="Ingrese nombre del producto" required="">
                             </div>
                             <div class="form-group">
-                                <label class="control-label">Descripcion Producto:</label>
+                                <label class="control-label">Descripción Producto:</label>
                                 <textarea class="form-control" name="txt_descripcion" id="txt_descripcion"
                                     style="resize:none;" rows="4"
                                     placeholder="Descripción del producto (Opcional)"></textarea>
@@ -78,7 +78,7 @@
                                     min="0" required="" />
                             </div>
                             <div class="form-group">
-                                <label for="categoria_id">Categoria del Producto</label>
+                                <label for="categoria_id">Categoría del Producto</label>
                                 <select class="form-control" data-live-search="true" id="categoria_id"
                                     name="categoria_id" required>
 

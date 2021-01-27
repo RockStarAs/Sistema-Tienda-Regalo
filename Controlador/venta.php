@@ -97,7 +97,8 @@ class Venta extends Controladores
                     for ($i = 0; $i < count($id_productos); $i++) {
                         $solicitud_agrega_detalle_venta = $this->modelo->modelo_inserta_detalles_venta($solicitud_agregar_venta, $id_productos[$i], $precio_venta_productos[$i], $cantidad_productos[$i], $descuento[$i]);
                     }
-                    $data = array("status" => true, "msg" => "Se ha registrado la venta, con un total de " . count($id_productos) . " productos.", "id_venta" => $solicitud_agregar_venta);
+                    $id_crypt=encriptar($solicitud_agregar_venta);
+                    $data = array("status" => true, "msg" => "Se ha registrado la venta, con un total de " . count($id_productos) . " productos.", "id_venta" => $id_crypt);
                 }
             } else {
                 $respuesta = array('status' => false, 'msg' => "Id agregado es $solicitud_agregar_venta");
@@ -125,6 +126,7 @@ class Venta extends Controladores
             $flag = false;
 
             $solicitud_agregar_venta = $this->modelo->modelo_inserta_venta_mayor($id_usuario_caja, $id_usuario_atiende, $dni_cliente, $fecha_venta);
+            
             if ($solicitud_agregar_venta > 0) {
                 //El id se ha registrado
                 if (count($id_productos) <= 0) {
@@ -135,7 +137,8 @@ class Venta extends Controladores
                     for ($i = 0; $i < count($id_productos); $i++) {
                         $solicitud_agrega_detalle_venta = $this->modelo->modelo_inserta_detalles_venta($solicitud_agregar_venta, $id_productos[$i], $precio_venta_productos[$i], $cantidad_productos[$i], $descuento[$i]);
                     }
-                    $data = array("status" => true, "msg" => "Se ha registrado la venta, con un total de " . count($id_productos) . " productos.","id" => $solicitud_agregar_venta);
+                    $id_crypt=encriptar($solicitud_agregar_venta);
+                    $data = array("status" => true, "msg" => "Se ha registrado la venta, con un total de " . count($id_productos) . " productos.","id" => $id_crypt);
                 }
             } else {
                 $data = array("status" => false, "id" => null, "msg" => "Fallo inserción de la venta como tal.");

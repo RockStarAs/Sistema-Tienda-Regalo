@@ -8,7 +8,7 @@
             parent::__construct();
         }
         public function gestionar_clientes(){
-            $data["titulo_pagina"] = "Gestion de Clientes";
+            $data["titulo_pagina"] = "Gestión de Clientes";
             $data["nombre_pagina"] = "Sistema Tienda :: Clientes";
             $data["funciones_js"] = "funciones_clientes.js";
             //$data = $this->modelo->modelo_inserta_usuario("75541205","Juan","Ortelli","caja2","caja2","CAJERO");

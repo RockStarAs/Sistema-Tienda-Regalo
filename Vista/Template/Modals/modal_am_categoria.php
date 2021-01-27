@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header modalHeaderRegistro">
-                <h5 class="modal-title" id="titulo_Modal">Nueva Categoria</h5>
+                <h5 class="modal-title" id="titulo_Modal">Nueva Categoría</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -14,13 +14,13 @@
                         <form id="frm_agregar_categoria" class="frm" name="frm_agregar_categoria">
                             
                             <div class="form-group">
-                                <label class="control-label">Nombre Categoria:</label>
+                                <label class="control-label">Nombre Categoría:</label>
                                 <input class="form-control" id="txt_nombre" name="txt_nombre" type="text"
-                                    placeholder="Ingrese el nombre de la Categoria" required="">
+                                    placeholder="Ingrese el nombre de la Categoría" required="">
                             </div>
                             <div class="form-group">
-                                <label class="control-label">Descripcion:</label>
-                                <textarea class="form-control" name="txt_descripcion" id="txt_descripcion" style= "resize:none;" rows="4" placeholder="Descripción de la categoria (Opcional)"></textarea>
+                                <label class="control-label">Descripción:</label>
+                                <textarea class="form-control" name="txt_descripcion" id="txt_descripcion" style= "resize:none;" rows="4" placeholder="Descripción de la categoría (Opcional)"></textarea>
                             </div>
 
                             <div class="tile-footer">

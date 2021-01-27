@@ -12,7 +12,7 @@ class Producto extends Controladores
 
     public function gestionar_productos()
     {
-        $data["titulo_pagina"] = "Gestion de Productos";
+        $data["titulo_pagina"] = "Gestión de Productos";
         $data["nombre_pagina"] = "Productos :: Gestión Productos";
         $data["funciones_js"] = "funciones_producto.js";
         $this->vistas->obten_vista($this, "gestionar_productos", $data);

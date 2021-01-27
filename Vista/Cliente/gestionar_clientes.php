@@ -27,7 +27,7 @@
                       <th>DNI</th>
                       <th>Nombre</th>
                       <th>Apellidos</th>
-                      <th>Telefono de Contacto</th>
+                      <th>Teléfono de Contacto</th>
                       <th>Acción</th>
                     </tr>
                   </thead>

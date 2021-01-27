@@ -40,6 +40,7 @@ function carga_modal_datos() {
       url: " " + base_url + "producto/listar_productos_v2",
       dataSrc: "",
     },
+    bAutoWidth: false,
     columns: [
       { data: "opciones" },
       { data: "nombre_producto" },

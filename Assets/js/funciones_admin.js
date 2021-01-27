@@ -83,8 +83,7 @@ document.addEventListener('DOMContentLoaded',function(){
                     tabla_usuarios.ajax.reload(function(){
                         //Importante para que se carguen todas los editar de los usuarios cuando se agregan
                         setTimeout(()=>{
-                            fnc_editar_usuario();
-                            fnc_eliminar_usuario();
+                            
                         },1000);
                     });
                 }else{
@@ -124,8 +123,7 @@ document.addEventListener('DOMContentLoaded',function(){
                     tabla_usuarios.ajax.reload(function(){
                         //Importante para que se carguen todas los editar de los usuarios cuando se agregan
                         setTimeout(()=>{
-                            fnc_editar_usuario();
-                            fnc_eliminar_usuario();
+                            
                         },1000);
                     });
                 }else{
@@ -142,12 +140,7 @@ $('#tabla_usuarios').DataTable();
 function abrir_modal(){
     $('#modal_form_agrega_usuario').modal('show');
 }
-window.addEventListener('load',function(){
-    setTimeout(() => { 
-        fnc_editar_usuario();
-        fnc_eliminar_usuario();
-    }, 1000);
-},false);
+
 
 function fnc_editar_usuario(){
     var btn_editar_usuario = document.querySelectorAll(".btnEditarUsuario");
@@ -218,8 +211,7 @@ function fnc_eliminar_usuario(){
                             if(obj_data.status){
                                 swal("Eliminar!",obj_data.msg,"success");
                                 tabla_usuarios.ajax.reload(function(){
-                                    fnc_editar_usuario();
-                                    fnc_eliminar_usuario();
+                                    
                                 });
                             }else{
                                swal("Atencion!",obj_data.msg,"error"); 

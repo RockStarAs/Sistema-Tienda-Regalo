@@ -73,7 +73,7 @@ function abrir_modal(){
     if (document.querySelector("#id_categoria")) {
         $("#id_categoria").remove();
     }
-    document.querySelector("#titulo_Modal").innerHTML="Nueva Categoria ";
+    document.querySelector("#titulo_Modal").innerHTML="Nueva Categoría ";
     document.querySelector(".modal-header").classList.replace("modalHeaderActualizar","modalHeaderRegistro");
     document.querySelector("#btnAccion_Form").classList.replace("btn-info","btn-primary");
     document.querySelector("#btn_Text").innerHTML="Guardar";
@@ -88,7 +88,7 @@ function ftnEditar_Categoria(){
             if (document.querySelector("#id_categoria")) {
                 $("#id_categoria").remove();
             }
-            document.querySelector("#titulo_Modal").innerHTML="Actualizar Categoria ";
+            document.querySelector("#titulo_Modal").innerHTML="Actualizar Categoría ";
             document.querySelector(".modal-header").classList.replace("modalHeaderRegistro","modalHeaderActualizar");
             document.querySelector("#btnAccion_Form").classList.replace("btn-primary","btn-info");
             document.querySelector("#btn_Text").innerHTML="Actualizar";

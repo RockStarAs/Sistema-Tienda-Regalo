@@ -15,22 +15,22 @@
                             <div class="form-group">
                                 <label class="control-label">DNI:</label>
                                 <input class="form-control" id="txt_dni_cliente" name="txt_dni_cliente" type="text"
-                                    placeholder="Enter full name" required="">
+                                    placeholder="Ingrese DNI" required="">
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Nombres:</label>
                                 <input class="form-control" id="txt_nombre_cliente" name="txt_nombre_cliente" type="text"
-                                    placeholder="Enter full name" required="">
+                                    placeholder="Ingrese nombre" required="">
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Apellidos:</label>
                                 <input class="form-control" id="txt_apellido_cliente" name="txt_apellido_cliente"
-                                    type="text" placeholder="Enter full name" required="">
+                                    type="text" placeholder="Ingrese apellidos" required="">
                             </div>
                             <div class="form-group">
-                                <label class="control-label">Telefono de Contacto:</label>
+                                <label class="control-label">Teléfono de Contacto:</label>
                                 <input class="form-control" id="txt_telefono_contacto" name="txt_telefono_contacto" type="text"
-                                    placeholder="Enter full name" required="">
+                                    placeholder="Número de teléfono" required="">
                             </div>
                             <div class="tile-footer">
                                 <button class="btn btn-primary" type="submit"><i

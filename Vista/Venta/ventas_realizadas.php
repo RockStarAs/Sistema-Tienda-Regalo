@@ -7,7 +7,7 @@
         </div>
         <ul class="app-breadcrumb breadcrumb">
           <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-          <li class="breadcrumb-item"><a href="<?= base_url();?>usuario/gestionar_usuarios"><?= $data["nombre_pagina"];?></a></li>
+          <li class="breadcrumb-item"><a href="<?= base_url();?>venta/listar_ventas_general">Ventas Realizadas</a></li>
         </ul>
         
       </div>

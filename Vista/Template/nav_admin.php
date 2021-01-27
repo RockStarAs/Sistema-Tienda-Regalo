@@ -37,7 +37,7 @@
                     <li>
                         <a class="treeview-item" href="<?= base_url();?>categoria/gestionar_categorias" target=""
                             rel="noopener">
-                            <i class="icon fa fa-circle-o"></i> Gestionar Categorias
+                            <i class="icon fa fa-circle-o"></i> Gestionar Categorías
                         </a>
                     </li>
                     <li>
