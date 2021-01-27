@@ -41,8 +41,38 @@
                 </a>
             </div>
         </div>
-
-
     </div>
+    <dviv class="row">
+        <div class="col-md-6">
+            <div class="tile">
+                <h3 class="tile-title">Últimas ventas realizadas por el usuario</h3>
+                <div class="tile-body">
+                    <div class="table-responsive" style="height: 400px">
+                        <table class="table table-hover table-bordered" id="tabla_ventas">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Fecha</th>
+                                    <th>Tipo de venta</th>
+                                    <th>Total de venta</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div class="col-md-6">
+          <div class="tile">
+            <h3 class="tile-title">Vector Map</h3>
+            <div class="tile-body">
+              <div id="demo-map" style="height: 400px"></div>
+            </div>
+          </div>
+        </div>
+    </dviv>
 </main>
 <?php footer_admin($data); ?>
