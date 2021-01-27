@@ -8,7 +8,7 @@
             parent::__construct();
         }
         public function gestionar_proveedores(){
-            $data["titulo_pagina"] = "Gestion de Proveedores";
+            $data["titulo_pagina"] = "Gestión de Proveedores";
             $data["nombre_pagina"] = "Sistema Tienda :: Proveedores";
             $data["funciones_js"] = "funciones_proveedor.js";
             //$data = $this->modelo->modelo_inserta_usuario("75541205","Juan","Ortelli","caja2","caja2","CAJERO");

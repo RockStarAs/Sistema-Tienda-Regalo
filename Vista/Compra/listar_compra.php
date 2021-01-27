@@ -9,7 +9,7 @@
         <ul class="app-breadcrumb breadcrumb">
             <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
             <li class="breadcrumb-item"><a
-                    href="<?= base_url();?>producto/gestionar_productos"><?= $data["titulo_pagina"];?></a></li>
+                    href="<?= base_url();?>compra/ver_compras"><?= $data["titulo_pagina"];?></a></li>
         </ul>
     </div>
     <div class="row">

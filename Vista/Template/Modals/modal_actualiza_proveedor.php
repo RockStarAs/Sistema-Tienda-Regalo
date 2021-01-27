@@ -15,27 +15,27 @@
                 <input type="hidden" name="txt_dni_ruc_cambiar" id="txt_dni_ruc_cambiar" >
                 <div class="form-group">
                   <label class="control-label">DNI o RUC:</label>
-                  <input class="form-control" id="txt_dni_ruc_act" name="txt_dni_ruc_act" type="text" placeholder="Enter full name" required="">
+                  <input class="form-control" id="txt_dni_ruc_act" name="txt_dni_ruc_act" type="text" placeholder="Ingrese DNI o RUC" required="">
                 </div>
                 <div class="form-group">
                   <label class="control-label">Nombre del Proveedor:</label>
-                  <input class="form-control" id="txt_nombre_proveedor_act" name="txt_nombre_proveedor_act" type="text" placeholder="Enter full name" required="">
+                  <input class="form-control" id="txt_nombre_proveedor_act" name="txt_nombre_proveedor_act" type="text" placeholder="Ingrese nombre" required="">
                 </div>
                 <div class="form-group">
-                  <label class="control-label">Telefono del Proveedor:</label>
-                  <input class="form-control" id="txt_telefono_proveedor_act" name="txt_telefono_proveedor_act" type="text" placeholder="Enter full name" required="">
+                  <label class="control-label">Teléfono del Proveedor:</label>
+                  <input class="form-control" id="txt_telefono_proveedor_act" name="txt_telefono_proveedor_act" type="text" placeholder="Ingrese número de teléfono" required="">
                 </div>
                 <div class="form-group">
                   <label class="control-label">Email proveedor:</label>
-                  <input class="form-control" id="txt_email_proveedor_act" name="txt_email_proveedor_act" type="text" placeholder="Enter full name" required="">
+                  <input class="form-control" id="txt_email_proveedor_act" name="txt_email_proveedor_act" type="text" placeholder="Ingrese email" required="">
                 </div>
                 <div class="form-group">
                   <label class="control-label">Ciudad:</label>
-                  <input class="form-control" id="txt_ciudad_proveedor_act" name="txt_ciudad_proveedor_act"type="text" placeholder="Enter full name" required="">
+                  <input class="form-control" id="txt_ciudad_proveedor_act" name="txt_ciudad_proveedor_act"type="text" placeholder="Ingrese ciudad" required="">
                 </div>
                 <div class="form-group">
                   <label class="control-label">Dirección:</label>
-                  <input class="form-control" id="txt_direccion_proveedor_act" name="txt_direccion_proveedor_act"type="text" placeholder="Enter full name" required="">
+                  <input class="form-control" id="txt_direccion_proveedor_act" name="txt_direccion_proveedor_act"type="text" placeholder="Ingrese dirección" required="">
                 </div>
                 
                   <div class="tile-footer">

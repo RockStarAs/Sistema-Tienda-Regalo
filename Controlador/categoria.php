@@ -13,8 +13,8 @@
 
         public function gestionar_categorias()
         {
-            $data["titulo_pagina"] = "Gestion de Categorias";
-            $data["nombre_pagina"] = "Productos :: Gestión Categorias";
+            $data["titulo_pagina"] = "Gestión de Categorías";
+            $data["nombre_pagina"] = "Productos :: Gestión Categorías";
             $data["funciones_js"]="funciones_categoria.js";
             $this->vistas->obten_vista($this, "gestionar_categorias", $data);
         }

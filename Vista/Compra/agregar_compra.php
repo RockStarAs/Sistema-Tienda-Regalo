@@ -11,7 +11,7 @@
         <ul class="app-breadcrumb breadcrumb">
             <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
             <li class="breadcrumb-item"><a
-                    href="<?= base_url();?>producto/gestionar_productos"><?= $data["titulo_pagina"];?></a></li>
+                    href="<?= base_url();?>compra/agregar_compra"><?= $data["titulo_pagina"];?></a></li>
         </ul>
     </div>
     <!--Aqui va el formulario -->
@@ -53,13 +53,13 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label">Serie de boleta o factura (Opcional)</label>
-                                <input class="form-control" type="text" id="serie_boleta_factura" name="serie_boleta_factura" placeholder="Enter your name">
+                                <input class="form-control" type="text" id="serie_boleta_factura" name="serie_boleta_factura" placeholder="Ingrese serie (opcional)">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label">Correlativo(Opcional)</label>
-                                <input class="form-control" type="text" id="correlativo_boleta_factura" name="correlativo_boleta_factura"  placeholder="Enter your name">
+                                <input class="form-control" type="text" id="correlativo_boleta_factura" name="correlativo_boleta_factura"  placeholder="Ingrese correlativo (opcional)">
                             </div>
                         </div>
                     </div>
