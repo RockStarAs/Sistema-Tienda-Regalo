@@ -90,7 +90,7 @@ function carga_ventas(tipo) {
                             type:"success",
                             showCancelButton:false,
                             confirmButtonText:"Aceptar.",
-                            closeOnConfirm:false,
+                            closeOnConfirm:false, 
                             closeOnCancel:false
                         },function(isConfirm){
                           if(isConfirm){

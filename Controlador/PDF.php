@@ -92,7 +92,7 @@ function genera_pdf($id_venta){
     $id_venta = desencriptar($id_venta);
     if(ctype_digit($id_venta)){
         $venta = new Venta();
-        $json = $venta->busca_venta_con_datos($id_venta);
+        $json = $venta->busca_venta_con_datos($id_venta); 
         if($json["status"]){
             $pdf = new PDF('P','mm',array(80,150));
             $pdf->SetTitle(utf8_decode("Ticket de venta : TIENDA DE REGALOS PEÑA -> Nro: $id_venta"));

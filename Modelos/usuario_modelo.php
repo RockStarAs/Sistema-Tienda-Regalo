@@ -39,6 +39,11 @@
             }
             return $return;
         }
+        public function modelo_desconecta($fecha,$id_usuario){
+            $query = "UPDATE usuario SET ultima_conexion = ? WHERE id_usuario = ?";
+            $valores = array($fecha,$id_usuario);
+            $this->update($query,$valores);
+        }
         public function modelo_actualiza_usuario($dni_trabajador,$nombre_trabajador,$apellidos_trabajador,$nombre_usuario,$password_usuario,$rol_usuario,$estado_usuario,$id_usuario){
             //No actualizaremos la fecha de creación nunca, la última conexión se hará en una función aparte
             $query = "UPDATE usuario SET

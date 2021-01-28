@@ -13,6 +13,9 @@
             print_r($data);
         }
         */
+        public function desconecta($fecha,$id_usuario){
+            $this->modelo->modelo_desconecta($fecha,$id_usuario);
+        }
         public function gestionar_usuarios(){
             $data["titulo_pagina"] = "Agregar Usuario";
             $data["nombre_pagina"] = "Usuarios :: Agregar Usuario";
@@ -75,6 +78,14 @@
         public function listar_usuarios(){
             $data = $this->modelo->modelo_listar_usuarios();
             for ($i=0; $i < count($data); $i++) { 
+                $fecha = $data[$i]['fecha_creacion'];  
+                $fecha_mostrar = date_create("$fecha");
+                $data[$i]['fecha_creacion'] = date_format($fecha_mostrar,"Y/m/d H:i A");
+
+                $fecha = $data[$i]['ultima_conexion'];  
+                $fecha_mostrar = date_create("$fecha");
+                $data[$i]['ultima_conexion'] = date_format($fecha_mostrar,"Y/m/d H:i A");
+
                 if($data[$i]['estado_usuario'] == 1){
                     $data[$i]['estado_usuario'] = " <span class='badge badge-success'> Activo </span> ";
                 }else{
