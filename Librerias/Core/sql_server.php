@@ -49,5 +49,11 @@
             $resultado->execute();
             return $resultado;
         }
+        public function agregar_sin_valores($query){
+            $this->cadena_query = $query;
+            $resultado = $this->conexion->prepare($this->cadena_query);
+            $resultado->execute();
+            return $resultado;
+        }
     }
 ?>

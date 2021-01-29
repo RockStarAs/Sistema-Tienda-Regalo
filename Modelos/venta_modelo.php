@@ -20,6 +20,11 @@
         public function modelo_inserta_venta_mayor($id_usuario,$id_usuario_atiende,$dni_cliente,$fecha_venta,$tipo_venta=0)
         {
             $fecha_venta = date("Y-m-d H:i:s");
+            if(VERSION_BD == "MySQL"){
+                //EN MYSQL No deja agregar directamente porque dice que hay un erro de string con el bit D: 
+                $query ="INSERT INTO venta(id_usuario,id_usuario_atiende,fecha_venta,dni_cliente,tipo_venta) VALUES ('$id_usuario','$id_usuario_atiende','$fecha_venta','$dni_cliente',$tipo_venta)";
+                $valores = array();   
+            }else{
             $query = "INSERT INTO venta(
                 id_usuario,
                 id_usuario_atiende,
@@ -29,6 +34,7 @@
                 ) 
                 values (?,?,?,?,?)";
             $valores = array($id_usuario,$id_usuario_atiende,$fecha_venta,$dni_cliente,$tipo_venta);
+            }
             $solicita_insert = $this->insert($query,$valores);
             return $solicita_insert;
         }
