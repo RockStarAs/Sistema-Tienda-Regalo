@@ -117,5 +117,46 @@
             $solicita_update = $this->update($query,$valores);
             return $solicita_update;
         }
+
+        public function rango_fechas($fechaInicial, $fechaFinal){
+
+            if($fechaInicial == null)
+            {
+                $query="SELECT * FROM vista_datos_venta ORDER BY id_venta ASC";
+                
+            }else if($fechaInicial == $fechaFinal)
+            {
+                $query="SELECT * FROM venta WHERE fecha_venta like '%$fechaFinal%'";
+    
+            }else{
+    
+                $fechaActual = new DateTime();
+                $fechaActual ->add(new DateInterval("P1D"));
+                $fechaActualMasUno = $fechaActual->format("Y-m-d");
+    
+                $fechaFinal2 = new DateTime($fechaFinal);
+                $fechaFinal2 ->add(new DateInterval("P1D"));
+                $fechaFinalMasUno = $fechaFinal2->format("Y-m-d");
+    
+                if($fechaFinalMasUno == $fechaActualMasUno){
+    
+                    $query="SELECT * FROM venta WHERE fecha BETWEEN '$fechaInicial' AND '$fechaFinalMasUno'";
+    
+                }else{
+    
+                    $query = "SELECT * FROM venta WHERE fecha BETWEEN '$fechaInicial' AND '$fechaFinal'";
+    
+                }
+            }
+            $solicita=$this->select_all($query);
+            return $solicita;	 
+        }
+
+        public function Suma_Total_Ventas(){	
+
+            $query="SELECT SUM(TOTAL_PAGADO) as Total FROM vista_datos_venta";
+            $solicitud = $this->select_one($query);
+            return $solicitud;
+        }
     }
 ?>

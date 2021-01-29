@@ -27,6 +27,64 @@ class Venta extends Controladores
         $this->vistas->obten_vista($this, "listar_ventas_main", $data);
     }
 
+    public function reporte_ventas()
+    {
+        $data["titulo_pagina"] = "Sistema Tienda :: Ventas";
+        $data["nombre_pagina"] = "Reporte de Ventas";
+        $data["funciones_js"] = "funciones_reporte_ventas.js";
+        $data["fecha"]="Rango fecha";
+        if($_SESSION['rol_usuario'] == 'ADMINISTRADOR'){
+            $this->vistas->obten_vista($this, "reporte_ventas", $data);   
+        }else{
+            $this->vistas->obten_vista($this,"errores/sin_autorizacion",$data);    
+        }
+        
+    }
+    public function grafico_ventas()
+    {
+        if ($_GET) {
+            if(isset($_GET["fechaInicial"])){
+                $fechaInicial = $_GET["fechaInicial"];
+                $fechaFinal = $_GET["fechaFinal"];
+            }else{
+                $fechaInicial = null;
+                $fechaFinal = null;
+            }
+
+            $solicitud = $this->modelo->rango_fechas($fechaInicial, $fechaFinal);
+            $arrayFechas=array();
+            $arrayVentas = array();
+            $sumaPagosMes = [];
+            for ($i = 0; $i < count($solicitud); $i++) {
+                $fecha=substr($solicitud[$i]["FECHA_VENTA"],0,7);
+                array_push($arrayFechas, $fecha);
+                $solicitud[$i]["TOTAL_PAGADO"]=round($solicitud[$i]["TOTAL_PAGADO"], 2);
+                $arrayVentas = array($fecha => $solicitud[$i]["TOTAL_PAGADO"]);
+                #Sumamos los pagos que ocurrieron el mismo mes
+                foreach ($arrayVentas as $key => $value) {
+                    if (array_key_exists($key, $sumaPagosMes)) {
+                        $sumaPagosMes[$key] += $value;
+                    }else{
+                        $sumaPagosMes+= [$key => $value];
+                    }
+                    
+                }
+            }
+            $noRepetirFechas = array_unique($arrayFechas);
+            foreach($noRepetirFechas as $key){
+                $sumaPagosMes[$key]=round($sumaPagosMes[$key]);
+                $data[]=array("y"=>$key,"ventas"=>$sumaPagosMes[$key]);
+            }
+            if ($data==null) {
+                $data[]=array("y"=>0,"ventas"=>0);
+            }
+        } else {
+            $data = array("status" => false, "msg" => "Error creacion.");
+        }
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
     public function listar_ventas_normal($tipo)
     {
 

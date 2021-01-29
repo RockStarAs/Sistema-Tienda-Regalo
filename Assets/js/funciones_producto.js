@@ -315,8 +315,7 @@ function ftnEliminarProducto() {
                   swal("Eliminar!", obj_json.msg, "success");
                   tabla_productos.ajax.reload(function () {
                     setTimeout(() => {
-                      ftnEditar_Producto();
-                      ftnEliminarProducto();
+                      
                     }, 500);
                   });
                 } else {

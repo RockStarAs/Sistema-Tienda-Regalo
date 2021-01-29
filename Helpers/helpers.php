@@ -28,6 +28,10 @@
         $vista_modal = "Vista/Template/Modals/{$nombre_modal}.php";
         require_once $vista_modal;
     }
+    function obtener_reporte(string $nombre_reporte,$data){
+        $vista_reporte = "Vista/Template/Reportes/{$nombre_reporte}.php";
+        require_once $vista_reporte;
+    }
     function mostrar_acciones($id,$claseEditar="",$claseEliminar="",$clase_compra="",$num = 0){
         switch ($num){
             case 0:{
