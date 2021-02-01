@@ -61,8 +61,8 @@
         }
         public function modelo_eliminar_producto($id_producto){
             $return ="";
-            $query = "UPDATE producto SET estado_producto=? WHERE id_producto=?";
-            $valores = array(0,$id_producto);
+            $query = "UPDATE producto SET estado_producto=0 WHERE id_producto=?";
+            $valores = array($id_producto);
             $return = $this->update($query,$valores);
             if ($return) {
                 $return='ok';

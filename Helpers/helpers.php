@@ -45,8 +45,11 @@
                 return '<div class="text-center">
                 <button class="btn btn-outline-warning btn-sm '.$claseEditar.'" rl="'.$id.'" title="Editar" type="button">✏️</button>
                 <button class="btn btn-outline-danger btn-sm '.$claseEliminar.'" rl="'.$id.'" title="Eliminar" type="button">❌</button>
-                <button class="btn btn-outline-success btn-sm '.$clase_compra.'" rl="'.$id.'" title="Agregar una compa" type="button">🛒</button>
                 </div>';
+                //Delete la clase compra 
+                /*
+                <button class="btn btn-outline-success btn-sm '.$clase_compra.'" rl="'.$id.'" title="Agregar una compa" type="button">🛒</button>                
+                */
             }
             case 4:{
                 

@@ -45,13 +45,13 @@
             $solicita_insert = $this->insert($query, $valores);
             return $solicita_insert;
         }
-        public function modelo_listar_venta_producto(){
-            $query = "SELECT * FROM vista_datos_venta WHERE tipo_venta=1 AND estado_venta = 1";
+        public function modelo_listar_venta_producto($tipo = 1){
+            $query = "SELECT * FROM vista_datos_venta WHERE ESTADO_VENTA = $tipo AND tipo_venta=1";
             $solicita_listado = $this->select_all($query);
             return $solicita_listado;
         }
-        public function modelo_listar_venta_mayor(){
-            $query = "SELECT * FROM vista_datos_venta WHERE tipo_venta=0 AND estado_venta = 1";
+        public function modelo_listar_venta_mayor($tipo = 0){
+            $query = "SELECT * FROM vista_datos_venta WHERE tipo_venta=$tipo AND estado_venta = 1";
             $solicita_listado = $this->select_all($query);
             return $solicita_listado;
         }
@@ -86,19 +86,24 @@
             return $solicita_busqueda;
         }
         public function lista_ventas_realizadas(){
-            $query = "SELECT * FROM vista_datos_venta WHERE estado_venta = 1";
+            $query = "SELECT * FROM vista_datos_venta WHERE ESTADO_VENTA = 1";
             $solicita_busqueda = $this->select_all($query);
             return $solicita_busqueda;
         }
         public function ventas_realizadas_por_vendedor($nombre_usuario){
-            $query = "SELECT FECHA_VENTA,ID_VENTA,TIPO_VENTA,TOTAL_PAGADO
-            FROM vista_datos_venta WHERE ESTADO_VENTA!=0 AND NOMBRE_CAJERO='$nombre_usuario' AND YEAR(FECHA_VENTA)=YEAR(GETDATE())
-						ORDER BY FECHA_VENTA DESC";
+            if(VERSION_BD == "MySQL"){
+                $query = "SELECT FECHA_VENTA,ID_VENTA,TIPO_VENTA,TOTAL_PAGADO FROM vista_datos_venta WHERE ESTADO_VENTA!=0 AND NOMBRE_CAJERO='$nombre_usuario' AND YEAR(FECHA_VENTA)=YEAR(CURDATE())
+                        ORDER BY FECHA_VENTA DESC";
+            }else{
+                $query = "SELECT FECHA_VENTA,ID_VENTA,TIPO_VENTA,TOTAL_PAGADO
+                FROM vista_datos_venta WHERE ESTADO_VENTA!=0 AND NOMBRE_CAJERO='$nombre_usuario' AND YEAR(FECHA_VENTA)=YEAR(GETDATE())
+                            ORDER BY FECHA_VENTA DESC"; 
+            }
             $solicita_busqueda = $this->select_all($query);
             return $solicita_busqueda;
         }
         public function lista_ventas_realizadas_eliminadas(){
-            $query = "SELECT * FROM vista_datos_venta WHERE estado_venta = 0";
+            $query = "SELECT * FROM vista_datos_venta WHERE ESTADO_VENTA = 0";
             $solicita_busqueda = $this->select_all($query);
             return $solicita_busqueda;
         }

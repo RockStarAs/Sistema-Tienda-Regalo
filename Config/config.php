@@ -6,7 +6,7 @@
     const METHOD = 'aes-256-cbc';
     date_default_timezone_set('America/Lima');
     //PARA SQL SERVER
-    /*
+    /* 
     const DB_USER = "abel";
     const DB_PASSWORD = "cien100%";
     const DB_NAME = "bd_tienda";

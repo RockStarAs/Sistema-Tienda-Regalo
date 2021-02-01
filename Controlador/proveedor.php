@@ -12,7 +12,11 @@
             $data["nombre_pagina"] = "Sistema Tienda :: Proveedores";
             $data["funciones_js"] = "funciones_proveedor.js";
             //$data = $this->modelo->modelo_inserta_usuario("75541205","Juan","Ortelli","caja2","caja2","CAJERO");
-            $this->vistas->obten_vista($this,"gestionar_proveedores",$data);
+            if($_SESSION['rol_usuario'] == 'ADMINISTRADOR'){
+                $this->vistas->obten_vista($this,"gestionar_proveedores",$data);  
+            }else{
+                $this->vistas->obten_vista($this,"errores/sin_autorizacion",$data);    
+            }
         }
         public function insertar_proveedor(){
             $ruc_dni = limpiar_str($_POST['txt_dni_ruc']);

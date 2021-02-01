@@ -44,20 +44,32 @@
             $valores = array($fecha,$id_usuario);
             $this->update($query,$valores);
         }
-        public function modelo_actualiza_usuario($dni_trabajador,$nombre_trabajador,$apellidos_trabajador,$nombre_usuario,$password_usuario,$rol_usuario,$estado_usuario,$id_usuario){
+        public function modelo_actualiza_usuario($dni_trabajador,$nombre_trabajador,$apellidos_trabajador,$nombre_usuario,$password_usuario="" ,$rol_usuario,$estado_usuario,$id_usuario){
             //No actualizaremos la fecha de creación nunca, la última conexión se hará en una función aparte
+            if($password_usuario == ''){
             $query = "UPDATE usuario SET
                     dni_trabajador = ?,
                     nombre_trabajador = ?,
                     apellidos_trabajador = ?,
                     nombre_usuario = ?,
-                    password_usuario = ?,
                     rol_usuario = ?,
-                    estado_usuario = ?
+                    estado_usuario = $estado_usuario
                     WHERE id_usuario = ?
                     ";
-            $valores = array($dni_trabajador,$nombre_trabajador,$apellidos_trabajador,$nombre_usuario,$password_usuario,$rol_usuario,$estado_usuario,$id_usuario);
-            
+                $valores = array($dni_trabajador,$nombre_trabajador,$apellidos_trabajador,$nombre_usuario,$rol_usuario,$id_usuario);
+            }else{
+                $query = "UPDATE usuario SET
+                dni_trabajador = ?,
+                nombre_trabajador = ?,
+                apellidos_trabajador = ?,
+                nombre_usuario = ?,
+                password_usuario = ?,
+                rol_usuario = ?,
+                estado_usuario = $estado_usuario
+                WHERE id_usuario = ?
+                ";
+                $valores = array($dni_trabajador,$nombre_trabajador,$apellidos_trabajador,$nombre_usuario,$password_usuario,$rol_usuario,$id_usuario);
+            }
             $solicita_update = $this->update($query,$valores);
             return $solicita_update;
         }
