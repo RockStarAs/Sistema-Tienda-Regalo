@@ -78,13 +78,14 @@
                             <i class="icon fa fa-circle-o"></i> Ver ventas
                         </a>
                     </li>
-
+                    <?php if($bandera){ ?>
                     <li>
                         <a class="treeview-item" href="<?= base_url();?>venta/reporte_ventas" target=""
                             rel="noopener">
                             <i class="icon fa fa-circle-o"></i> Reporte ventas
                         </a>
                     </li>
+                    <?php } ?>
                 </ul>
             </li>
             <li><a class="app-menu__item" href="<?= base_url();?>cliente/gestionar_clientes"><i
