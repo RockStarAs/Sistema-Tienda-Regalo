@@ -15,6 +15,11 @@
             $query = "SELECT * FROM proveedor WHERE ruc_dni = '$ruc_dni'";
             $solicita_listado = $this->select_all($query);
             if(empty($solicita_listado)){
+                if(VERSION_BD == "MySQL"){
+                    $query = "INSERT INTO proveedor(ruc_dni,nombre_proveedor,telefono_contacto,email_proveedor,ciudad_ubicacion,direccion_ubicacion,estado_proveedor) values ('$ruc_dni','$nombre_proveedor','$telefono_contacto','$email_proveedor','$ciudad_ubicacion','$direccion_ubicacion',1)";
+                    $solicita_insert = $this->agregar_sin_valores($query);
+                    
+                }else{
                 $query = "INSERT INTO proveedor(
                     ruc_dni,
                     nombre_proveedor,
@@ -27,7 +32,7 @@
                     values (?,?,?,?,?,?,?)";
                 $valores = array($ruc_dni,$nombre_proveedor,$telefono_contacto,$email_proveedor,$ciudad_ubicacion,$direccion_ubicacion,1);
                 $solicita_insert = $this->insert($query,$valores);
-
+                }
                 $return = 1;
             }else{
                 $return = "exist";

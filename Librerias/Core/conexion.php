@@ -3,7 +3,8 @@
         private $connect;
 
         public function __construct(){
-            $cadena_conexion = "sqlsrv:server=".DB_HOST.";database=".DB_NAME;
+            //$cadena_conexion = "sqlsrv:server=".DB_HOST.";database=".DB_NAME;
+            $cadena_conexion = "mysql:host=".DB_HOST.";charset=UTF8;dbname=".DB_NAME.";";
             try{
                 $this->connect = new PDO($cadena_conexion,DB_USER,DB_PASSWORD);
                 $this->connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);;

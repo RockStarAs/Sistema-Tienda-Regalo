@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded',function(){
             { "data": "opciones"}
         ],
         "responsive":true,
-        "bDestroy":true,
+        "bDestroy":true, 
         "iDisplayLength":50,
         "order":[[0,"desc"]],
         drawCallback:function(){
@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded',function(){
         var nombre_usuario_act = document.querySelector('#txt_nombre_usuario_act').value;
         var password_usuario_act = document.querySelector('#txt_contraseña_act').value;
         var rol_usuario_act = document.querySelector('#select_tipo_act').value;
-        if(dni_trabajador_act == '' || nombre_trabajador_act == '' || apellidos_trabajador_act == '' || nombre_usuario_act == '' || password_usuario_act =='' || rol_usuario_act == ''){
+        if(dni_trabajador_act == '' || nombre_trabajador_act == '' || apellidos_trabajador_act == '' || nombre_usuario_act == '' ||  rol_usuario_act == ''){
             swal("Atención","Todos los campos son obligatorios.","error");
             return false;
         }
@@ -161,7 +161,7 @@ function fnc_editar_usuario(){
                         document.querySelector("#txt_nombre_act").value = obj_data.data.nombre_trabajador;
                         document.querySelector("#txt_apellido_act").value = obj_data.data.apellidos_trabajador;
                         document.querySelector("#txt_nombre_usuario_act").value = obj_data.data.nombre_usuario;
-                        document.querySelector("#txt_contraseña_act").value = obj_data.data.password_usuario;
+                        //document.querySelector("#txt_contraseña_act").value = obj_data.data.password_usuario;
                         
                         if(obj_data.data.rol_usuario == 'CAJERO'){
                             var opcion_seleccionada = '<option selected value="CAJERO" class="no_listado" >CAJERO</option>';

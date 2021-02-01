@@ -22,17 +22,17 @@
         }
 
         public function modelo_listar_productos(){
-            $query = "SELECT * FROM producto WHERE estado_producto!=0";
+            $query = "SELECT * FROM producto WHERE estado_producto != 0";
             $solicita_listado = $this->select_all($query);
             return $solicita_listado;
         }
         public function modelo_listar_productos_stock_mayor(){
-            $query = "SELECT * FROM producto WHERE estado_producto!=0 AND stock_producto > 0";
+            $query = "SELECT * FROM producto WHERE estado_producto != 0 AND stock_producto > 0";
             $solicita_listado = $this->select_all($query);
             return $solicita_listado; 
         }
         public function modelo_listar_productos_mayor(){
-            $query = "SELECT * FROM producto WHERE estado_producto!=0 AND precio_venta_por_mayor!=0 AND stock_producto > 0";
+            $query = "SELECT * FROM producto WHERE estado_producto != 0 AND precio_venta_por_mayor != 0 AND stock_producto > 0";
             $solicita_listado = $this->select_all($query);
             return $solicita_listado;
         }
@@ -43,8 +43,14 @@
         }
 
         public function modelo_nombre_Categorias($id_categoria){
-            $query="SELECT TOP 1 categoria_producto.nombre_categoria FROM producto INNER JOIN categoria_producto
-            on producto.id_categoria=categoria_producto.id_categoria WHERE producto.id_categoria=$id_categoria";
+            if(VERSION_BD == "MySQL"){
+                $query="SELECT categoria_producto.nombre_categoria FROM producto INNER JOIN categoria_producto
+                on producto.id_categoria=categoria_producto.id_categoria WHERE producto.id_categoria=$id_categoria
+                LIMIT 1";    
+            }else{
+                $query="SELECT TOP 1 categoria_producto.nombre_categoria FROM producto INNER JOIN categoria_producto
+                on producto.id_categoria=categoria_producto.id_categoria WHERE producto.id_categoria=$id_categoria";    
+            }
             $solicita_busqueda = $this->select_one($query);
             return $solicita_busqueda;
         }
@@ -55,8 +61,8 @@
         }
         public function modelo_eliminar_producto($id_producto){
             $return ="";
-            $query = "UPDATE producto SET estado_producto=? WHERE id_producto=?";
-            $valores = array(0,$id_producto);
+            $query = "UPDATE producto SET estado_producto=0 WHERE id_producto=?";
+            $valores = array($id_producto);
             $return = $this->update($query,$valores);
             if ($return) {
                 $return='ok';

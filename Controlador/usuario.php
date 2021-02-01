@@ -66,9 +66,16 @@
             $apellidos_trabajador = limpiar_str($_POST['txt_apellido_act']);
             $nombre_usuario = limpiar_str($_POST['txt_nombre_usuario_act']);
             $password_usuario = $_POST['txt_contraseña_act'];
+            $bandera = $password_usuario == '' ? true:false;
             $rol_usuario = limpiar_str($_POST['select_tipo_act']);
-            $solicitud_modificar = $this->modelo->modelo_actualiza_usuario($dni_usuario,$nombre_trabajador,$apellidos_trabajador,$nombre_usuario,$password_usuario,$rol_usuario,1,$id_usuario);
 
+            if($bandera){
+                $password_usuario = '';
+                $solicitud_modificar = $this->modelo->modelo_actualiza_usuario($dni_usuario,$nombre_trabajador,$apellidos_trabajador,$nombre_usuario,$password_usuario,$rol_usuario,1,$id_usuario);
+            }else{
+                $password_usuario = hash('sha256',$password_usuario);
+                $solicitud_modificar = $this->modelo->modelo_actualiza_usuario($dni_usuario,$nombre_trabajador,$apellidos_trabajador,$nombre_usuario,$password_usuario,$rol_usuario,1,$id_usuario);
+            }
             $array_respuesta = array('status' => true, 'msg' => "Datos actualizados correctamente.");
             
             echo json_encode($array_respuesta,JSON_UNESCAPED_UNICODE);

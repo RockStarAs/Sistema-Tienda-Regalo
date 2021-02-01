@@ -32,7 +32,7 @@
                 </div>
                 <div class="form-group">
                   <label class="control-label">Contraseña:</label>
-                  <input class="form-control" id="txt_contraseña_act" name="txt_contraseña_act" type="password" placeholder="Ingrese contraseña" required="">
+                  <input class="form-control" id="txt_contraseña_act" name="txt_contraseña_act" type="password" placeholder="Ingrese contraseña" >
                 </div>
                 <div class="form-group">
                     <label for="select_tipo">Rol de Ususario</label>

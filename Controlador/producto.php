@@ -64,8 +64,15 @@ class Producto extends Controladores
                 $opcion = 1;
             } else {
                 //Modificar
-                $solicitud_insertar = $this->modelo->modelo_actualizar_producto($id_producto, $id_categoria, $nombre_producto,$precio_unitario_venta,$precio_por_mayor, $stock_producto, $precio_compra, $descripcion_producto, $imgProducto, $codigo_barras);
-                $opcion = 2;
+                if($_SESSION['rol_usuario'] == 'ADMINISTRADOR'){
+                    $solicitud_insertar = $this->modelo->modelo_actualizar_producto($id_producto, $id_categoria, $nombre_producto,$precio_unitario_venta,$precio_por_mayor, $stock_producto, $precio_compra, $descripcion_producto, $imgProducto, $codigo_barras);
+                    $opcion = 2;    
+                
+                }else{
+                    $array_respuesta = array('status' => false, 'msg' => "Solo el administrador puede cambiar datos de los productos."); 
+                    echo json_encode($array_respuesta, JSON_UNESCAPED_UNICODE);
+                    die();
+                }
             }
             
             if ($solicitud_insertar > 0) {

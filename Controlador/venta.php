@@ -102,12 +102,9 @@ class Venta extends Controladores
     }
     public function listar_ventas_r($tipo)
     {
-        if ($tipo == 1) {
-            //AL POR MAYOR
-            $data = $this->modelo->modelo_listar_venta_mayor();
-        } else {
-            $data = $this->modelo->modelo_listar_venta_producto();
-        }
+        
+        $data = $tipo == 2 ? $data = $data = $this->modelo->modelo_listar_venta_producto():$this->modelo->modelo_listar_venta_mayor();
+
         for ($i = 0; $i < count($data); $i++) {
             $fecha = $data[$i]["FECHA_VENTA"];
             $fecha_venta = date_create("$fecha");
@@ -116,6 +113,11 @@ class Venta extends Controladores
             $data[$i]["TOTAL_PAGADO"] = SMONEY . formatea_moneda($data[$i]["TOTAL_PAGADO"]);
             $data[$i]["OPCIONES"] = mostrar_acciones($data[$i]["ID_VENTA"], "verVenta", "eliminarVenta", "verTicket", 4);
         }
+        echo json_encode($data,JSON_UNESCAPED_UNICODE);
+        die();
+    }
+    public function listar_ventaaa(){
+        $data = $this->modelo->modelo_listar_venta_producto();
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
         die();
     }
