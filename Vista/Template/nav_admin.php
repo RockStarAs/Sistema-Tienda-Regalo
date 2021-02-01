@@ -140,19 +140,19 @@
             </li>
             <li class="treeview">
                 <a class="app-menu__item" href="#" data-toggle="treeview">
-                    <i class="app-menu__icon fa fa-history"></i>
+                    <i class="app-menu__icon fa fa-bookmark"></i>
                     <span class="app-menu__label">Reportes</span>
                     <i class="treeview-indicator fa fa-angle-right"></i>
                 </a>
                 <ul class="treeview-menu">
                     <li>
-                        <a class="treeview-item" href="<?= base_url();?>venta/ventas_realizadas" target="" rel="noopener">
-                            <i class="icon fa fa-circle-o"></i> Lista de ventas realizadas
+                        <a class="treeview-item" href="<?= base_url();?>reporte/ver_ventas_dia" target="" rel="noopener">
+                            <i class="icon fa fa-circle-o"></i> Ver ventas del día 
                         </a>
                     </li>
                     <li>
                         <a class="treeview-item" href="<?= base_url();?>venta/ventas_eliminadas" target="" rel="noopener">
-                            <i class="icon fa fa-circle-o"></i> Lista de ventas eliminadas
+                            <i class="icon fa fa-circle-o"></i> Reporte 2
                         </a>
                     </li>
                 </ul>
