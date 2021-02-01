@@ -13,6 +13,11 @@
     <script type="text/javascript" src="<?= media();?>js/plugins/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="<?= media();?>js/plugins/dataTables.bootstrap.min.js"></script>
     <script type="text/javascript" src="<?= media();?>js/plugins/bootstrap-select.min.js"></script>
+    <script type="text/javascript" src="<?= media();?>js/plugins/moment.min.js"></script>
+    <script type="text/javascript" src="<?= media();?>js/plugins/daterangepicker.js"></script>
+    <script type="text/javascript" src="<?= media();?>js/plugins/chart.js"></script>
+    <script type="text/javascript" src="<?= media();?>js/plugins/raphael.min.js"></script>
+    <script type="text/javascript" src="<?= media();?>js/plugins/morris.min.js"></script>
     <!-- Page specific javascripts-->
     <script src="<?= media();?>js/<?= $data["funciones_js"];?>"></script>
     
