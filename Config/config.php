@@ -1,5 +1,5 @@
 <?php 
-    const URL = 'http://localhost:8/sistema-tienda-regalo/';
+    const URL = 'https://tiendaaa.herokuapp.com/';
     const LIBS = 'Librerias/';
     const VIEWS = 'Vista/';
     const CLAVE='SNDAIDNSAINDSHASRDGCGFCHHHGVGCF';
@@ -20,6 +20,6 @@
 */
     const SPD=".";
     const SPM=",";
-    const VERSION_BD = "MySQL";
+    const VERSION_BD = "SQLserver";
     const SMONEY="S/. ";
 ?>
