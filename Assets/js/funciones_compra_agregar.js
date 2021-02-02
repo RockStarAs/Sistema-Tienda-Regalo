@@ -25,7 +25,7 @@ function fnc_listar_proveedor() {
     }
   };
 }
-function abrir_modal() {
+function abrir_modal_compra() {
   $("#modal_agregar_detalle_compra").modal("show");
   carga_modal_datos();
 }

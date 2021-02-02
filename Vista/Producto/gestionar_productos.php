@@ -20,7 +20,7 @@
             <div class="tile">
                 <div class="tile-body">
                     <div class="table-responsive">
-                        <table class="table table-hover table-bordered" id="tabla_productos">
+                        <table class="table table-hover table-bordered" id="tabla_productos1">
                             <thead>
                                 <tr>
                                     <th>ID</th>
