@@ -12,6 +12,7 @@
             $data["titulo_pagina"] = "Agregar una compra";
             $data["nombre_pagina"] = "Sistema Tienda :: Compras";
             $data["funciones_js"] = "funciones_compra_agregar.js";
+            
             //$data = $this->modelo->modelo_inserta_usuario("75541205","Juan","Ortelli","caja2","caja2","CAJERO");
             
             $this->vistas->obten_vista($this,"agregar_compra",$data); 

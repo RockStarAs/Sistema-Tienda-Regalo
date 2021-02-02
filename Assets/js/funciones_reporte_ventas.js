@@ -12,26 +12,25 @@ document.addEventListener("DOMContentLoaded", function () {
     request.onreadystatechange = function () {
         if (request.readyState == 4 && request.status == 200) {
             var obj_json = JSON.parse(request.responseText);
-            var line = new Morris.Line({
-                element          : 'line-chart-ventas',
+            var bar = new Morris.Bar({
+                element          : 'bar-chart2',
                 resize           : true,
                 data             : obj_json,
                 xkey             : 'y',
                 ykeys            : ['ventas'],
                 labels           : ['ventas'],
-                lineColors       : ['#efefef'],
+                barColors        : ['#efefef'],
                 lineWidth        : 2,
                 hideHover        : 'auto',
                 gridTextColor    : '#fff',
-                gridStrokeWidth  : 0.4,
+                gridStrokeWidth  : 0.8,
                 pointSize        : 4,
-                pointStrokeColors: ['#efefef'],
                 gridLineColor    : '#efefef',
                 gridTextFamily   : 'Open Sans',
                 preUnits         : 'S/.',
                 gridTextSize     : 10
               });
-             line.setData(obj_json);
+             bar.setData(obj_json);
         }
     };
 });

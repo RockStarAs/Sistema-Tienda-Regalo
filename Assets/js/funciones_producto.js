@@ -1,6 +1,6 @@
-var tabla_productos;
+var tabla_productos1;
 document.addEventListener("DOMContentLoaded", function () {
-  tabla_productos = $("#tabla_productos").DataTable({
+  tabla_productos1 = $("#tabla_productos1").DataTable({
     aProcessing: true,
     aServerSide: true,
     language: {
@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", function () {
           $("#modal_form_agrega_producto").modal("hide");
           form_productos.reset();
           swal("Añadido", json.msg, "success");
-          tabla_productos.ajax.reload(function () {
+          tabla_productos1.ajax.reload(function () {
             //fntListarCategorias();
           });
         } else {
@@ -110,7 +110,9 @@ document.addEventListener("DOMContentLoaded", function () {
   
 });
 
-$("#tabla_productos").DataTable();
+if (document.querySelector("#tabla_productos1")) {
+  $("#tabla_productos1").DataTable();
+}
 window.addEventListener(
   "load",
   function () {
@@ -264,6 +266,9 @@ function remove_foto() {
   }
 }
 function abrir_modal() {
+  if (document.querySelector("#img")) {
+    document.querySelector("#img").remove();
+  }
   if (document.querySelector("#id_producto")) {
     $("#id_producto").remove();
     $("#foto_actual").remove();
@@ -313,7 +318,7 @@ function ftnEliminarProducto() {
                 console.log(obj_json);
                 if (obj_json.status) {
                   swal("Eliminar!", obj_json.msg, "success");
-                  tabla_productos.ajax.reload(function () {
+                  tabla_productos1.ajax.reload(function () {
                     setTimeout(() => {
                       
                     }, 500);

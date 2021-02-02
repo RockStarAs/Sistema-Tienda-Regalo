@@ -126,6 +126,7 @@ function carga_modal_datos() {
       url: " " + base_url + "producto/listar_productos_venta",
       dataSrc: "",
     },
+    bAutoWidth: false,
     columns: [
       { data: "opciones" },
       { data: "id_producto" },

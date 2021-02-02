@@ -1,5 +1,6 @@
 <?php header_admin($data);
     obtener_modal("modal_agregar_detalle_compra",$data);
+    obtener_modal('modal_am_producto',$data);
 ?>
 
 <main class="app-content">
@@ -44,8 +45,8 @@
                             <label class="control-label">Estado de compra</label>
                             <select class="form-control" data-live-search="true" id="estado_compra" name="estado_compra" name="estado_compra"
                                 required>
-                                <option value="1" selected>Recibida</option>
-                                <option value="0">Por recibir</option>
+                                <option value="1">Recibida</option>
+                                <option value="0" selected>Por recibir</option>
                             </select>
                         </div>
                     </div>
@@ -64,11 +65,19 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-6">
+                        <div class="col-sm-3">
                             <div class="form-group">
                                 <a data-toggle="modal" href="#myModal">
-                                    <button class="btn btn-info" type="button" onclick="abrir_modal();"><i
-                                            class="fa fa-fw fa-lg fa-plus-square"></i>Añadir un producto</button>
+                                    <button class="btn btn-info" type="button" onclick="abrir_modal_compra();"><i
+                                            class="fa fa-fw fa-lg fa-plus-square"></i>Añadir producto existente</button>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <a data-toggle="modal" href="#myModal">
+                                    <button class="btn btn-warning" type="button" onclick="abrir_modal();"><i
+                                            class="fa fa-fw fa-lg fa-plus-square"></i>Añadir nuevo producto</button>
                                 </a>
                             </div>
                         </div>
@@ -115,5 +124,5 @@
         </div>
     </div>
 </main>
-
+<script src="<?= media();?>js/funciones_producto.js"></script>
 <?php footer_admin($data); ?>
