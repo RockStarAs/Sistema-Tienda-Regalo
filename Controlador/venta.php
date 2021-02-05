@@ -144,8 +144,12 @@ class Venta extends Controladores
             $descuento = $_POST["descuento_venta"];
             //public function modelo_inserta_venta_mayor($id_usuario,$id_usuario_atiende,$dni_cliente,$fecha_venta,$tipo_venta=0)
             /*La function modelo_inserta_venta_mayor modificada para que el tipo de venta por defecto sea 0 la cuál hace referencia a una venta al por mayor, para la venta al por meno el tipo_venta = 1 --> en la base de datos este también se encuentra por defecto */
-
-            $solicitud_agregar_venta = $this->modelo->modelo_inserta_venta_mayor($id_usuario_caja, $id_usuario_atiende, $dni_cliente, $fecha_venta, 1);
+            $tipo_pago = $_POST['tipo_pago'];
+            $campo_extra = "";
+            if($tipo_pago != 2 ){
+                $campo_extra = $_POST['monto_o_id'];
+            }
+            $solicitud_agregar_venta = $this->modelo->modelo_inserta_venta_mayor($id_usuario_caja, $id_usuario_atiende, $dni_cliente, $fecha_venta, 1,$tipo_pago,$campo_extra);
 
             if ($solicitud_agregar_venta > 0) {
                 //El id se ha registrado
@@ -178,6 +182,11 @@ class Venta extends Controladores
             $fecha_venta = limpiar_str($_POST["fecha_venta"]);
             //Datos de venta asignados
             //Array de detalles pero están separados
+            $tipo_pago = $_POST['tipo_pago'];
+            $campo_extra = "";
+            if($tipo_pago != 2 ){
+                $campo_extra = $_POST['monto_o_id'];
+            }
             $id_productos = $_POST["idarticulo"];
             $cantidad_productos = $_POST["cantidad"];
             $precio_venta_productos = $_POST["precio_venta"];
@@ -185,7 +194,7 @@ class Venta extends Controladores
             //bandera
             $flag = false;
 
-            $solicitud_agregar_venta = $this->modelo->modelo_inserta_venta_mayor($id_usuario_caja, $id_usuario_atiende, $dni_cliente, $fecha_venta);
+            $solicitud_agregar_venta = $this->modelo->modelo_inserta_venta_mayor($id_usuario_caja, $id_usuario_atiende, $dni_cliente, $fecha_venta,0,$tipo_pago,$campo_extra);
             
             if ($solicitud_agregar_venta > 0) {
                 //El id se ha registrado
@@ -226,6 +235,7 @@ class Venta extends Controladores
             $data["detalles_venta"] = $this->modelo->modelo_detalles_venta($id_venta);
             $data["status"] = true;
         }
+        //echo json_encode($data,JSON_UNESCAPED_UNICODE);
         return $data;
         die();
     }

@@ -392,3 +392,43 @@ form_clientes.onsubmit = function (e) {
     }
   };
 };
+$('#pago_efectivo').click(function() {
+  if($('#pago_efectivo').is(':checked')) {
+    //console.log("PAGO_EFECTIVO");
+    //Cargar el input que apaarecerá
+    $('#lbl_pagar_con').text("PAGO EN EFECTIVO (INGRESE EL MONTO CON EL QUE CANCELAN:)");
+    $("#id_voucher_o_total_pago").remove();
+    $('#pagar_con').append('<input onchange="actualiza_vuelto()" type="number" name="monto_o_id" id="id_voucher_o_total_pago" step ="0.1" required>');
+    $('#div_vuelto').append('<label class="control-label col-md-12" id="lbl_devolucion">DEVOLUCIÓN o VUELTO:</label>'+
+    '<div class="col-md-12" id="devolucion">'+
+            '<input type="number" name="vuelto" id="vuelto"  disabled>'+
+            '</div>'+
+    '</div>');
+  }
+});
+function actualiza_vuelto(){
+  var total = $('#total_venta').val();
+  total = total == "" ? 0 : total;
+  var pago_con = $('#id_voucher_o_total_pago').val();
+  var vuelto = pago_con - total;
+  $('#vuelto').val(vuelto);
+}
+$('#pago_tarjeta').click(function() {
+  if($('#pago_tarjeta').is(':checked')){
+    //console.log("PAGO_TAJETA");
+    $('#lbl_pagar_con').text("PAGO CON TARJETA (INGRESE EL ID DEL VOUCHER GENERADO)");
+    $("#id_voucher_o_total_pago").remove();
+    $("#lbl_devolucion").remove();
+    $("#vuelto").remove();
+    $('#pagar_con').append('<input type="text" id="id_voucher_o_total_pago" name="monto_o_id" required>');
+  }
+});
+$('#pago_yape').click(function() {
+  if($('#pago_yape').is(':checked')) { 
+    //console.log("PAGO_YAPE");
+    $('#lbl_pagar_con').text("PAGO CON YAPE (POR FAVOR, VERFIQUE EN SU APP RECIBIR EL PAGO)");
+    $("#id_voucher_o_total_pago").remove();
+    $("#lbl_devolucion").remove();
+    $("#vuelto").remove();
+  }
+});

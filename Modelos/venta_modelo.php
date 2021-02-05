@@ -17,12 +17,20 @@
             $solicita_insert = $this->insert($query,$valores);
             return $solicita_insert;
         }
-        public function modelo_inserta_venta_mayor($id_usuario,$id_usuario_atiende,$dni_cliente,$fecha_venta,$tipo_venta=0)
+        public function modelo_inserta_venta_mayor($id_usuario,$id_usuario_atiende,$dni_cliente,$fecha_venta,$tipo_venta=0,$tipo_pago,$campo_extra)
         {
             $fecha_venta = date("Y-m-d H:i:s");
             if(VERSION_BD == "MySQL"){
+                if($tipo_pago == 0 ){
+                    $query ="INSERT INTO venta(id_usuario,id_usuario_atiende,fecha_venta,dni_cliente,tipo_venta,tipo_pago,paga_con) VALUES ('$id_usuario','$id_usuario_atiende','$fecha_venta','$dni_cliente',$tipo_venta,$tipo_pago,$campo_extra)";
+                }else{
+                    if($tipo_pago == 1 ){
+                        $query ="INSERT INTO venta(id_usuario,id_usuario_atiende,fecha_venta,dni_cliente,tipo_venta,tipo_pago,id_voucher_tarjeta) VALUES ('$id_usuario','$id_usuario_atiende','$fecha_venta','$dni_cliente',$tipo_venta,$tipo_pago,$campo_extra)";
+                    }else{
+                        $query ="INSERT INTO venta(id_usuario,id_usuario_atiende,fecha_venta,dni_cliente,tipo_venta,tipo_pago) VALUES ('$id_usuario','$id_usuario_atiende','$fecha_venta','$dni_cliente',$tipo_venta,$tipo_pago)";
+                    }
+                }
                 //EN MYSQL No deja agregar directamente porque dice que hay un erro de string con el bit D: 
-                $query ="INSERT INTO venta(id_usuario,id_usuario_atiende,fecha_venta,dni_cliente,tipo_venta) VALUES ('$id_usuario','$id_usuario_atiende','$fecha_venta','$dni_cliente',$tipo_venta)";
                 $valores = array();   
             }else{
             $query = "INSERT INTO venta(

@@ -9,37 +9,52 @@
         </div>
         <ul class="app-breadcrumb breadcrumb">
             <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-            <li class="breadcrumb-item"><a
-                    href="<?= base_url();?>venta/listar_ventas_general">Ventas Realizadas</a></li>
+            <li class="breadcrumb-item"><a href="<?= base_url();?>venta/listar_ventas_general">Ventas Realizadas</a>
+            </li>
         </ul>
-        
+
     </div>
     <?php 
         if ($data['status'] == false ){
             ?>
-            <div class="card mb-3 text-white bg-danger">
-                <div class="card-body">
-                  <blockquote class="card-blockquote">
-                    <p><?= $data["msg"]; ?></p>
-                    
-                  </blockquote>
-                </div>
-              </div>
+    <div class="card mb-3 text-white bg-danger">
+        <div class="card-body">
+            <blockquote class="card-blockquote">
+                <p><?= $data["msg"]; ?></p>
 
-              <div class="bs-component">
-              <div class="alert alert-dismissible alert-danger">
-              <label for="">TOTAL GENERADO EN VENTAS HOY ES  S/. <?= $data['TOTAL_PAGADO'] ?></label>
-              </div>
-            </div>
-            <?php
+            </blockquote>
+        </div>
+    </div>
+
+    <div class="bs-component">
+        <div class="alert alert-dismissible alert-danger">
+            <label for="">TOTAL GENERADO EN VENTAS HOY ES S/. <?= $data['TOTAL_PAGADO'] ?></label>
+        </div>
+    </div>
+    <?php
         }else{
     ?>
     <div class="bs-component">
-              <div class="alert alert-dismissible alert-success">
-              <label for="">TOTAL GENERADO EN VENTAS HOY ES  S/. <?= $data['TOTAL_PAGADO']['TOTAL_VENTA'] ?></label>
-              </div>
-            </div>
+        <div class="alert alert-dismissible alert-success">
+            <label for="">TOTAL GENERADO EN VENTAS HOY ES S/. <?= $data['TOTAL_PAGADO']['TOTAL_VENTA'] ?></label>
+        </div>
+    </div>
     <?php  } ?>
+    <div class="bs-component">
+        <div class="alert alert-dismissible alert-primary">
+            <label for="">INGRESOS TOTALES POR PAGO EN EFECTIVO SON S/. <?= $data['TOTAL_PAGADO_EFECTIVO'] ?></label>
+        </div>
+    </div>
+    <div class="bs-component">
+        <div class="alert alert-dismissible alert-warning">
+            <label for="">INGRESOS TOTALES POR PAGO CON TARJETA SON S/. <?= $data['TOTAL_PAGADO_TARJETA'] ?></label>
+        </div>
+    </div>
+    <div class="bs-component">
+        <div class="alert alert-dismissible alert-success">
+            <label for="">INGRESOS TOTALES POR PAGOS MEDIANTE YAPE SON S/. <?= $data['TOTAL_PAGADO_YAPE'] ?></label>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-12">
             <div class="tile">
