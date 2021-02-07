@@ -14,9 +14,33 @@
             $data['DATOS_VENTA'] = $this->modelo->modelo_lista_ventas_dia($anio,$mes,$day);
             if(count($data['DATOS_VENTA']) == 0){
                 $data = array("status" => false, "msg" => "Tal parece que aún no se ha hecho una venta el día de hoy ($day-$mes-$anio)","TOTAL_PAGADO" => 0.0);
-            }else{
+            }else{ 
                 $data['TOTAL_PAGADO'] = $this->modelo->modelo_busca_ventas_dia($anio,$mes,$day);
                 $data['status'] = true;
+                
+                $array = $this->modelo->modelo_lista_ventas_dia($anio,$mes,$day);
+                //echo json_encode($array,JSON_UNESCAPED_UNICODE);
+                //die();
+                $total_efectivo = 0;
+                $total_tarjeta = 0;
+                $total_yape = 0;
+                
+                for ($i=0; $i < count($array); $i++) { 
+                    switch($array[$i]['TIPO_PAGO']){
+                        case 0:
+                            $total_efectivo += $array[$i]['TOTAL_PAGADO'];
+                        break;
+                        case 1:
+                            $total_tarjeta += $array[$i]['TOTAL_PAGADO']; 
+                        break;
+                        case 2:
+                            $total_yape += $array[$i]['TOTAL_PAGADO'];
+                        break;
+                    }    
+                }
+                $data['TOTAL_PAGADO_EFECTIVO'] = $total_efectivo;
+                $data['TOTAL_PAGADO_TARJETA'] = $total_tarjeta;
+                $data['TOTAL_PAGADO_YAPE'] = $total_yape;
             }
             $data["titulo_pagina"] = "Ver ventas del día";
             $data["nombre_pagina"] = "Sistema Tienda :: Reportes";

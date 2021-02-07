@@ -17,7 +17,8 @@ function Header_2($fecha_venta,$nombre_cliente,$id_venta,$nombre_cajero,$tipo_ve
     $this->Ln(2);
     $this->SetFont('Helvetica','',10);
     $this->Cell(60,4,'PROFORMA VENTA',0,1,'C');
-    $this->Cell(60,4,date_format($fecha_venta2,"d/m/Y H:i A"),0,1,'C');
+    $this->Cell(60,4,'FECHA: '.date_format($fecha_venta2,"d/m/Y"),0,1,'C');
+    $this->Cell(60,4,'HORA: '.date_format($fecha_venta2,"H:m A"),0,1,'C');
     $this->Ln(2);
     $this->SetFont('Helvetica','',8);
     $this->Cell(60,4,"Cliente: ". utf8_decode($nombre_cliente),0,1,'C');
@@ -26,11 +27,11 @@ function Header_2($fecha_venta,$nombre_cliente,$id_venta,$nombre_cajero,$tipo_ve
     $this->Cell(60,4,"Tipo venta: $cadena_tipo_venta",0,1,'C');
     //$this->Cell(60,4,'alfredo@lacodigoteca.com',0,1,'C');
 }
-function CargarDatos($array_detalles_venta,$total_pagado,$estado_venta){
+function CargarDatos($array_detalles_venta,$total_pagado,$estado_venta,$tipo_pago,$id_voucher,$pago_con){
     // COLUMNAS
     $this->SetFont('Helvetica', 'B', 7);
     $this->Cell(5, 10, 'Cod.', 0);
-    $this->Cell(12, 10, 'Art.',0,0,'C');
+    //$this->Cell(12, 10, 'Art.',0,0,'C');
     $this->Cell(12, 10, 'Prec.',0,0,'C');
     $this->Cell(8, 10, 'Cant.',0,0,'R');
     $this->Cell(10, 10, 'Desc.',0,0,'R');
@@ -49,18 +50,19 @@ function CargarDatos($array_detalles_venta,$total_pagado,$estado_venta){
         $total = ($cantidad * $precio) - $descuento_aplicado;
         
         $total_a_pagar = $total_pagado;
-
+        $this->Cell(21,10,$nombre_producto,0,0,'L');
+        $this->Ln(4);
         $this->Cell(5, 10,$codigo_producto, 0);
-        $this->Cell(12, 10, utf8_decode(strtoupper(substr($nombre_producto, 0,7))),0,0,'C');
+        //$this->Cell(12, 10, utf8_decode(strtoupper(substr($nombre_producto, 0,7))),0,0,'C');
         $this->Cell(12, 10, "S/.".round($precio,2),0,0,'R');
         $this->Cell(8, 10, $cantidad,0,0,'C');
         $this->Cell(10, 10, "S/.".round($descuento_aplicado,2),0,0,'R');
         $this->Cell(12, 10, "S/.".round($total,2) ,0,0,'R');  
-        $this->Ln(3);
+        $this->Ln(4);
     }
     $this->Ln(8);
     $this->Cell(60,0,'','T');
-    $this->Carga_total(round($total_a_pagar,2),$estado_venta);
+    $this->Carga_total(round($total_a_pagar,2),$estado_venta,$tipo_pago,$id_voucher,$pago_con);
 }
 // Pie de página
 function Footer()
@@ -72,14 +74,35 @@ function Footer()
     // Número de página
     $this->Cell(0,10,'Pag. '.$this->PageNo().'/{nb}',0,0,'C');
 }
-function Carga_total($total_a_pagar,$estado_venta){
+function Carga_total($total_a_pagar,$estado_venta,$tipo_pago,$id_voucher,$pago_con){
 
 
     $this->setX(10);
     $this->Cell(5,10,"TOTAL A PAGAR: " );
     $this->setX(38);
     $this->Cell(5,10,"S/.".$total_a_pagar,0,0,"R");
-    
+    $this->Ln(6);
+    if($tipo_pago == 0){
+        $this->setX(10);
+        $this->Cell(5,10,"TIPO DE PAGO: PAGO EN EFECTIVO" );
+        $this->Ln(4);
+        $this->Cell(5,10,"PAGO CON S/. ".round($pago_con,2),0,0,"L");
+        $this->Ln(4);
+        $this->Cell(5,10,"CAMBIO O VUELTO: S/. ".round($pago_con - $total_a_pagar,2),0,0,"L");        
+    }else{
+        if($tipo_pago == 1){
+            $this->setX(10);
+            $this->Cell(5,10,"TIPO DE PAGO: PAGO CON TARJETA" );
+            $this->Ln(4);
+            $this->Cell(5,10,"ID DE VOUCHER GENERADO: ". $id_voucher,0,0,"L");
+            $this->Ln(4);
+        }else{
+            $this->setX(10);
+            $this->Cell(5,10,"TIPO DE PAGO: PAGADO POR YAPE" );
+            $this->Ln(4);
+            
+        }
+    }
     $this->setX(10);
     if($estado_venta == 0){
         $this->Cell(5,15+6,'ESTA VENTA FUE ELIMINADA');
@@ -100,7 +123,7 @@ function genera_pdf($id_venta){
             $pdf->AddPage();
             $pdf->Header_2($json['FECHA_VENTA'],$json['NOMBRE_CLIENTE'],$json['ID_VENTA'],$json['NOMBRE_CAJERO'],$json['TIPO_VENTA']);
              //HEADER
-            $pdf->CargarDatos($json['detalles_venta'],$json['TOTAL_PAGADO'],$json['ESTADO_VENTA']);
+            $pdf->CargarDatos($json['detalles_venta'],$json['TOTAL_PAGADO'],$json['ESTADO_VENTA'],$json['TIPO_PAGO'],$json['ID_VOUCHER'],$json['PAGO_CON']);
             $pdf->Output();    
         }else{
             echo "Error con el servidor";

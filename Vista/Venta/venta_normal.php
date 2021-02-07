@@ -7,12 +7,12 @@
     <div class="app-title">
         <div>
             <h1><i class="fa fa-archive"></i> <?= $data["nombre_pagina"];?></h1>
-            <p>Agregar venta</p>
+            <p>Agregar una venta normal</p>
         </div>
         <ul class="app-breadcrumb breadcrumb">
             <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-            <li class="breadcrumb-item"><a
-                    href="<?= base_url();?>venta/realizar_venta">Realice una venta</a></li>
+            <li class="breadcrumb-item"><a href="<?= base_url();?>venta/realizar_venta">Realice una venta normal</a>
+            </li>
         </ul>
     </div>
     <!--Aqui va el formulario -->
@@ -20,12 +20,12 @@
         <div class="col-md-12 col-sd-12">
             <div class="tile p-md-4">
                 <form id="form_venta_normal" class="frm" name="">
-                <div class="row">
+                    <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label class="control-label">Dni Cliente</label>
-                                <select class="form-control selectCliente" data-live-search="true" id="cliente_dni" name="cliente_dni"
-                                    onchange="mostar_nombre_cliente()">
+                                <select class="form-control selectCliente" data-live-search="true" id="cliente_dni"
+                                    name="cliente_dni" onchange="mostar_nombre_cliente()">
                                 </select>
                             </div>
                         </div>
@@ -39,13 +39,13 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label class="control-label">Cambiar a (Sin DNI): </label>
-                                <button type="button" class="btn btn-warning"
-                                onclick="fnc_cambia_gen()"><i class="fa fa-fw fa-lg fa-address-card"></i>Público General.</button>
+                                <button type="button" class="btn btn-warning" onclick="fnc_cambia_gen()"><i
+                                        class="fa fa-fw fa-lg fa-address-card"></i>Público General.</button>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                            <label class="control-label">Agregar nuevo Cliente: </label>
+                                <label class="control-label">Agregar nuevo Cliente: </label>
                                 <a data-toggle="modal" href="#myModal">
                                     <button class="btn btn-info" type="button" onclick="abrir_modal_cliente();"><i
                                             class="fa fa-fw fa-lg fa-plus-square"></i>Añadir cliente</button>
@@ -115,6 +115,42 @@
                                     </tbody>
                                 </table>
                             </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="control-label col-md-6">Elije una forma de pago:</label>
+                                <div class="col-md-9">
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input"  type="radio" id="pago_efectivo" name="tipo_pago" value="0" checked>Pago en efectivo
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="radio" id="pago_tarjeta" name="tipo_pago" value="1">Pago con tarjeta
+                                        </label>
+                                    </div>
+                                    <div class="form-check"> 
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="radio" id="pago_yape"  name="tipo_pago" value="2">Pago con YAPE
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                        <label class="control-label col-md-6" id="lbl_pagar_con">PAGO EN EFECTIVO (INGRESE EL MONTO CON EL QUE CANCELAN):</label>
+                                <div class="col-md-4" id="pagar_con">
+                                <input type="number" onchange="actualiza_vuelto()"  name="monto_o_id" id="id_voucher_o_total_pago" step ="0.1" required>
+                                </div>
+                        </div>
+                        <div class="cold-md-12" id="div_vuelto">
+                        <label class="control-label col-md-12" id="lbl_devolucion">DEVOLUCIÓN o VUELTO:</label>
+                        <div class="col-md-12" id="devolucion">
+                                <input type="number" name="vuelto" id="vuelto"  disabled>
+                                </div>
                         </div>
                     </div>
                     <div class="tile-footer text-center">
