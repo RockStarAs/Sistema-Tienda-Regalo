@@ -1,5 +1,5 @@
 <?php
-    class categoria extends Controladores
+    class Categoria extends Controladores
     {
         
         public function __construct()
