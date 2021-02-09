@@ -97,7 +97,7 @@
 	padding: 10px;
   }
   .small-box > .small-box-footer {
-	position: relative;
+	/* position: relative; */
 	text-align: center;
 	padding: 3px 0;
 	color: #fff;

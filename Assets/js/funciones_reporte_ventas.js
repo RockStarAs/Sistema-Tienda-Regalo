@@ -168,7 +168,7 @@ $(".daterangepicker.opensright .ranges li").on("click", function () {
     localStorage.setItem("capturarRango2", "Hoy");
     
     $.ajax({
-      url: "ventas/ventas_realizadas",
+      url: "ventas/grafico_ventas",
       method: "GET", // or POST
       dataType: "json",
       data: { from: fechaInicial, to: fechaFinal },

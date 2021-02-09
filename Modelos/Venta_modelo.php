@@ -141,7 +141,7 @@
 
             if($fechaInicial == null)
             {
-                $query="SELECT * FROM vista_datos_venta ORDER BY id_venta ASC";
+                $query="SELECT * FROM vista_datos_venta WHERE YEAR(FECHA_VENTA)=YEAR(NOW()) ORDER BY FECHA_VENTA ASC";
                 
             }else if($fechaInicial == $fechaFinal)
             {

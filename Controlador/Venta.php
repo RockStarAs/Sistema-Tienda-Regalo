@@ -71,9 +71,12 @@ class Venta extends Controladores
                 }
             }
             $noRepetirFechas = array_unique($arrayFechas);
+
             foreach($noRepetirFechas as $key){
                 $sumaPagosMes[$key]=round($sumaPagosMes[$key]);
-                $data[]=array("y"=>$key,"ventas"=>$sumaPagosMes[$key]);
+                $fechaEntera = strtotime($key);
+                $mes=valorMes(date("m", $fechaEntera));
+                $data[]=array("y"=>$mes,"ventas"=>$sumaPagosMes[$key]);
             }
             if ($data==null) {
                 $data[]=array("y"=>0,"ventas"=>0);
