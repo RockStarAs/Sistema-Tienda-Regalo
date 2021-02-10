@@ -71,6 +71,17 @@
             }      
             return $return;
         }    
+
+        public function reporte_producto(){
+            $query = "SELECT nombre_producto,imagen_producto,detalle_venta.id_producto,SUM(cantidad) as cantidad_vendida FROM detalle_venta
+            INNER JOIN producto on detalle_venta.id_producto=producto.id_producto
+            INNER JOIN venta on detalle_venta.id_venta=venta.id_venta
+            WHERE estado_producto=1 AND YEAR(fecha_venta)=YEAR(NOW())
+            GROUP BY detalle_venta.id_producto 
+            ORDER BY cantidad_vendida DESC LIMIT 10";
+            $solicita_listado = $this->select_all($query);
+            return $solicita_listado;
+        }
     }
     
 ?>

@@ -141,11 +141,11 @@
 
             if($fechaInicial == null)
             {
-                $query="SELECT * FROM vista_datos_venta ORDER BY id_venta ASC";
+                $query="SELECT * FROM vista_datos_venta WHERE YEAR(FECHA_VENTA)=YEAR(NOW()) AND ESTADO_VENTA!=0 ORDER BY FECHA_VENTA ASC";
                 
             }else if($fechaInicial == $fechaFinal)
             {
-                $query="SELECT * FROM venta WHERE fecha_venta like '%$fechaFinal%'";
+                $query="SELECT * FROM vista_datos_venta WHERE fecha_venta like '%$fechaFinal%' AND ESTADO_VENTA!=0";
     
             }else{
     
@@ -159,11 +159,11 @@
     
                 if($fechaFinalMasUno == $fechaActualMasUno){
     
-                    $query="SELECT * FROM venta WHERE fecha BETWEEN '$fechaInicial' AND '$fechaFinalMasUno'";
+                    $query="SELECT * FROM vista_datos_venta WHERE ESTADO_VENTA!=0 AND fecha_venta BETWEEN '$fechaInicial' AND '$fechaFinalMasUno'";
     
                 }else{
     
-                    $query = "SELECT * FROM venta WHERE fecha BETWEEN '$fechaInicial' AND '$fechaFinal'";
+                    $query = "SELECT * FROM vista_datos_venta WHERE ESTADO_VENTA!=0 AND fecha_venta BETWEEN '$fechaInicial' AND '$fechaFinal'";
     
                 }
             }
@@ -176,6 +176,83 @@
             $query="SELECT SUM(TOTAL_PAGADO) as Total FROM vista_datos_venta";
             $solicitud = $this->select_one($query);
             return $solicitud;
+        }
+
+        public function reporte_cajeros($fechaInicial, $fechaFinal){
+            if($fechaInicial == null)
+            {
+                $query="SELECT * FROM vista_datos_venta WHERE YEAR(FECHA_VENTA)=YEAR(NOW()) AND ESTADO_VENTA!=0 ORDER BY FECHA_VENTA ASC";
+                
+            }else if($fechaInicial == $fechaFinal)
+            {
+                $query="SELECT * FROM vista_datos_venta WHERE fecha_venta like '%$fechaFinal%' AND ESTADO_VENTA!=0";
+    
+            }else{
+    
+                $fechaActual = new DateTime();
+                $fechaActual ->add(new DateInterval("P1D"));
+                $fechaActualMasUno = $fechaActual->format("Y-m-d");
+    
+                $fechaFinal2 = new DateTime($fechaFinal);
+                $fechaFinal2 ->add(new DateInterval("P1D"));
+                $fechaFinalMasUno = $fechaFinal2->format("Y-m-d");
+    
+                if($fechaFinalMasUno == $fechaActualMasUno){
+    
+                    $query="SELECT * FROM vista_datos_venta WHERE ESTADO_VENTA!=0 AND fecha_venta BETWEEN '$fechaInicial' AND '$fechaFinalMasUno'";
+    
+                }else{
+    
+                    $query = "SELECT * FROM vista_datos_venta WHERE ESTADO_VENTA!=0 AND fecha_venta BETWEEN '$fechaInicial' AND '$fechaFinal'";
+    
+                }
+            }
+            $solicita=$this->select_all($query);
+            return $solicita;
+
+        }
+        public function ventas_realizadas_hoy(){
+            $query="SELECT *,TIME(FECHA_VENTA) as Hora FROM vista_datos_venta WHERE DATE_FORMAT(FECHA_VENTA,'%Y-%m-%d')=CURDATE()
+            ORDER BY Hora DESC";
+            $solicita=$this->select_all($query);
+            return $solicita;
+        }
+
+        public function reporte_vendedores($fechaInicial, $fechaFinal){
+            $query="SELECT vista_datos_venta.*,usuario.apellidos_trabajador as Vendedor from vista_datos_venta
+            INNER JOIN venta on vista_datos_venta.ID_VENTA=venta.id_venta
+            INNER JOIN usuario on venta.id_usuario_atiende=usuario.id_usuario ";
+            if($fechaInicial == null)
+            {
+                $query.="WHERE YEAR(vista_datos_venta.FECHA_VENTA)=YEAR(NOW()) AND vista_datos_venta.ESTADO_VENTA!=0 ORDER BY vista_datos_venta.FECHA_VENTA ASC";
+                
+            }else if($fechaInicial == $fechaFinal)
+            {
+                $query.="WHERE vista_datos_venta.FECHA_VENTA like '%$fechaFinal%' AND vista_datos_venta.ESTADO_VENTA!=0";
+    
+            }else{
+    
+                $fechaActual = new DateTime();
+                $fechaActual ->add(new DateInterval("P1D"));
+                $fechaActualMasUno = $fechaActual->format("Y-m-d");
+    
+                $fechaFinal2 = new DateTime($fechaFinal);
+                $fechaFinal2 ->add(new DateInterval("P1D"));
+                $fechaFinalMasUno = $fechaFinal2->format("Y-m-d");
+    
+                if($fechaFinalMasUno == $fechaActualMasUno){
+    
+                    $query.="WHERE vista_datos_venta.ESTADO_VENTA!=0 AND vista_datos_venta.FECHA_VENTA BETWEEN '$fechaInicial' AND '$fechaFinalMasUno'";
+    
+                }else{
+    
+                    $query .= "WHERE vista_datos_venta.ESTADO_VENTA!=0 AND vista_datos_venta.FECHA_VENTA BETWEEN '$fechaInicial' AND '$fechaFinal'";
+    
+                }
+            }
+            $solicita=$this->select_all($query);
+            return $solicita;
+                        
         }
     }
 ?>

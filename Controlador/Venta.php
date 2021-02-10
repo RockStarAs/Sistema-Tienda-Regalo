@@ -27,12 +27,30 @@ class Venta extends Controladores
         $this->vistas->obten_vista($this, "listar_ventas_main", $data);
     }
 
-    public function reporte_ventas()
+    public function reporte_ventas($fechaInicial)
     {
         $data["titulo_pagina"] = "Sistema Tienda :: Ventas";
         $data["nombre_pagina"] = "Reporte de Ventas";
         $data["funciones_js"] = "funciones_reporte_ventas.js";
         $data["fecha"]="Rango fecha";
+        if (empty($fechaInicial)) {
+            $data["fechaInicial"]="null";
+            $data["fechaFinal"]="null";
+        }else{
+            $fechas=explode(",", $fechaInicial);
+            if (count($fechas)==2) {
+                if (validar_fecha($fechas[0]) && validar_fecha($fechas[1])) {
+                    $data["fechaInicial"]=$fechas[0];
+                    $data["fechaFinal"]=$fechas[1];
+                }else{
+                    $data["fechaInicial"]="null";
+                    $data["fechaFinal"]="null";
+                }
+            }else{
+                $data["fechaInicial"]="null";
+                $data["fechaFinal"]="null";
+            }
+        }
         if($_SESSION['rol_usuario'] == 'ADMINISTRADOR'){
             $this->vistas->obten_vista($this, "reporte_ventas", $data);   
         }else{
@@ -42,15 +60,14 @@ class Venta extends Controladores
     }
     public function grafico_ventas()
     {
-        if ($_GET) {
-            if(isset($_GET["fechaInicial"])){
-                $fechaInicial = $_GET["fechaInicial"];
-                $fechaFinal = $_GET["fechaFinal"];
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if(isset($_POST["fechaInicial"])){
+                $fechaInicial = $_POST["fechaInicial"];
+                $fechaFinal = $_POST["fechaFinal"];
             }else{
                 $fechaInicial = null;
                 $fechaFinal = null;
             }
-
             $solicitud = $this->modelo->rango_fechas($fechaInicial, $fechaFinal);
             $arrayFechas=array();
             $arrayVentas = array();
@@ -71,11 +88,14 @@ class Venta extends Controladores
                 }
             }
             $noRepetirFechas = array_unique($arrayFechas);
+
             foreach($noRepetirFechas as $key){
-                $sumaPagosMes[$key]=round($sumaPagosMes[$key]);
-                $data[]=array("y"=>$key,"ventas"=>$sumaPagosMes[$key]);
+                $sumaPagosMes[$key]=round($sumaPagosMes[$key],2);
+                $fechaEntera = strtotime($key);
+                $mes=valorMes(date("m", $fechaEntera));
+                $data[]=array("y"=>$mes,"ventas"=>$sumaPagosMes[$key]);
             }
-            if ($data==null) {
+            if ($solicitud==null) {
                 $data[]=array("y"=>0,"ventas"=>0);
             }
         } else {
@@ -351,4 +371,115 @@ class Venta extends Controladores
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
         die();
     }
+
+    public function ventas_hoy(){
+        $data = $this->modelo->ventas_realizadas_hoy();
+        for ($i = 0; $i < count($data); $i++) {
+            $hora = $data[$i]["Hora"];
+            $hora_venta =date_create("$hora");;
+            $data[$i]["Hora"] = date_format($hora_venta, "H:i A");
+            $data[$i]["TIPO_VENTA"] = $data[$i]["TIPO_VENTA"] == 0 ? "Al por mayor" : "Venta normal";
+            $data[$i]["TOTAL_PAGADO"] = round($data[$i]["TOTAL_PAGADO"], 2);
+            $total = $data[$i]["TOTAL_PAGADO"];
+            $data[$i]["TOTAL_PAGADO"] = "S/. $total";
+        }
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
+    public function grafico_cajeros()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if(isset($_POST["fechaInicial"])){
+                $fechaInicial = $_POST["fechaInicial"];
+                $fechaFinal = $_POST["fechaFinal"];
+            }else{
+                $fechaInicial = null;
+                $fechaFinal = null;
+            }
+            $solicitud = $this->modelo->reporte_cajeros($fechaInicial, $fechaFinal);
+            $arrayNombre=array();
+            $arrayVentas = array();
+            $sumaPagosCajero = [];
+            
+            for ($i = 0; $i < count($solicitud); $i++) {
+                $fecha=substr($solicitud[$i]["FECHA_VENTA"],0,7);
+                array_push($arrayNombre, $solicitud[$i]["NOMBRE_CAJERO"]);
+                $solicitud[$i]["TOTAL_PAGADO"]=round($solicitud[$i]["TOTAL_PAGADO"], 2);
+                $arrayVentas = array($solicitud[$i]["NOMBRE_CAJERO"] => $solicitud[$i]["TOTAL_PAGADO"]);
+                #Sumamos los pagos que ocurrieron por el mismo cajero
+                foreach ($arrayVentas as $key => $value) {
+                    if (array_key_exists($key, $sumaPagosCajero)) {
+                        $sumaPagosCajero[$key] += $value;
+                    }else{
+                        $sumaPagosCajero+= [$key => $value];
+                    }
+                    
+                }
+            }
+            $noRepetirNombres = array_unique($arrayNombre);
+            foreach($noRepetirNombres as $key){
+                $sumaPagosCajero[$key]=round($sumaPagosCajero[$key],2);
+                // $fechaEntera = strtotime($key);
+                // $mes=valorMes(date("m", $fechaEntera));
+                $data[]=array("y"=>$key,"ventas"=>$sumaPagosCajero[$key]);
+            }
+            if ($solicitud==null) {
+                $data[]=array("y"=>0,"ventas"=>0);
+            }
+        } else {
+            $data = array("status" => false, "msg" => "Error creacion.");
+        }
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
+    public function grafico_vendedores()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if(isset($_POST["fechaInicial"])){
+                $fechaInicial = $_POST["fechaInicial"];
+                $fechaFinal = $_POST["fechaFinal"];
+            }else{
+                $fechaInicial = null;
+                $fechaFinal = null;
+            }
+            $solicitud = $this->modelo->reporte_vendedores($fechaInicial, $fechaFinal);
+            $arrayNombre=array();
+            $arrayVentas = array();
+            $sumaPagosCajero = [];
+            
+            for ($i = 0; $i < count($solicitud); $i++) {
+                $fecha=substr($solicitud[$i]["FECHA_VENTA"],0,7);
+                array_push($arrayNombre, $solicitud[$i]["Vendedor"]);
+                $solicitud[$i]["TOTAL_PAGADO"]=round($solicitud[$i]["TOTAL_PAGADO"], 2);
+                $arrayVentas = array($solicitud[$i]["Vendedor"] => $solicitud[$i]["TOTAL_PAGADO"]);
+                #Sumamos los pagos que ocurrieron por el mismo cajero
+                foreach ($arrayVentas as $key => $value) {
+                    if (array_key_exists($key, $sumaPagosCajero)) {
+                        $sumaPagosCajero[$key] += $value;
+                    }else{
+                        $sumaPagosCajero+= [$key => $value];
+                    }
+                    
+                }
+            }
+            $noRepetirNombres = array_unique($arrayNombre);
+            foreach($noRepetirNombres as $key){
+                $sumaPagosCajero[$key]=round($sumaPagosCajero[$key],2);
+                // $fechaEntera = strtotime($key);
+                // $mes=valorMes(date("m", $fechaEntera));
+                $data[]=array("y"=>$key,"ventas"=>$sumaPagosCajero[$key]);
+            }
+            if ($solicitud==null) {
+                $data[]=array("y"=>0,"ventas"=>0);
+            }
+        } else {
+            $data = array("status" => false, "msg" => "Error creacion.");
+        }
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
+
 }

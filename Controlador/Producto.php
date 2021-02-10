@@ -191,10 +191,37 @@ class Producto extends Controladores
             <button class="btn btn-outline-info btn-sm" rl="'.$id_crypt.'" title="Agregar" type="button" onclick="agregar_detalle('.$data[$i]['id_producto'].',\''.$data[$i]['nombre_producto'].'\')">➕</button>
             </div>';
         }
-
+        
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
         die();       
     }
+
+    public function reporte_productos(){
+        $data = $this->modelo->reporte_producto(); 
+        $colores = array("red","green","yellow","aqua","purple","blue","cyan","magenta","orange","navy");
+        $totalVentas=0;
+        for ($i = 0; $i < count($data); $i++) {
+            $data[$i]['lista']='<li><i class="fa fa-circle-o text-'.$colores[$i].'"></i> '.$data[$i]["nombre_producto"].'</li>';
+            $totalVentas+=$data[$i]["cantidad_vendida"];
+            $data[$i]["colores"]=$colores[$i];
+        }
+        $mitad_array=round((count($data)/2), 0, PHP_ROUND_HALF_DOWN);
+        for ($i=0; $i < $mitad_array; $i++) { 
+           $data[$i]['listado']='<li>			 
+           <a class="list-group-item-action">
+           <img src='.base_url().'Assets/images/uploads/'.$data[$i]["imagen_producto"].' class="img-thumbnail" width="60px" style="margin-right:10px"> 
+           '.$data[$i]["nombre_producto"].'
+                    <span class="pull-right text-'.$colores[$i].'">   
+                        '.ceil($data[$i]["cantidad_vendida"]*100/$totalVentas).'%
+                    </span>
+                </a>
+            </li>';
+        }
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        die(); 
+    }
+
+
 
     public function busca_producto_id()
     {

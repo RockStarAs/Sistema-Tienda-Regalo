@@ -28,22 +28,29 @@ header_admin($data);
                     <?php obtener_reporte("grafico_ventas",$data) ?>
                 </div>
             </div>
+            <br>
+
             <div class="row">
-                
-                <div class="col-md-6 col-xs-12">
-                    
-                    </div>
-    
-                    <div class="col-md-6 col-xs-12">
-                        
-                    </div>
-    
-                    <div class="col-md-6 col-xs-12">
-                       
-                    </div>
+                <div class="col-md-6">
+                    <?php obtener_reporte("productos-mas-vendidos",$data) ?>
+                </div>
+                <div class="col-md-6">
+                    <?php obtener_reporte("cajeros",$data) ?>
+                    <?php obtener_reporte("vendedores",$data) ?>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-12">
+                    <?php obtener_reporte("compradores",$data) ?>
+                </div>
             </div>
         </div>
     </div>
-</main>
 
+</main>
+<script>
+const fechaInit = <?= '"'.$data["fechaInicial"].'"'?>;
+const fechaFin = <?= '"'.$data["fechaFinal"].'"'?>;
+</script>
 <?php footer_admin($data); ?>
