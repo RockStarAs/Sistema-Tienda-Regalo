@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     if (document.querySelector('#tabla_ventas')) {
-        if (typeof tipo=== 'undefined') {
+        if (typeof tipo === 'undefined') {
             tipo=13;
         }
         if (tipo==1) {

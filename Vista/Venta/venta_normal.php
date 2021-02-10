@@ -118,40 +118,88 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group row">
-                                <label class="control-label col-md-6">Elije una forma de pago:</label>
-                                <div class="col-md-9">
-                                    <div class="form-check">
+                        <div class="col-md-4">
+                            <fieldset class="border p-2">
+                                <legend class="w-auto">Elije una forma de pago:</legend>
+
+                                <div class="form-group">
+
+                                    <div class="col-md-9">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="pago_efectivo" name="tipo_pago"
+                                                class="custom-control-input" value="0" checked>
+                                            <label class="custom-control-label" for="pago_efectivo">Pago en
+                                                efectivo</label>
+                                        </div>
+                                        <!-- <div class="form-check">
                                         <label class="form-check-label">
-                                            <input class="form-check-input"  type="radio" id="pago_efectivo" name="tipo_pago" value="0" checked>Pago en efectivo
+                                            <input class="form-check-input" type="radio" id="pago_efectivo"
+                                                name="tipo_pago" value="0" checked>Pago en efectivo
+                                        </label>
+                                    </div> -->
+                                        <!-- <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="radio" id="pago_tarjeta"
+                                                name="tipo_pago" value="1">Pago con tarjeta
                                         </label>
                                     </div>
                                     <div class="form-check">
                                         <label class="form-check-label">
-                                            <input class="form-check-input" type="radio" id="pago_tarjeta" name="tipo_pago" value="1">Pago con tarjeta
+                                            <input class="form-check-input" type="radio" id="pago_yape" name="tipo_pago"
+                                                value="2">Pago con YAPE
                                         </label>
-                                    </div>
-                                    <div class="form-check"> 
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" type="radio" id="pago_yape"  name="tipo_pago" value="2">Pago con YAPE
-                                        </label>
+                                    </div> -->
+
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="pago_tarjeta" name="tipo_pago"
+                                                class="custom-control-input" value="1">
+                                            <label class="custom-control-label" for="pago_tarjeta">Pago con
+                                                tarjeta</label>
+                                        </div>
+
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="pago_yape" name="tipo_pago"
+                                                class="custom-control-input" value="2">
+                                            <label class="custom-control-label" for="pago_yape">Pago con YAPE</label>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </fieldset>
                         </div>
-                        <div class="col-md-6">
-                        <label class="control-label col-md-6" id="lbl_pagar_con">PAGO EN EFECTIVO (INGRESE EL MONTO CON EL QUE CANCELAN):</label>
-                                <div class="col-md-4" id="pagar_con">
-                                <input type="number" onchange="actualiza_vuelto()"  name="monto_o_id" id="id_voucher_o_total_pago" step ="0.1" required>
+                        <div class="col-md-8">
+                            <fieldset class="border p-2">
+                                <legend class="w-auto">PAGO <span id="lbl_forma_pago">EN EFECTIVO</span></legend>
+                                <div class="row">
+                                    <div class="col-sm-7">
+                                        <label class="control-label" id="lbl_pagar_con">
+                                            INGRESE EL MONTO
+                                            CON EL QUE CANCELAN:</label>
+                                        <div id="pagar_con">
+                                            <input type="number" class="form-control" onchange="actualiza_vuelto()"
+                                                name="monto_o_id" id="id_voucher_o_total_pago" step="0.1" required>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="col-sm-5" id="div_vuelto">
+                                        <label class="control-label" id="lbl_devolucion">DEVOLUCIÓN o
+                                            VUELTO:</label>
+                                        
+                                        <div id="devolucion">
+                                            <input type="number" class="form-control" name="vuelto" id="vuelto" disabled>
+                                        </div>
+                                    </div>
                                 </div>
+                            </fieldset>
+                        </div>
+                        <!-- <div class="col-md-6">
+                            
                         </div>
                         <div class="cold-md-12" id="div_vuelto">
-                        <label class="control-label col-md-12" id="lbl_devolucion">DEVOLUCIÓN o VUELTO:</label>
-                        <div class="col-md-12" id="devolucion">
-                                <input type="number" name="vuelto" id="vuelto"  disabled>
-                                </div>
-                        </div>
+                            <label class="control-label col-md-12" id="lbl_devolucion">DEVOLUCIÓN o VUELTO:</label>
+                            <div class="col-md-12" id="devolucion">
+                                <input type="number" name="vuelto" id="vuelto" disabled>
+                            </div>
+                        </div> -->
                     </div>
                     <div class="tile-footer text-center">
                         <button id="btnAccion_Form" class="btn btn-success" type="submit"><i

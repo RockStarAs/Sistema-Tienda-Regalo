@@ -30,4 +30,37 @@ document.addEventListener('DOMContentLoaded',function(){
         drawCallback: function () {
         },
     });
+
+    tabla_ventas_hoy= $('#tabla_ventas_hoy').DataTable({
+        "aProcessing":true,
+        "aServerSide":true,
+        "dom": 'frtip',
+        "language":{
+            url : " " + base_url + "assets/js/idioma.json"
+        },
+        "ajax":{
+            "url" : " "+base_url+"venta/ventas_hoy",
+            "dataSrc":""  
+        },
+        "bAutoWidth": false,
+        columnDefs: [
+            {
+              width: "50px",
+              targets: 1
+            }
+        ],
+        "columns": [
+            { "data": "ID_VENTA" },
+            { "data": "Hora" },
+            { "data": "NOMBRE_CAJERO" },
+            { "data": "TIPO_VENTA" },
+            { "data": "TOTAL_PAGADO"}
+        ],
+        "responsive":true,
+        "bDestroy":true,
+        "iDisplayLength":10,
+        "order":[[1,"desc"]],
+        drawCallback: function () {
+        },
+    });
 });
