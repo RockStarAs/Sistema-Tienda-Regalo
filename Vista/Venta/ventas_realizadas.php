@@ -19,13 +19,14 @@
                 <table class="table table-hover table-bordered" id="tabla_ventas">
                   <thead>
                     <tr>
-                      <th>ID VENTA:</th>
-                      <th>REALIZADA POR:</th>
-                      <th>CLIENTE:</th>
-                      <th>FECHA:</th>
-                      <th>TIPO VENTA:</th>
-                      <th>TOTAL PAGADO:</th>
-                      <th>OPCIONES:</th>
+                      <th>Id.Venta:</th>
+                      <th>Vendedor:</th>
+                      <th>Cliente:</th>
+                      <th>Fecha:</th>
+                      <th>Tipo Vent.:</th>
+                      <th>Medio de pago</th>
+                      <th>Monto cancelado:</th>
+                      <th>Opciones:</th>
                     </tr>
                   </thead>
                   <tbody>

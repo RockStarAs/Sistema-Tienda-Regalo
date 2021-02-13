@@ -28,9 +28,10 @@ function carga_ventas(tipo) {
       bAutoWidth: false,
       columns: [
         { data: "ID_VENTA" },
-        { data: "FECHA_VENTA" },
+        { data: "FECHA_VENTA" }, 
         { data: "NOMBRE_CAJERO" },
-        { data: "NOMBRE_CLIENTE" },
+        { data: "NOMBRE_CLIENTE" }, 
+        { data: "TIPO_PAGO" },
         { data: "TOTAL_PAGADO" },
         { data: "OPCIONES" },
       ],

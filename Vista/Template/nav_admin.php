@@ -150,11 +150,6 @@
                             <i class="icon fa fa-circle-o"></i> Ver ventas del día 
                         </a>
                     </li>
-                    <li>
-                        <a class="treeview-item" href="<?= base_url();?>venta/ventas_eliminadas" target="" rel="noopener">
-                            <i class="icon fa fa-circle-o"></i> Reporte 2
-                        </a>
-                    </li>
                 </ul>
             </li>
             <?php } ?>

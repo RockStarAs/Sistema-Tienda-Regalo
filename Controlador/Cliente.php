@@ -64,7 +64,7 @@ class Cliente extends Controladores
     {
         $data = $this->modelo->modelo_listar_cliente();
         for ($i = 0; $i < count($data); $i++) {
-            $data[$i]['opciones'] = mostrar_acciones($data[$i]["dni_cliente"], "actualizaCliente", "", 1);
+            $data[$i]['opciones'] = mostrar_acciones($data[$i]["dni_cliente"], "actualizaCliente", "","", 1);
         }
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
         die();

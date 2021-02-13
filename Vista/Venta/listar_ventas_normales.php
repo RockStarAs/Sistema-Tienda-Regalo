@@ -28,6 +28,7 @@
                                     <th>Fecha</th>
                                     <th>Cajero</th>
                                     <th>Cliente</th>
+                                    <th>Medio de pago</th>
                                     <th>Total Venta</th>
                                     <th>Acciones</th>
                                 </tr>

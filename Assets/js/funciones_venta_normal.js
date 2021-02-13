@@ -422,7 +422,7 @@ $('#pago_tarjeta').click(function() {
     $("#id_voucher_o_total_pago").remove();
     $("#lbl_devolucion").remove();
     $("#vuelto").remove();
-    $('#pagar_con').append('<input class="form-control" type="text" id="id_voucher_o_total_pago" name="monto_o_id" required>');
+    $('#pagar_con').append('<input class="form-control" type="text" inputmode="numeric" pattern="[-+]?[0-9]*[.,]?[0-9]+" id="id_voucher_o_total_pago" name="monto_o_id" required>');
   }
 });
 $('#pago_yape').click(function() {

@@ -25,7 +25,7 @@
                     $query ="INSERT INTO venta(id_usuario,id_usuario_atiende,fecha_venta,dni_cliente,tipo_venta,tipo_pago,paga_con) VALUES ('$id_usuario','$id_usuario_atiende','$fecha_venta','$dni_cliente',$tipo_venta,$tipo_pago,$campo_extra)";
                 }else{
                     if($tipo_pago == 1 ){
-                        $query ="INSERT INTO venta(id_usuario,id_usuario_atiende,fecha_venta,dni_cliente,tipo_venta,tipo_pago,id_voucher_tarjeta) VALUES ('$id_usuario','$id_usuario_atiende','$fecha_venta','$dni_cliente',$tipo_venta,$tipo_pago,$campo_extra)";
+                        $query ="INSERT INTO venta(id_usuario,id_usuario_atiende,fecha_venta,dni_cliente,tipo_venta,tipo_pago,id_voucher_tarjeta) VALUES ('$id_usuario','$id_usuario_atiende','$fecha_venta','$dni_cliente',$tipo_venta,$tipo_pago,'$campo_extra')";
                     }else{
                         $query ="INSERT INTO venta(id_usuario,id_usuario_atiende,fecha_venta,dni_cliente,tipo_venta,tipo_pago) VALUES ('$id_usuario','$id_usuario_atiende','$fecha_venta','$dni_cliente',$tipo_venta,$tipo_pago)";
                     }

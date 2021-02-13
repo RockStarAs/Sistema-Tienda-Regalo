@@ -14,7 +14,7 @@
     */
     //PARA MYSQL
     const DB_USER = "root";
-    const DB_PASSWORD = "root";
+    const DB_PASSWORD = "";
     const DB_NAME = "datos_tienda";
     const DB_HOST = "localhost";
 

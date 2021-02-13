@@ -118,7 +118,7 @@ class Venta extends Controladores
         $data["titulo_pagina"] = "Sistema Tienda :: Ventas";
         $data["funciones_js"] = "funciones_ventas_listar.js";
 
-        $this->vistas->obten_vista($this, "listar_ventas_normales", $data);
+        $this->vistas->obten_vista($this, "listar_ventas_normales", $data); 
     }
     public function listar_ventas_r($tipo)
     {
@@ -132,6 +132,17 @@ class Venta extends Controladores
             $id_crypt = encriptar($data[$i]["ID_VENTA"]);
             $data[$i]["TOTAL_PAGADO"] = SMONEY . formatea_moneda($data[$i]["TOTAL_PAGADO"]);
             $data[$i]["OPCIONES"] = mostrar_acciones($data[$i]["ID_VENTA"], "verVenta", "eliminarVenta", "verTicket", 4);
+            switch($data[$i]['TIPO_PAGO']){
+                case 0:
+                    $data[$i]['TIPO_PAGO'] = "EN EFECTIVO"; 
+                break;
+                case 1:
+                    $data[$i]['TIPO_PAGO'] = "POR TARJETA"; 
+                break;
+                case 2:
+                    $data[$i]['TIPO_PAGO'] = "MEDIANTE APP YAPE"; 
+                break;
+            }
         }
         echo json_encode($data,JSON_UNESCAPED_UNICODE);
         die();
@@ -169,7 +180,7 @@ class Venta extends Controladores
             if($tipo_pago != 2 ){
                 $campo_extra = $_POST['monto_o_id'];
             }
-            $solicitud_agregar_venta = $this->modelo->modelo_inserta_venta_mayor($id_usuario_caja, $id_usuario_atiende, $dni_cliente, $fecha_venta, 1,$tipo_pago,$campo_extra);
+            $solicitud_agregar_venta = $this->modelo->modelo_inserta_venta_mayor($id_usuario_caja, $id_usuario_atiende, $dni_cliente, $fecha_venta, 1,$tipo_pago,$campo_extra); 
 
             if ($solicitud_agregar_venta > 0) {
                 //El id se ha registrado
@@ -319,6 +330,17 @@ class Venta extends Controladores
             $total = $data[$i]["TOTAL_PAGADO"];
             $data[$i]["TOTAL_PAGADO"] = "S/. $total";
             $data[$i]["OPCIONES"] = mostrar_acciones($data[$i]["ID_VENTA"], "verVenta", "eliminarVenta", "verTicket", 4);
+            switch($data[$i]["TIPO_PAGO"]){
+                case 0:
+                    $data[$i]["TIPO_PAGO"] = "EN EFECTIVO";
+                break;
+                case 1:
+                    $data[$i]["TIPO_PAGO"] = "POR TARJETA";
+                break;
+                case 2:
+                    $data[$i]["TIPO_PAGO"] = "MEDIANTE APP YAPE";
+                break;
+            }
         }
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
         die();

@@ -67,7 +67,9 @@
                                     <th>Fecha</th>
                                     <th>Cajero</th>
                                     <th>Cliente</th>
+                                    <th>Tipo de Pago</th>
                                     <th>Total Venta</th>
+                                    <th>Opciones</th>
                                 </tr>
                             </thead>
                             <tbody>

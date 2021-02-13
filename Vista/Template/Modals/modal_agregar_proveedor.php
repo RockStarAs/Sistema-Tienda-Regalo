@@ -22,19 +22,19 @@
                 </div>
                 <div class="form-group">
                   <label class="control-label">Teléfono del Proveedor:</label>
-                  <input class="form-control" id="txt_telefono_proveedor" name="txt_telefono_proveedor" type="text" placeholder="Ingrese número de teléfono" required="">
+                  <input class="form-control" id="txt_telefono_proveedor" name="txt_telefono_proveedor" type="text" placeholder="Ingrese número de teléfono" >
                 </div>
                 <div class="form-group">
                   <label class="control-label">Email proveedor:</label>
-                  <input class="form-control" id="txt_email_proveedor" name="txt_email_proveedor" type="text" placeholder="Ingrese email" required="">
+                  <input class="form-control" id="txt_email_proveedor" name="txt_email_proveedor" type="text" placeholder="Ingrese email">
                 </div>
                 <div class="form-group">
                   <label class="control-label">Ciudad:</label>
-                  <input class="form-control" id="txt_ciudad_proveedor" name="txt_ciudad_proveedor"type="text" placeholder="Ingrese ciudad" required="">
+                  <input class="form-control" id="txt_ciudad_proveedor" name="txt_ciudad_proveedor"type="text" placeholder="Ingrese ciudad" >
                 </div>
                 <div class="form-group">
                   <label class="control-label">Dirección:</label>
-                  <input class="form-control" id="txt_direccion_proveedor" name="txt_direccion_proveedor"type="text" placeholder="Ingrese dirección" required="">
+                  <input class="form-control" id="txt_direccion_proveedor" name="txt_direccion_proveedor"type="text" placeholder="Ingrese dirección" >
                 </div>
                 
                   <div class="tile-footer">

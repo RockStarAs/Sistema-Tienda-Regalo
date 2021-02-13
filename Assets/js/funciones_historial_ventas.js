@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded',function(){
             { "data": "NOMBRE_CLIENTE" }, 
             { "data": "FECHA_VENTA" },
             { "data": "TIPO_VENTA" },
+            { "data": "TIPO_PAGO" },
             { "data": "TOTAL_PAGADO" },
             { "data": "OPCIONES" }
         ],
