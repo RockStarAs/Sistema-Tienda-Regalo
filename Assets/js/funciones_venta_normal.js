@@ -411,7 +411,7 @@ function actualiza_vuelto(){
   var total = $('#total_venta').val();
   total = total == "" ? 0 : total;
   var pago_con = $('#id_voucher_o_total_pago').val();
-  var vuelto = pago_con - total;
+  var vuelto = (pago_con - total).toFixed(2);
   $('#vuelto').val(vuelto);
 }
 $('#pago_tarjeta').click(function() {
