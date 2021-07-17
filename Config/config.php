@@ -1,5 +1,5 @@
 <?php 
-    const URL = 'http://localhost:8/sistema-tienda-regalo/';
+    const URL = 'http://localhost:88/sistema-tienda-regalo/';
     const LIBS = 'Librerias/';
     const VIEWS = 'Vista/';
     const CLAVE='SNDAIDNSAINDSHASRDGCGFCHHHGVGCF';
@@ -15,7 +15,7 @@
     //PARA MYSQL
     const DB_USER = "root";
     const DB_PASSWORD = "";
-    const DB_NAME = "datos_tienda";
+    const DB_NAME = "bd_tienda";
     const DB_HOST = "localhost";
 
     const SPD=".";

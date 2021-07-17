@@ -43,7 +43,7 @@ class Cliente extends Controladores
     {
         $dni_cliente_viejo = $_POST['txt_dni_antiguo_act'];
 
-        $dni_cliente_nuevo = $_POST['txt_dni_cliente_act'];
+        $dni_cliente_nuevo = $_POST['txt_dni_antiguo_act'];
         $nombre_cliente = $_POST['txt_nombre_cliente_act'];
         $apellidos_cliente = $_POST['txt_apellido_cliente_act'];
         $telefono_contacto = $_POST['txt_telefono_contacto_act'];

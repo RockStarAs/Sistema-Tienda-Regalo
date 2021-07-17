@@ -15,7 +15,7 @@
                             <input type="hidden" name="txt_dni_antiguo_act" id="txt_dni_antiguo_act" value="">
                             <div class="form-group">
                                 <label class="control-label">DNI:</label>
-                                <input class="form-control" id="txt_dni_cliente_act" name="txt_dni_cliente_act" type="text"
+                                <input class="form-control" id="txt_dni_cliente_act" name="txt_dni_cliente_act" disabled type="text"
                                     placeholder="Ingrese DNI" required="">
                             </div>
                             <div class="form-group">

@@ -61,8 +61,8 @@
             $solicita_listado = $this->select_all($query);
 
             if(empty($solicita_listado)){
-                $query = "UPDATE categoria_producto SET estado_categoria=? WHERE id_categoria=?";
-                $valores = array(0,$id_categoria);
+                $query = "UPDATE categoria_producto SET estado_categoria= 0 WHERE id_categoria= '$id_categoria'";
+                $valores = array();
                 $return = $this->update($query,$valores);
                 if ($return) {
                     $return='ok';
