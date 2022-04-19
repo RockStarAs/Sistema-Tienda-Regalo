@@ -1,5 +1,5 @@
 <?php
-    class usuario_modelo extends sql_server{
+    class usuario_modelo extends conexion_bd{
         public function __construct(){
             parent::__construct();
         }

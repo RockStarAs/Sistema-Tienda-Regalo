@@ -1,5 +1,5 @@
 <?php
-class cliente_modelo extends sql_server
+class cliente_modelo extends conexion_bd
 {
     public function __construct()
     {

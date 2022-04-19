@@ -146,6 +146,13 @@
                 </a>
                 <ul class="treeview-menu">
                     <li>
+                        <a class="treeview-item" href="<?= base_url();?>venta/reporte_ventas" target="" rel="noopener">
+                            <i class="icon fa fa-circle-o"></i> Reporte gráficos 
+                        </a>
+                    </li>
+                </ul>
+                <ul class="treeview-menu">
+                    <li>
                         <a class="treeview-item" href="<?= base_url();?>reporte/ver_ventas_dia" target="" rel="noopener">
                             <i class="icon fa fa-circle-o"></i> Ver ventas del día 
                         </a>

@@ -1,5 +1,5 @@
 <?php 
-    const URL = 'http://localhost:88/sistema-tienda-regalo/';
+    const URL = 'http://localhost:8080/sistema-tienda-regalo/';
     const LIBS = 'Librerias/';
     const VIEWS = 'Vista/';
     const CLAVE='SNDAIDNSAINDSHASRDGCGFCHHHGVGCF';

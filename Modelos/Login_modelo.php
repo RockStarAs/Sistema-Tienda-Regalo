@@ -1,6 +1,6 @@
 <?php
 
-class login_modelo extends sql_server{
+class login_modelo extends conexion_bd{
     public function __construct(){
         parent::__construct();
     }

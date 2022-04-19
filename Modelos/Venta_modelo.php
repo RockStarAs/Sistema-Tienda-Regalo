@@ -1,5 +1,5 @@
 <?php
-    class venta_modelo extends sql_server{
+    class venta_modelo extends conexion_bd{
         public function __construct(){
             parent::__construct();
         }

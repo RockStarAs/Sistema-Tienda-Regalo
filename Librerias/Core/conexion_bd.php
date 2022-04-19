@@ -1,5 +1,5 @@
 <?php 
-    class sql_server extends Conexion{
+    class conexion_bd extends Conexion{
         private $conexion;
         private $cadena_query;
         private $array_valores;
