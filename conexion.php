@@ -3,7 +3,7 @@ class Conexion{
     //Servidor de la base de datos
     private $nombre_servidor = "servbd.database.windows.net";
     private $opciones_conexion = array(
-        "Database" => "bd_tienda", // update me
+        "Database" => "bd_tienda_v2", // update me
         "Uid" => "abel", // update me
         "PWD" => "cien100%" // update me
     );

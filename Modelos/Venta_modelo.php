@@ -17,8 +17,9 @@
             $solicita_insert = $this->insert($query,$valores);
             return $solicita_insert;
         }
-        public function modelo_inserta_venta_mayor($id_usuario,$id_usuario_atiende,$dni_cliente,$fecha_venta,$tipo_venta=0,$tipo_pago,$campo_extra)
+        public function modelo_inserta_venta_mayor($id_usuario,$id_usuario_atiende,$dni_cliente,$fecha_venta,$tipo_venta,$tipo_pago,$campo_extra)
         {
+            $tipo_venta = isset($tipo_venta) ? 0 : $tipo_venta;
             $fecha_venta = date("Y-m-d H:i:s");
             if(VERSION_BD == "MySQL"){
                 if($tipo_pago == 0 ){
