@@ -13,7 +13,7 @@ function Header_2($fecha_venta,$nombre_cliente,$id_venta,$nombre_cajero,$tipo_ve
     $cadena_tipo_venta = $tipo_venta == 1 ? "NORMAL" : "POR MAYOR";
     $fecha_venta2 = date_create("$fecha_venta");
     $this->SetFont('Helvetica','',12);
-    $this->Cell(60,4,utf8_decode("TIENDA REGALOS"),0,1,'C');
+    $this->Cell(60,4,utf8_decode("BODEGA MARY PEÑA"),0,1,'C');
     $this->Ln(2);
     $this->SetFont('Helvetica','',10);
     $this->Cell(60,4,'PROFORMA VENTA',0,1,'C');
